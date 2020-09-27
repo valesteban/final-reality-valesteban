@@ -1,9 +1,14 @@
 package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.AbstractCharacter;
+import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import com.github.cc3002.finalreality.model.weapon.Weapon;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -13,6 +18,8 @@ import org.jetbrains.annotations.NotNull;
  * @author <Your name>
  */
 public class PlayerCharacter extends AbstractCharacter {
+
+  protected Weapon equippedWeapon = null;
 
   /**
    * Creates a new character.
@@ -28,6 +35,15 @@ public class PlayerCharacter extends AbstractCharacter {
       @NotNull BlockingQueue<ICharacter> turnsQueue,
       final CharacterClass characterClass) {
     super(turnsQueue, name, characterClass);
+  }
+
+  @Override
+  public void waitTurn() {
+      scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
+      if (this instanceof PlayerCharacter) {
+        scheduledExecutor
+                .schedule(this::addToQueue, equippedWeapon.getWeight() / 10, TimeUnit.SECONDS);
+      }
   }
 
   @Override
@@ -47,4 +63,15 @@ public class PlayerCharacter extends AbstractCharacter {
     return getCharacterClass() == that.getCharacterClass()
         && getName().equals(that.getName());
   }
+
+  public void equip(Weapon weapon) {
+    if (this instanceof PlayerCharacter) {
+      this.equippedWeapon = weapon;
+    }
+  }
+
+  public Weapon getEquippedWeapon() {
+    return equippedWeapon;
+  }
+
 }

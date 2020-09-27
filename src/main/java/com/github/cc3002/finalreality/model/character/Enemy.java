@@ -3,6 +3,10 @@ package com.github.cc3002.finalreality.model.character;
 import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -42,6 +46,16 @@ public class Enemy extends AbstractCharacter {
     }
     final Enemy enemy = (Enemy) o;
     return getWeight() == enemy.getWeight();
+  }
+
+  @Override
+  public void waitTurn() {
+      scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
+      if (this instanceof Enemy) {
+        var enemy = (Enemy) this;
+        scheduledExecutor
+                .schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
+      }
   }
 
   @Override
