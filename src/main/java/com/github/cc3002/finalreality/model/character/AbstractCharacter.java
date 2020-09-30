@@ -1,46 +1,23 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
-
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 
 import org.jetbrains.annotations.NotNull;
 
-/**
- * An abstract class that holds the common behaviour of all the characters in the game.
- *
- * @author Ignacio Slater Muñoz.
- * @author <Your name>
- */
 public abstract class AbstractCharacter implements ICharacter {
 
   protected final BlockingQueue<ICharacter> turnsQueue;
   protected final String name;
-  protected final CharacterClass characterClass;
+  protected  String characterClass;
   protected ScheduledExecutorService scheduledExecutor;
-  //protected final int healthPoints;
+  protected  int healthPoints;
 
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
-      @NotNull String name, CharacterClass characterClass) {
+      @NotNull String name, int healthPoints) {
     this.turnsQueue = turnsQueue;
     this.name = name;
-    this.characterClass = characterClass;
-  }
-
-  @Override
-  public abstract void waitTurn();
-
-  @Override
-  public abstract int hashCode() ;
-
-  /**
-   * Adds this character to the turns queue.
-   */
-
-  protected void addToQueue() {
-    turnsQueue.add(this);
-    scheduledExecutor.shutdown();
+    this.healthPoints = healthPoints;
   }
 
   @Override
@@ -49,8 +26,18 @@ public abstract class AbstractCharacter implements ICharacter {
   }
 
   @Override
-  public CharacterClass getCharacterClass() {
-    return characterClass;
+  public  String getCharacterClass(){
+    return  characterClass;
   }
 
+  protected void addToQueue() {
+    turnsQueue.add(this);
+    scheduledExecutor.shutdown();
+  }
+
+  @Override
+  public abstract void waitTurn();
+
+  @Override
+  public abstract int hashCode();
 }

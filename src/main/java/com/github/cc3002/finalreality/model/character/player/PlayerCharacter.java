@@ -7,44 +7,36 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import com.github.cc3002.finalreality.model.weapon.AbstractWeapon;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * A class that holds all the information of a single character of the game.
- *
- * @author Ignacio Slater Muñoz.
- * @author <Your name>
- */
 public class PlayerCharacter extends AbstractCharacter {
 
-  protected Weapon equippedWeapon = null;
+  protected AbstractWeapon equippedWeapon = null;
 
-  /**
-   * Creates a new character.
-   *
-   * @param name
-   *     the character's name
-   * @param turnsQueue
-   *     the queue with the characters waiting for their turn
-   * @param characterClass
-   *     the class of this character
-   */
-  public PlayerCharacter(@NotNull String name,
-      @NotNull BlockingQueue<ICharacter> turnsQueue,
-      final CharacterClass characterClass) {
-    super(turnsQueue, name, characterClass);
+  public PlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
+                         @NotNull String name, int healthPoints) {
+    super(turnsQueue, name, healthPoints);
   }
 
   @Override
   public void waitTurn() {
-      scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
-        scheduledExecutor
-                .schedule(this::addToQueue, equippedWeapon.getWeight() / 10, TimeUnit.SECONDS);
+    scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
+    //if (this instanceof PlayerCharacter) {
+      scheduledExecutor
+              .schedule(this::addToQueue, equippedWeapon.getWeight() / 10, TimeUnit.SECONDS);
+    //}
+  }
+
+  //quiero cambiar esta clase a un aabstracta asi cada player podra equiparse segun la tabal
+  //no estoy segura de que hacer con esto
+  public void equipped(AbstractWeapon weapon){
+    this.equippedWeapon = weapon;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getCharacterClass());
+    return Object.hashCode(getCharacterClass());
   }
 
   @Override
@@ -56,16 +48,7 @@ public class PlayerCharacter extends AbstractCharacter {
       return false;
     }
     final PlayerCharacter that = (PlayerCharacter) o;
-    return getCharacterClass() == that.getCharacterClass()
-        && getName().equals(that.getName());
+    return getCharacterClass().equals(that.getCharacterClass())
+            && getName().equals(that.getName());
   }
-
-  public void equip(Weapon weapon) {
-      this.equippedWeapon = weapon;
-  }
-
-  public Weapon getEquippedWeapon() {
-    return equippedWeapon;
-  }
-
 }

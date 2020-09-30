@@ -1,12 +1,10 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -18,22 +16,31 @@ import org.jetbrains.annotations.NotNull;
 public class Enemy extends AbstractCharacter {
 
   protected final int weight;
+  protected int attack;
 
-  /**
-   * Creates a new enemy with a name, a weight and the queue with the characters ready to
-   * play.
-   */
-  public Enemy(@NotNull final String name, final int weight,
-      @NotNull final BlockingQueue<ICharacter> turnsQueue) {
-    super(turnsQueue, name, CharacterClass.ENEMY);
+  public Enemy(@NotNull BlockingQueue<ICharacter> turnsQueue,
+               @NotNull String name, int healthPoints ,int weight) {
+    super(turnsQueue, name,healthPoints);
     this.weight = weight;
+    this.characterClass = "Enemy";
   }
 
-  /**
-   * Returns the weight of this enemy.
-   */
-  public int getWeight() {
+  @Override
+  public void waitTurn() {
+    scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
+    //if (this instanceof Enemy) {
+      var enemy = (Enemy) this;
+      scheduledExecutor
+              .schedule(this::addToQueue, enemy.weight / 10, TimeUnit.SECONDS);
+    //}
+  }
+
+  public int getWeight(){
     return weight;
+  }
+  @Override
+  public int hashCode() {
+    return Objects.hash(getWeight());
   }
 
   @Override
@@ -46,20 +53,5 @@ public class Enemy extends AbstractCharacter {
     }
     final Enemy enemy = (Enemy) o;
     return getWeight() == enemy.getWeight();
-  }
-
-  @Override
-  public void waitTurn() {
-      scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
-      //if (this instanceof Enemy) {
-        var enemy = (Enemy) this;
-        scheduledExecutor
-                .schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
-      //}
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(getWeight());
   }
 }
