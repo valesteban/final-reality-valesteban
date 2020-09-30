@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Enemy extends AbstractCharacter {
 
-  private final int weight;
+  protected final int weight;
 
   /**
    * Creates a new enemy with a name, a weight and the queue with the characters ready to
@@ -51,11 +51,11 @@ public class Enemy extends AbstractCharacter {
   @Override
   public void waitTurn() {
       scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
-      if (this instanceof Enemy) {
+      //if (this instanceof Enemy) {
         var enemy = (Enemy) this;
         scheduledExecutor
                 .schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
-      }
+      //}
   }
 
   @Override
