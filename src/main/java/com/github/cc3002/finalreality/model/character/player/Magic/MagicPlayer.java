@@ -16,7 +16,7 @@ public class MagicPlayer extends PlayerCharacter {
     }
 
     @Override
-    public void equipped(IWeapon weapon) {
+    public void equipped(IWeapon weapon) { //despues se supone q va  acambiar especifica para estos
         this.equippedWeapon = weapon;
     }
 

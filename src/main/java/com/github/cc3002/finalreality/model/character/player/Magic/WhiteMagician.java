@@ -12,9 +12,4 @@ public class WhiteMagician extends MagicPlayer {
         super(turnsQueue, name ,healthPoints, mana);
         this.characterClass = "WhiteMagician";
     }
-
-    @Override
-    public void equipped(IWeapon weapon) {
-
-    }
 }
