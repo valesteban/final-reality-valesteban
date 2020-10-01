@@ -7,16 +7,18 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import com.github.cc3002.finalreality.model.weapon.AbstractWeapon;
+import com.github.cc3002.finalreality.model.weapon.IWeapon;
+
 import org.jetbrains.annotations.NotNull;
 
-public class PlayerCharacter extends AbstractCharacter {
+public abstract class PlayerCharacter extends AbstractCharacter {
 
-  protected AbstractWeapon equippedWeapon = null;
+  protected IWeapon equippedWeapon = null;
 
   public PlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
                          @NotNull String name, int healthPoints) {
     super(turnsQueue, name, healthPoints);
+    this.equippedWeapon = null ;
   }
 
   @Override
@@ -30,9 +32,11 @@ public class PlayerCharacter extends AbstractCharacter {
 
   //quiero cambiar esta clase a un aabstracta asi cada player podra equiparse segun la tabal
   //no estoy segura de que hacer con esto
-  public void equipped(AbstractWeapon weapon){
-    this.equippedWeapon = weapon;
-  }
+  //@override
+  public abstract void equipped(IWeapon weapon);//{
+ //   this.equippedWeapon = weapon;
+ // }
+  //cada clase de personajes tendra dentrsos de si las weaponq  puede ocupar
 
   @Override
   public int hashCode() {

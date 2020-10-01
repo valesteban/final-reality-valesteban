@@ -16,7 +16,8 @@ import org.jetbrains.annotations.NotNull;
 public class Enemy extends AbstractCharacter {
 
   protected final int weight;
-  protected int attack;
+
+
 
   public Enemy(@NotNull BlockingQueue<ICharacter> turnsQueue,
                @NotNull String name, int healthPoints ,int weight) {

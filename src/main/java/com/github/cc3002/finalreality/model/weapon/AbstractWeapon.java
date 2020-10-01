@@ -2,18 +2,17 @@ package com.github.cc3002.finalreality.model.weapon;
 import java.util.Objects;
 
 public abstract class AbstractWeapon implements IWeapon{
-        private  String name;
-        private  int damage;
-        private  int weight;
-        protected String type;
-        //protected String weaponType;
+        private final String name;
+        private final int damage;
+        private final int weight;
+        ////protected String weaponType;
 
-        public AbstractWeapon(String name,int damage, int weight) {
-            this.name = name;
-            this.damage = damage;
-            this.weight = weight;
-          //  this.type = "None";
-        }
+    public AbstractWeapon(String name,int damage, int weight) {
+        this.name = name;
+        this.damage = damage;
+        this.weight = weight;
+        //this.type = "None";
+    }
 
         @Override
         public String getName() {
@@ -29,9 +28,7 @@ public abstract class AbstractWeapon implements IWeapon{
             return weight;
         }
         @Override
-        public String getType() {
-            return null;
-        }
+        public abstract String getType();
         @Override
         public boolean equals(final Object o) {
             if (this == o) {
