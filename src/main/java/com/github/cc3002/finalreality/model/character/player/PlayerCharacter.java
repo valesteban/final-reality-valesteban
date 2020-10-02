@@ -7,6 +7,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import com.github.cc3002.finalreality.model.weapon.AbstractWeapon;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 
 import org.jetbrains.annotations.NotNull;
@@ -30,14 +31,6 @@ public abstract class PlayerCharacter extends AbstractCharacter {
     //}
   }
 
-  //quiero cambiar esta clase a un aabstracta asi cada player podra equiparse segun la tabal
-  //no estoy segura de que hacer con esto
-  //@override
-  public abstract void equipped(IWeapon weapon);//{
- //   this.equippedWeapon = weapon;
- // }
-  //cada clase de personajes tendra dentrsos de si las weaponq  puede ocupar
-
   @Override
   public int hashCode() {
     return Object.hashCode(getCharacterClass());
@@ -55,4 +48,6 @@ public abstract class PlayerCharacter extends AbstractCharacter {
     return getCharacterClass().equals(that.getCharacterClass())
             && getName().equals(that.getName());
   }
+
+  //voy a asumir que en el futuro voy a tener aqui un metodo  abstracto para atacar y esas cosas
 }
