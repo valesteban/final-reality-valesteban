@@ -1,7 +1,6 @@
 package com.github.cc3002.finalreality.model.character.player.NonMagic;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
-import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.Knife;
 import com.github.cc3002.finalreality.model.weapon.Sword;
 import org.jetbrains.annotations.NotNull;

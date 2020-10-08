@@ -1,9 +1,7 @@
 package com.github.cc3002.finalreality.model.character.player.NonMagic;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
-import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.Bow;
-import com.github.cc3002.finalreality.model.weapon.Knife;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;

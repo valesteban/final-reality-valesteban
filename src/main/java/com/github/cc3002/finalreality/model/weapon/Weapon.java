@@ -29,7 +29,9 @@ public  class Weapon implements IWeapon{
             return weight;
         }
         @Override
-        public  String getType(){return type;}
+        public  String getType(){
+            return type;
+        }
         @Override
         public boolean equals(final Object o) {
             if (this == o) {
@@ -38,7 +40,7 @@ public  class Weapon implements IWeapon{
             if (!(o instanceof com.github.cc3002.finalreality.model.weapon.Weapon)) {
                 return false;
             }
-            final com.github.cc3002.finalreality.model.weapon.Weapon weapon = (com.github.cc3002.finalreality.model.weapon.AbstractWeapon) o;
+            final com.github.cc3002.finalreality.model.weapon.Weapon weapon = (com.github.cc3002.finalreality.model.weapon.Weapon) o;
             return getDamage() == weapon.getDamage() &&
                     getWeight() == weapon.getWeight() &&
                     getName().equals(weapon.getName()) &&
