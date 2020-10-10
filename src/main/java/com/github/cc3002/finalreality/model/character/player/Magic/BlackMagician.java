@@ -10,8 +10,7 @@ import java.util.concurrent.BlockingQueue;
 public class BlackMagician extends MagicPlayer {
     public BlackMagician(@NotNull BlockingQueue<ICharacter> turnsQueue,
                        @NotNull String name, int healthPoints, int mana){
-        super(turnsQueue, name ,healthPoints,mana);
-        this.characterClass = "BlackMagician";
+        super(turnsQueue, name ,healthPoints,"BlackMagician",mana);
         }
 
     public void equipped(Knife weapon) {

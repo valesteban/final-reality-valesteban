@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+
+import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
+
+import com.github.cc3002.finalreality.model.weapon.Axe;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +24,8 @@ import org.junit.jupiter.api.Test;
 public abstract class AbstractCharacterTest {
 
   protected BlockingQueue<ICharacter> turns;
-  protected List<ICharacter> testCharacters;
-  protected Weapon testWeapon;
+  protected List<PlayerCharacter> testCharacters;
+  protected Axe testWeapon;
 
   /**
    * Checks that the character waits the appropriate amount of time for it's turn.
@@ -45,7 +49,7 @@ public abstract class AbstractCharacterTest {
     }
   }
 
-  private void tryToEquip(ICharacter character) {
+  private void tryToEquip(PlayerCharacter character) {
     character.equip(testWeapon);
   }
 
@@ -61,7 +65,7 @@ public abstract class AbstractCharacterTest {
 
   protected void basicSetUp() {
     turns = new LinkedBlockingQueue<>();
-    testWeapon = new Weapon("Test", 15, 10, WeaponType.AXE);
+    testWeapon = new Axe("Test", 15, 10);
     testCharacters = new ArrayList<>();
   }
 }

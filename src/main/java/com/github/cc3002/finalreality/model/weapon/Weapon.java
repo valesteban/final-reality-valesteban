@@ -2,7 +2,7 @@ package com.github.cc3002.finalreality.model.weapon;
 
 import java.util.Objects;
 
-public  class Weapon implements IWeapon{
+public abstract class Weapon implements IWeapon{
     private final String name;
     private final int damage;
     private final int weight;
@@ -28,11 +28,11 @@ public  class Weapon implements IWeapon{
         public int getWeight() {
             return weight;
         }
-        @Override
-        public  String getType(){
-            return type;
-        }
-        @Override
+
+    @Override
+    public abstract String getType();
+
+    @Override
         public boolean equals(final Object o) {
             if (this == o) {
                 return true;

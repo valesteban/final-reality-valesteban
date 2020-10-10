@@ -9,8 +9,7 @@ import java.util.concurrent.BlockingQueue;
 public class WhiteMagician extends MagicPlayer {
     public WhiteMagician(@NotNull BlockingQueue<ICharacter> turnsQueue,
                          @NotNull String name, int healthPoints, int mana){
-        super(turnsQueue, name ,healthPoints, mana);
-        this.characterClass = "WhiteMagician";
+        super(turnsQueue, name ,healthPoints, "WhiteMagician",mana);
     }
 
 }

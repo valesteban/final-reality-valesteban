@@ -3,6 +3,7 @@ package com.github.cc3002.finalreality.model.character.player.NonMagic;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.weapon.Knife;
 import com.github.cc3002.finalreality.model.weapon.Sword;
+import com.github.cc3002.finalreality.model.weapon.Axe;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
@@ -10,8 +11,7 @@ import java.util.concurrent.BlockingQueue;
 public class Knight extends NonMagicPlayer{
     public Knight(@NotNull BlockingQueue<ICharacter> turnsQueue,
                   @NotNull String name, int healthPoints){
-        super(turnsQueue, name ,healthPoints);
-        this.characterClass ="Knight";
+        super(turnsQueue, name ,healthPoints, "Knight");
 
     }
     public void equipped(Sword weapon) {

@@ -12,8 +12,7 @@ import java.util.concurrent.BlockingQueue;
 public class Thief extends NonMagicPlayer {
     public Thief(@NotNull BlockingQueue<ICharacter> turnsQueue,
                     @NotNull String name, int healthPoints){
-        super(turnsQueue, name ,healthPoints);
-        this.characterClass ="Thief";
+        super(turnsQueue, name ,healthPoints,"Thief");
     }
 
     public void equipped(Sword weapon) {

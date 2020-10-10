@@ -14,10 +14,12 @@ public abstract class AbstractCharacter implements ICharacter {
   protected  int healthPoints;
 
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
-      @NotNull String name, int healthPoints) {
+      @NotNull String name, int healthPoints, String characterClass) {
     this.turnsQueue = turnsQueue;
     this.name = name;
     this.healthPoints = healthPoints;
+    this.characterClass = characterClass;
+
   }
 
   @Override
@@ -26,9 +28,10 @@ public abstract class AbstractCharacter implements ICharacter {
   }
 
   @Override
-  public  String getCharacterClass(){
+  public String getCharacterClass(){
     return  characterClass;
   }
+
 
   protected void addToQueue() {
     turnsQueue.add(this);

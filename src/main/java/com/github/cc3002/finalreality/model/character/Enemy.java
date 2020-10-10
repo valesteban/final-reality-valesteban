@@ -21,9 +21,8 @@ public class Enemy extends AbstractCharacter {
 
   public Enemy(@NotNull BlockingQueue<ICharacter> turnsQueue,
                @NotNull String name, int healthPoints ,int weight) {
-    super(turnsQueue, name,healthPoints);
+    super(turnsQueue, name,healthPoints,"Enemy");
     this.weight = weight;
-    this.characterClass = "Enemy";
   }
 
   @Override
