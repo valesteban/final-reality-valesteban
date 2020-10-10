@@ -42,14 +42,12 @@ public class PlayerCharacter extends AbstractCharacter {
       return false;
     }
     final PlayerCharacter that = (PlayerCharacter) o;
-    return getCharacterClass() == that.getCharacterClass()
+    return getCharacterClass().equals(that.getCharacterClass())
         && getName().equals(that.getName());
   }
 
   public void equip(IWeapon weapon) {
-    if (this instanceof PlayerCharacter) {
       this.equippedWeapon = weapon;
-    }
   }
   public IWeapon getEquippedWeapon(){
     return equippedWeapon;
