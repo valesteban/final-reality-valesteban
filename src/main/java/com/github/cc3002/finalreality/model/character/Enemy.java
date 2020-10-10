@@ -1,8 +1,11 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -15,21 +18,22 @@ public class Enemy extends AbstractCharacter {
 
   private final int weight;
 
-  /**
-   * Creates a new enemy with a name, a weight and the queue with the characters ready to
-   * play.
-   */
   public Enemy(@NotNull final String name, final int weight,
       @NotNull final BlockingQueue<ICharacter> turnsQueue) {
-    super(turnsQueue, name, CharacterClass.ENEMY);
+    super(turnsQueue, name, "Enemy");
     this.weight = weight;
   }
 
-  /**
-   * Returns the weight of this enemy.
-   */
   public int getWeight() {
     return weight;
+  }
+  @Override
+  public void waitTurn() {
+    scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
+      var enemy = (Enemy) this;
+      scheduledExecutor
+              .schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
+
   }
 
   @Override
