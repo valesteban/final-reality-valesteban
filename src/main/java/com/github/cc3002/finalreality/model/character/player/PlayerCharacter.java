@@ -51,6 +51,9 @@ public class PlayerCharacter extends AbstractCharacter {
       this.equippedWeapon = weapon;
     }
   }
+  public IWeapon getEquippedWeapon(){
+    return equippedWeapon;
+  }
 
 
 }
