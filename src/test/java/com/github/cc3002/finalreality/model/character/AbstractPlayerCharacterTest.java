@@ -3,6 +3,7 @@ package com.github.cc3002.finalreality.model.character;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.github.cc3002.finalreality.model.character.player.BlackMage;
 import com.github.cc3002.finalreality.model.character.player.Engineer;
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import com.github.cc3002.finalreality.model.weapon.Staff;
@@ -23,7 +24,7 @@ public class AbstractPlayerCharacterTest {
     private Enemy teste;
 
     protected BlockingQueue<ICharacter> turns;
-    protected List<ICharacter> testCharacters;
+    protected List<IPlayerCharacter> testCharacters;
     protected IWeapon testWeapon;
     protected IWeapon testWeapon2;
 
@@ -57,22 +58,22 @@ public class AbstractPlayerCharacterTest {
     @Test
     void testwaitTyrn() {
         Assertions.assertTrue(turns.isEmpty());
-        blackTest.equip(testWeapon);
+        testCharacters.get(0).equip(testWeapon);
 
         // tryToEquip(testCharacters.get(0));
-        blackTest.waitTurn();
-      //  try {
+        testCharacters.get(0).waitTurn();
+        try {
             // Thread.sleep is not accurate so this values may be changed to adjust the
             // acceptable error margin.
             // We're testing that the character waits approximately 1 second.
-            //    Thread.sleep(1000);
-            //    Assertions.assertEquals(0, turns.size());
-            //    Thread.sleep(200);
-            //    Assertions.assertEquals(1, turns.size());
-            //    Assertions.assertEquals(testCharacters.get(0), turns.peek());
-            // } catch (InterruptedException e) {
-            //      e.printStackTrace();
-            //  }
+                Thread.sleep(1000);
+                Assertions.assertEquals(0, turns.size());
+                Thread.sleep(500);
+                Assertions.assertEquals(1, turns.size());
+               Assertions.assertEquals(testCharacters.get(0), turns.peek());
+             } catch (InterruptedException e) {
+                 e.printStackTrace();
+             }
 
 }}
 

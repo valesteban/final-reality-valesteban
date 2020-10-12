@@ -35,7 +35,7 @@ public class MagicCharacter extends AbstractPlayerCharacter {
     }
     @Override
     public int hashCode() {
-        return Objects.hash(getCharacterClass(),getMana());
+        return Objects.hash(getCharacterClass(),getMana(),getName());
     }
 
 

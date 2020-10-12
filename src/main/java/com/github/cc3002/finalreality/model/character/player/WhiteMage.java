@@ -10,17 +10,4 @@ public class WhiteMage extends MagicCharacter {
                      @NotNull String name, int mana) {
         super(turnsQueue, name, "WhiteMage",mana);
     }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof WhiteMage)) {
-            return false;
-        }
-        final IPlayerCharacter that = (IPlayerCharacter) o;
-        return getCharacterClass().equals(that.getCharacterClass())
-                && getName().equals(that.getName());
-    }
 }

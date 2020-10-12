@@ -8,4 +8,5 @@ public interface IPlayerCharacter {
     String getCharacterClass();
     void equip(IWeapon weapon) ;
     IWeapon getEquippedWeapon();
+    void waitTurn();
 }

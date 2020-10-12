@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.model.character;
 
 import com.github.cc3002.finalreality.model.character.player.BlackMage;
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.character.player.Thief;
 import com.github.cc3002.finalreality.model.character.player.WhiteMage;
 import com.github.cc3002.finalreality.model.weapon.Axe;
@@ -22,35 +23,36 @@ public class MagicCharactersTest {
     private BlackMage blackTest;
 
     protected BlockingQueue<ICharacter> turns;
-    protected List<ICharacter> testCharacters;
+
     protected IWeapon testWeapon;
 
     @BeforeEach
     void setUp(){
         turns = new LinkedBlockingQueue<>();
         testWeapon = new Axe("Test", 15, 10);
-        testCharacters = new ArrayList<>();
+
         whitetest = new WhiteMage(turns,"gandalf",11);
-        testCharacters.add(whitetest);
+
         blackTest = new BlackMage(turns,"dumblurdoor",2);
-        testCharacters.add(blackTest);
-        testCharacters.add(new Enemy(turns,ENEMY_NAME,11));
+
+
     }
 
 
     @Test
     void constructor2(){
-        assertEquals(new WhiteMage(turns,"gandalf",11), testCharacters.get(0));
-        assertEquals(new WhiteMage(turns,"gandalf",11).hashCode(), testCharacters.get(0).hashCode());
-        assertNotEquals(new WhiteMage(turns,"gndalf",7), testCharacters.get(0));
-        assertNotEquals(testCharacters.get(0), new Thief(turns,"ron"));
 
-        assertEquals(new BlackMage(turns,"dumblurdoor",2), testCharacters.get(1));
-        assertEquals(new BlackMage(turns,"dumblurdoor",2).hashCode(), testCharacters.get(1).hashCode());
-        assertNotEquals(new BlackMage(turns,"nomismodumburdoor",3), testCharacters.get(1));
-        assertNotEquals(testCharacters.get(1), new Thief(turns,"ron"));
+        assertEquals(new WhiteMage(turns,"gandalf",11).hashCode(), whitetest.hashCode());
+        assertNotEquals(new WhiteMage(turns,"gndalf",7), whitetest);
+        assertNotEquals(whitetest, new Thief(turns,"ron"));
 
-     //   assertNotEquals(testCharacters.get(0),new WhiteMage(turns,"gandalf",88));
-        //assertNotEquals(testCharacters.get(1), new BlackMage(turns,"dumblurdoor",1000));
+        assertEquals(new BlackMage(turns,"dumblurdoor",2), blackTest);
+        assertEquals(new BlackMage(turns,"dumblurdoor",2).hashCode(), blackTest.hashCode());
+        assertNotEquals(new BlackMage(turns,"nomismodumburdoor",3), blackTest);
+        assertNotEquals(blackTest, new Thief(turns,"ron"));
+
+
+        assertNotEquals(whitetest,new WhiteMage(turns,"gandalf",88));
+        assertNotEquals(blackTest, new BlackMage(turns,"dumblurdoor",1000));
     }
 }
