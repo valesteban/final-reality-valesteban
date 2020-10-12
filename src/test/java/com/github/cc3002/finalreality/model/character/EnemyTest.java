@@ -50,7 +50,7 @@ public class EnemyTest {
             Assertions.assertEquals(0, turns.size());
             Thread.sleep(200);
             Assertions.assertEquals(1, turns.size());
-            Assertions.assertEquals(testCharacters.get(0), turns.peek());
+            Assertions.assertEquals(teste, turns.peek());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

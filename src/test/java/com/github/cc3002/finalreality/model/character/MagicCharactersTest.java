@@ -49,5 +49,8 @@ public class MagicCharactersTest {
         assertEquals(new BlackMage(turns,"dumblurdoor",2).hashCode(), testCharacters.get(1).hashCode());
         assertNotEquals(new BlackMage(turns,"nomismodumburdoor",3), testCharacters.get(1));
         assertNotEquals(testCharacters.get(1), new Thief(turns,"ron"));
+
+     //   assertNotEquals(testCharacters.get(0),new WhiteMage(turns,"gandalf",88));
+        //assertNotEquals(testCharacters.get(1), new BlackMage(turns,"dumblurdoor",1000));
     }
 }

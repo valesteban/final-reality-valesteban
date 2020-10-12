@@ -30,6 +30,7 @@ public class Staff extends AbstractWeapon {
                 getWeight() == weapon.getWeight() &&
                 getName().equals(weapon.getName()) &&
                 getDamage() == weapon.getDamage() &&
+
                 getType().equals(weapon.getType());
     }
     @Override
