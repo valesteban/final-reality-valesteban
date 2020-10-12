@@ -16,12 +16,12 @@ public class SwordTest {
 
     @BeforeEach
     void setUp() {
-        testSword = new Bow(SWORD_NAME, DAMAGE, WEIGHT);
+        testSword = new Sword(SWORD_NAME, DAMAGE, WEIGHT);
     }
 
     @Test
     void constructorTest(){
-        var expectedBow = new Bow(SWORD_NAME,DAMAGE,WEIGHT);
+        var expectedBow = new Sword(SWORD_NAME,DAMAGE,WEIGHT);
 
         assertEquals(expectedBow,testSword);
         assertEquals(expectedBow.hashCode(),testSword.hashCode());

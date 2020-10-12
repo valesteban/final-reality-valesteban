@@ -1,12 +1,8 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
-import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import org.jetbrains.annotations.NotNull;
 
 /**

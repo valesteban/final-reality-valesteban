@@ -7,7 +7,7 @@ import java.util.concurrent.BlockingQueue;
 
 public class WhiteMage extends MagicCharacter {
     public WhiteMage(@NotNull BlockingQueue<ICharacter> turnsQueue,
-                     @NotNull String name, final String characterClass, int mana) {
+                     @NotNull String name, int mana) {
         super(turnsQueue, name, "WhiteMage",mana);
     }
 
@@ -19,7 +19,7 @@ public class WhiteMage extends MagicCharacter {
         if (!(o instanceof WhiteMage)) {
             return false;
         }
-        final PlayerCharacter that = (PlayerCharacter) o;
+        final IPlayerCharacter that = (IPlayerCharacter) o;
         return getCharacterClass().equals(that.getCharacterClass())
                 && getName().equals(that.getName());
     }

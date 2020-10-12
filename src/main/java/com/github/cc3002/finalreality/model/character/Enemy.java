@@ -5,7 +5,6 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -18,8 +17,8 @@ public class Enemy extends AbstractCharacter {
 
   private final int weight;
 
-  public Enemy(@NotNull final String name, final int weight,
-      @NotNull final BlockingQueue<ICharacter> turnsQueue) {
+  public Enemy(@NotNull final BlockingQueue<ICharacter> turnsQueue,
+               @NotNull final String name, final int weight) {
     super(turnsQueue, name, "Enemy");
     this.weight = weight;
   }
@@ -31,9 +30,7 @@ public class Enemy extends AbstractCharacter {
   public void waitTurn() {
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
       var enemy = (Enemy) this;
-      scheduledExecutor
-              .schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
-
+      scheduledExecutor.schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
   }
 
   @Override
