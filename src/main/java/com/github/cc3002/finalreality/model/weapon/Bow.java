@@ -1,14 +1,12 @@
 package com.github.cc3002.finalreality.model.weapon;
 
-public class Bow extends AbstractWeapon{
-    private final String type = "Bow";
 
-    public Bow(String name, int damage, final int weight){
-        super(name , damage ,weight);
-    }
+public class Bow extends AbstractWeapon {
 
-    @Override
-    public String getType() {
-        return type;
+    public Bow(final String name, final int damage,
+               final int weight) {
+
+        super(name, damage, weight, "Bow");
     }
 }
+

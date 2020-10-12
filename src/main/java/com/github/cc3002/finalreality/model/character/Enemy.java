@@ -17,11 +17,10 @@ public class Enemy extends AbstractCharacter {
 
   protected final int weight;
 
+  public Enemy(@NotNull final BlockingQueue<ICharacter> turnsQueue,
+               @NotNull final String name, final int weight) {
+    super(turnsQueue, name, "Enemy");
 
-
-  public Enemy(@NotNull BlockingQueue<ICharacter> turnsQueue,
-               @NotNull String name, int healthPoints ,int weight) {
-    super(turnsQueue, name,healthPoints);
     this.weight = weight;
     this.characterClass = "Enemy";
   }
@@ -36,12 +35,16 @@ public class Enemy extends AbstractCharacter {
     //}
   }
 
-  public int getWeight(){
+
+  public int getWeight() {
     return weight;
   }
   @Override
-  public int hashCode() {
-    return Objects.hash(getWeight());
+  public void waitTurn() {
+    scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
+      var enemy = (Enemy) this;
+      scheduledExecutor.schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
+
   }
 
   @Override

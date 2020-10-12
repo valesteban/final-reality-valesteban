@@ -7,17 +7,25 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractCharacter implements ICharacter {
 
-  protected final BlockingQueue<ICharacter> turnsQueue;
-  protected final String name;
-  protected  String characterClass;
+  private final BlockingQueue<ICharacter> turnsQueue;
+  private final String name;
+  private final String characterClass;
   protected ScheduledExecutorService scheduledExecutor;
-  protected  int healthPoints;
 
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
-      @NotNull String name, int healthPoints) {
+      @NotNull String name, String characterClass) {
     this.turnsQueue = turnsQueue;
     this.name = name;
-    this.healthPoints = healthPoints;
+    this.characterClass = characterClass;
+  }
+
+  @Override
+  public abstract void waitTurn() ;
+
+  protected void addToQueue() {
+    turnsQueue.add(this);
+    scheduledExecutor.shutdown();
+
   }
 
   @Override
@@ -26,18 +34,8 @@ public abstract class AbstractCharacter implements ICharacter {
   }
 
   @Override
-  public  String getCharacterClass(){
-    return  characterClass;
+
+  public String getCharacterClass() {
+    return characterClass;
   }
-
-  protected void addToQueue() {
-    turnsQueue.add(this);
-    scheduledExecutor.shutdown();
-  }
-
-  @Override
-  public abstract void waitTurn();
-
-  @Override
-  public abstract int hashCode();
 }

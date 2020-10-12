@@ -1,14 +1,12 @@
 package com.github.cc3002.finalreality.model.weapon;
 
-public class Knife extends AbstractWeapon{
-    private final String type = "Knife";
 
-    public Knife( String name, int damage, int weight){
-        super(name ,damage ,weight);
-    }
+public class Knife extends AbstractWeapon {
 
-    @Override
-    public String getType() {
-        return type;
-    }
+    public Knife(final String name, final int damage,
+               final int weight){
+
+        super( name, damage, weight, "Knife");
 }
+    }
+
