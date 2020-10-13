@@ -36,7 +36,7 @@ public class MagicCharactersTest {
 
 
     @Test
-    void constructor2(){
+    void constructorTest(){
 
         assertEquals(new WhiteMage(turns,"gandalf",11).hashCode(), whitetest.hashCode());
         assertNotEquals(new WhiteMage(turns,"gndalf",7), whitetest);

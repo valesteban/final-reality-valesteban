@@ -34,7 +34,7 @@ public class EnemyTest {
     }
 
     @Test
-    void constructor(){
+    void constructorTest(){
         assertEquals(new Enemy(turns,ENEMY_NAME,11), testCharacters.get(0));
         assertEquals(new Enemy(turns,ENEMY_NAME,11).hashCode(), testCharacters.get(0).hashCode());
         assertNotEquals(new Enemy(turns,ENEMY_NAME,1), testCharacters.get(0));
@@ -43,7 +43,7 @@ public class EnemyTest {
 
     }
     @Test
-    void waitTurnT(){
+    void waitTurnTest(){
         Assertions.assertTrue(turns.isEmpty());
         teste.waitTurn();
         try {

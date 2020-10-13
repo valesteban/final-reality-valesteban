@@ -1,9 +1,20 @@
 package com.github.cc3002.finalreality.model.weapon;
-
 import java.util.Objects;
+
+/**
+ * A class that creates a specific type of weapon: Staff
+ * and its variables
+ *
+ * @author Valentina Esteban
+ */
 
 public class Staff extends AbstractWeapon {
     protected int magicDamage;
+    /**
+     * Creates a weapon Staff with a name, a base damage, weight and it's type
+     *which is Staff.
+     *
+     */
 
 
     public Staff(final String name, final int damage,
@@ -14,6 +25,9 @@ public class Staff extends AbstractWeapon {
 
     }
 
+    /**
+     * Returns the magicDamage of the staff.
+     */
     public int getMagicDamage() {
         return magicDamage;
     }
