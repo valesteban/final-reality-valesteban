@@ -15,26 +15,13 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Enemy extends AbstractCharacter {
 
-  protected final int weight;
+  private final int weight;
 
   public Enemy(@NotNull final BlockingQueue<ICharacter> turnsQueue,
                @NotNull final String name, final int weight) {
     super(turnsQueue, name, "Enemy");
-
     this.weight = weight;
-    this.characterClass = "Enemy";
   }
-
-  @Override
-  public void waitTurn() {
-    scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
-    //if (this instanceof Enemy) {
-      var enemy = (Enemy) this;
-      scheduledExecutor
-              .schedule(this::addToQueue, enemy.weight / 10, TimeUnit.SECONDS);
-    //}
-  }
-
 
   public int getWeight() {
     return weight;
@@ -42,9 +29,8 @@ public class Enemy extends AbstractCharacter {
   @Override
   public void waitTurn() {
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
-      var enemy = (Enemy) this;
-      scheduledExecutor.schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
-
+    var enemy = (Enemy) this;
+    scheduledExecutor.schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
   }
 
   @Override
@@ -58,4 +44,8 @@ public class Enemy extends AbstractCharacter {
     final Enemy enemy = (Enemy) o;
     return getWeight() == enemy.getWeight();
   }
-}
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getWeight());
+  }}
