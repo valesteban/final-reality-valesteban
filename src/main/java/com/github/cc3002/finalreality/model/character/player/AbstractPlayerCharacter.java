@@ -29,7 +29,6 @@ public class AbstractPlayerCharacter extends AbstractCharacter implements IPlaye
         scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
         scheduledExecutor
                 .schedule(this::addToQueue, equippedWeapon.getWeight() / 10, TimeUnit.SECONDS);
-
     }
 
     @Override

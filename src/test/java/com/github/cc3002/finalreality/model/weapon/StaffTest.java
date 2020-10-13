@@ -30,7 +30,6 @@ public class StaffTest {
     void constructorTest() {
         var expectedStaff = new Staff(STAFF_NAME,DAMAGE,WEIGHT,MAGIC_DAMAGE);
 
-
         assertEquals(expectedStaff, testStaff );
         assertEquals(expectedStaff.hashCode(), testStaff.hashCode());
 
