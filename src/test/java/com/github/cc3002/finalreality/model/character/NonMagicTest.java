@@ -45,7 +45,7 @@ public class NonMagicTest {
 
 
     @Test
-    void constructor2(){
+    void constructorTest(){
         assertEquals(new Engineer(turns,"name1"), testCharacters.get(0));
         assertEquals(new Engineer(turns,"name1").hashCode(), testCharacters.get(0).hashCode());
         assertNotEquals(new Engineer(turns,"noname1"), testCharacters.get(0));

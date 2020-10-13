@@ -55,7 +55,7 @@ public class AbstractPlayerCharacterTest {
     }
 
     @Test
-    void testwaitTyrn() {
+    void testWaitTyrn() {
         Assertions.assertTrue(turns.isEmpty());
         testCharacters.get(0).equip(testWeapon);
 
