@@ -1,7 +1,6 @@
 package com.github.cc3002.finalreality.model.character;
 
 import com.github.cc3002.finalreality.model.character.player.BlackMage;
-import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.character.player.Thief;
 import com.github.cc3002.finalreality.model.character.player.WhiteMage;
 import com.github.cc3002.finalreality.model.weapon.Axe;
@@ -9,8 +8,6 @@ import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -18,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class MagicCharactersTest {
-    private static final String ENEMY_NAME = "juan";
     private WhiteMage whitetest;
     private BlackMage blackTest;
 
@@ -40,7 +36,7 @@ public class MagicCharactersTest {
 
 
     @Test
-    void constructor2(){
+    void constructorTest(){
 
         assertEquals(new WhiteMage(turns,"gandalf",11).hashCode(), whitetest.hashCode());
         assertNotEquals(new WhiteMage(turns,"gndalf",7), whitetest);

@@ -1,13 +1,10 @@
 package com.github.cc3002.finalreality.model.character;
-<<<<<<< HEAD
 
-import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
-=======
 import com.github.cc3002.finalreality.model.character.player.Thief;
 import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import org.junit.jupiter.api.Assertions;
->>>>>>> rama-2
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -37,14 +34,16 @@ public class EnemyTest {
     }
 
     @Test
-    void constructor(){
+    void constructorTest(){
         assertEquals(new Enemy(turns,ENEMY_NAME,11), testCharacters.get(0));
         assertEquals(new Enemy(turns,ENEMY_NAME,11).hashCode(), testCharacters.get(0).hashCode());
         assertNotEquals(new Enemy(turns,ENEMY_NAME,1), testCharacters.get(0));
         assertNotEquals(testCharacters.get(0), new Thief(turns,"ron"));
+        assertNotEquals(new Enemy(turns,ENEMY_NAME,19), testCharacters.get(0));
+
     }
     @Test
-    void waitTurnT(){
+    void waitTurnTest(){
         Assertions.assertTrue(turns.isEmpty());
         teste.waitTurn();
         try {

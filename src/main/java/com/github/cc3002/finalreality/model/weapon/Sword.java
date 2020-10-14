@@ -1,7 +1,18 @@
 package com.github.cc3002.finalreality.model.weapon;
-
+/**
+ * A class that creates a specific type of weapon: Sword
+ *
+ *
+ * @author Valentina Esteban
+ */
 public class Sword extends AbstractWeapon {
 
+
+    /**
+     * Creates a weapon Sword  with a name, a base damage, weight and it's type
+     *which is Sword.
+     *
+     */
 
     public Sword(final String name, final int damage,
                  final int weight) {

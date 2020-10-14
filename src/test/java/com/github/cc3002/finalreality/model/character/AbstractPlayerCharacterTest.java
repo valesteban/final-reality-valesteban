@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 public class AbstractPlayerCharacterTest {
     private BlackMage blackTest;
     private Engineer engTest;
-    private Enemy teste;
 
     protected BlockingQueue<ICharacter> turns;
     protected List<IPlayerCharacter> testCharacters;
@@ -56,7 +55,7 @@ public class AbstractPlayerCharacterTest {
     }
 
     @Test
-    void testwaitTyrn() {
+    void testWaitTyrn() {
         Assertions.assertTrue(turns.isEmpty());
         testCharacters.get(0).equip(testWeapon);
 
@@ -66,16 +65,15 @@ public class AbstractPlayerCharacterTest {
             // Thread.sleep is not accurate so this values may be changed to adjust the
             // acceptable error margin.
             // We're testing that the character waits approximately 1 second.
-                Thread.sleep(1000);
-                Assertions.assertEquals(0, turns.size());
-                Thread.sleep(500);
-                Assertions.assertEquals(1, turns.size());
-               Assertions.assertEquals(testCharacters.get(0), turns.peek());
-             } catch (InterruptedException e) {
-                 e.printStackTrace();
-             }
+            Thread.sleep(900);
+            Assertions.assertEquals(0, turns.size());
+            Thread.sleep(500);
+            Assertions.assertEquals(1, turns.size());
+            Assertions.assertEquals(testCharacters.get(0), turns.peek());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-}}
-
+    }}
 
 
