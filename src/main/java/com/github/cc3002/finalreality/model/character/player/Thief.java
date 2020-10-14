@@ -20,5 +20,4 @@ public class Thief extends AbstractPlayerCharacter {
                  @NotNull String name) {
         super(turnsQueue, name, "Thief");
     }
-
 }

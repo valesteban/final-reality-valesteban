@@ -20,5 +20,4 @@ public class Engineer  extends AbstractPlayerCharacter {
                     @NotNull String name) {
         super(turnsQueue, name, "Engineer");
     }
-
 }

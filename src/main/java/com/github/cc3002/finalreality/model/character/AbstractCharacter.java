@@ -16,28 +16,31 @@ public abstract class AbstractCharacter implements ICharacter {
   private final String name;
   private final String characterClass;
   protected ScheduledExecutorService scheduledExecutor;
-
+  /**
+   * Creates a new player Character.
+   *
+   * @param name
+   *     the character's name
+   * @param turnsQueue
+   *     the queue with the characters waiting for their turn
+   * @param characterClass
+   *     the class of this character
+   */
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
       @NotNull String name, String characterClass) {
     this.turnsQueue = turnsQueue;
     this.name = name;
     this.characterClass = characterClass;
   }
-
   @Override
   public abstract void waitTurn() ;
-
-
   /**
    * Adds this character to the turns queue.
    */
-  protected void addToQueue() {
+  public void addToQueue() {
     turnsQueue.add(this);
     scheduledExecutor.shutdown();
-
   }
-
-
   /**
    * Returns the name of this character.
    */
@@ -45,8 +48,6 @@ public abstract class AbstractCharacter implements ICharacter {
   public String getName() {
     return name;
   }
-
-
   /**
    * Returns the type of this character.
    */
