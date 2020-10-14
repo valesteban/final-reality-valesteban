@@ -20,7 +20,6 @@ public class AbstractWeapon implements IWeapon {
      * @see Knife
      * @see Sword
      * @see Staff
-     *
      */
     protected AbstractWeapon(final String name, final int damage,
                           final int weight, final String type){
