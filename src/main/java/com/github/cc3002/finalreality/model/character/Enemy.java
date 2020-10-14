@@ -14,28 +14,23 @@ import org.jetbrains.annotations.NotNull;
  * @author Valentina Esteban
  */
 public class Enemy extends AbstractCharacter {
-
   private final int weight;
-
   /**
    * Creates a new enemy with a name, a weight and the queue with the characters ready to
    * play.
    *
    */
-
   public Enemy(@NotNull final BlockingQueue<ICharacter> turnsQueue,
                @NotNull final String name, final int weight) {
     super(turnsQueue, name, "Enemy");
     this.weight = weight;
   }
-
   /**
    * Returns the weight of this enemy.
    */
   public int getWeight() {
     return weight;
   }
-
   /**
    * makes this enemy waits (enemy.getWeight() / 10) seconds and then
    * ejecute the method addToQueue()
@@ -68,4 +63,5 @@ public class Enemy extends AbstractCharacter {
   @Override
   public int hashCode() {
     return Objects.hash(getWeight());
-  }}
+  }
+}

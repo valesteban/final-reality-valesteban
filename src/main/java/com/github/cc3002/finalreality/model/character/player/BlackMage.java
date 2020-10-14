@@ -18,7 +18,5 @@ public class BlackMage extends MagicCharacter {
     public BlackMage(@NotNull BlockingQueue<ICharacter> turnsQueue,
                      @NotNull String name ,int mana){
         super(turnsQueue,name,"BlackMage",mana);
-
     }
-
 }

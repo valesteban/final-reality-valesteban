@@ -9,7 +9,6 @@ import java.util.concurrent.BlockingQueue;
 
 public class MagicCharacter extends AbstractPlayerCharacter {
     protected int mana;
-
     /**
      * Creates a new MagicCharacter with a name ,mana ,the queue and the class of mage that this is.
      *
@@ -27,14 +26,12 @@ public class MagicCharacter extends AbstractPlayerCharacter {
         super(turnsQueue, name, characterClass);
         this.mana = mana;
     }
-
     /**
      * returns this MagicCharacter´s mana.
      */
     public int getMana() {
         return mana;
     }
-
     /**
      * Compare this MagicCharacter with the given Object o.
      */
@@ -51,7 +48,6 @@ public class MagicCharacter extends AbstractPlayerCharacter {
                 && getName().equals(that.getName()) &&
                 getMana() == that.getMana();
     }
-
     /**
      * gives a hash code to this MagicCharacter.
      *
@@ -60,6 +56,4 @@ public class MagicCharacter extends AbstractPlayerCharacter {
     public int hashCode() {
         return Objects.hash(getCharacterClass(),getMana(),getName());
     }
-
-
 }

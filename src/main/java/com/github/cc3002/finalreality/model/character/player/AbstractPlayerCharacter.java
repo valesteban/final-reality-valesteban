@@ -18,9 +18,7 @@ import java.util.concurrent.TimeUnit;
  * @author Valentina Esteban
  */
 public class AbstractPlayerCharacter extends AbstractCharacter implements IPlayerCharacter {
-
     protected IWeapon equippedWeapon ;
-
     /**
      * Creates a new player PlayetCharacter.
      *
@@ -36,7 +34,6 @@ public class AbstractPlayerCharacter extends AbstractCharacter implements IPlaye
         super(turnsQueue, name, characterClass);
         this.equippedWeapon = null;
     }
-
     /**
      * returns a hash code to this PlayerCharacter.
      *
@@ -45,7 +42,6 @@ public class AbstractPlayerCharacter extends AbstractCharacter implements IPlaye
     public int hashCode() {
         return Objects.hash(getCharacterClass());
     }
-
     /**
      * makes this PlayerCharacter waits (equippedWeapon.getWeight() / 10) seconds and then
      * ejecute the method addToQueue()
@@ -56,7 +52,6 @@ public class AbstractPlayerCharacter extends AbstractCharacter implements IPlaye
         scheduledExecutor
                 .schedule(this::addToQueue, equippedWeapon.getWeight() / 10, TimeUnit.SECONDS);
     }
-
     /**
      * Compare this PlayerCharacter with the given Object o.
      */
@@ -72,7 +67,6 @@ public class AbstractPlayerCharacter extends AbstractCharacter implements IPlaye
         return getCharacterClass().equals(that.getCharacterClass())
                 && getName().equals(that.getName());
     }
-
     /**
      * gives a weapon to the variable equippedWeapon
      * of this PlayerCharacter.
@@ -80,8 +74,6 @@ public class AbstractPlayerCharacter extends AbstractCharacter implements IPlaye
     public void equip(IWeapon weapon) {
         this.equippedWeapon = weapon;
     }
-
-
     /**
      * Returns the equippedWeapon of this PlayerCharacter.
      */
