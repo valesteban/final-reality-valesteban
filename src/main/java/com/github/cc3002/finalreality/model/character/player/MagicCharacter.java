@@ -1,13 +1,13 @@
 package com.github.cc3002.finalreality.model.character.player;
 
-import com.github.cc3002.finalreality.model.character.AbstractCharacter;
 import com.github.cc3002.finalreality.model.character.ICharacter;
+import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 
-public class MagicCharacter extends AbstractPlayerCharacter {
+public abstract class MagicCharacter extends AbstractPlayerCharacter {
     protected int mana;
     /**
      * Creates a new MagicCharacter with a name ,mana ,the queue and the class of mage that this is.
@@ -56,4 +56,29 @@ public class MagicCharacter extends AbstractPlayerCharacter {
     public int hashCode() {
         return Objects.hash(getCharacterClass(),getMana(),getName());
     }
+
+
+    @Override
+    public void equipWithAxe(Axe axe) {
+        setEquippedWeapon(null);
+    }
+
+    @Override
+    public void equipWithBow(Bow bow) {
+        setEquippedWeapon(null);
+    }
+
+    @Override
+    public void equipWithStaff(Staff staff) {
+        setEquippedWeapon(staff);
+    }
+
+    @Override
+    public void equipWithSword(Sword sword) {
+        setEquippedWeapon(null);
+    }
+
+    @Override
+    public abstract void equipWithKnife(Knife knife);
+
 }

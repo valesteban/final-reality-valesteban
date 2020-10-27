@@ -11,8 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MagicCharactersTest {
     private WhiteMage whitetest;
@@ -51,4 +50,5 @@ public class MagicCharactersTest {
         assertNotEquals(whitetest,new WhiteMage(turns,"gandalf",88));
         assertNotEquals(blackTest, new BlackMage(turns,"dumblurdoor",1000));
     }
+
 }

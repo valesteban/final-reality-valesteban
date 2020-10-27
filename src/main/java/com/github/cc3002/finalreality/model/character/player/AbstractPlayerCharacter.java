@@ -2,7 +2,7 @@ package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.AbstractCharacter;
 import com.github.cc3002.finalreality.model.character.ICharacter;
-import com.github.cc3002.finalreality.model.weapon.IWeapon;
+import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * @author Ignacio Slater Muñoz.
  * @author Valentina Esteban
  */
-public class AbstractPlayerCharacter extends AbstractCharacter implements IPlayerCharacter {
+public abstract class AbstractPlayerCharacter extends AbstractCharacter implements IPlayerCharacter {
     protected IWeapon equippedWeapon ;
     /**
      * Creates a new player PlayetCharacter.
@@ -70,14 +70,27 @@ public class AbstractPlayerCharacter extends AbstractCharacter implements IPlaye
     /**
      * gives a weapon to the variable equippedWeapon
      * of this PlayerCharacter.
-     */
-    public void equip(IWeapon weapon) {
-        this.equippedWeapon = weapon;
+     **/
+    public  void equip(IWeapon weapon) {
+        weapon.equipFor(this);
     }
+
+
     /**
      * Returns the equippedWeapon of this PlayerCharacter.
      */
     public IWeapon getEquippedWeapon(){
         return equippedWeapon;
     }
+
+    public abstract void equipWithAxe(Axe axe);
+    public abstract void equipWithBow(Bow bow);
+    public abstract void equipWithKnife(Knife knife);
+    public abstract void equipWithStaff(Staff staff);
+    public abstract void equipWithSword(Sword sword);
+
+    public void setEquippedWeapon(IWeapon equippedWeapon) {
+        this.equippedWeapon = equippedWeapon;
+    }
 }
+
