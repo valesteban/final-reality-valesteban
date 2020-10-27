@@ -5,6 +5,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -21,8 +22,8 @@ public class Enemy extends AbstractCharacter {
    *
    */
   public Enemy(@NotNull final BlockingQueue<ICharacter> turnsQueue,
-               @NotNull final String name, final int weight) {
-    super(turnsQueue, name, "Enemy");
+               @NotNull final String name, final int weight, int protection) {
+    super(turnsQueue, name, "Enemy", protection);
     this.weight = weight;
   }
   /**
@@ -41,6 +42,8 @@ public class Enemy extends AbstractCharacter {
     var enemy = (Enemy) this;
     scheduledExecutor.schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
   }
+
+
 
   /**
    * Compare this Enemy with the given Object o.
@@ -64,4 +67,24 @@ public class Enemy extends AbstractCharacter {
   public int hashCode() {
     return Objects.hash(getWeight());
   }
+
+  @Override
+  public void attack(ICharacter character){
+    character.isAttackByEnemy(this);
+  }
+
+  @Override
+  public void isAttackByEnemy(Enemy enemy) {
+    int dano = enemy.getWeight() - this.getprotection();
+    int newHP = getHealthPoints() - dano;
+    this.setHealthPoints(newHP);
+  }
+
+  @Override
+  public void isAttackByPlayer(AbstractPlayerCharacter playerCharacter) {
+    int dano = playerCharacter.getEquippedWeapon().getDamage() - this.getprotection();
+    int newHP = this.getHealthPoints()-dano;
+    this.setHealthPoints(newHP);
+  }
+
 }

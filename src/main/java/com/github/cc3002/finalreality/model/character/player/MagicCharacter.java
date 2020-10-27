@@ -22,8 +22,8 @@ public abstract class MagicCharacter extends AbstractPlayerCharacter {
      *     mana of the magicCharacter
      */
     public MagicCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
-                          @NotNull String name, final String characterClass, int mana) {
-        super(turnsQueue, name, characterClass);
+                          @NotNull String name, final String characterClass, int mana, int protection) {
+        super(turnsQueue, name, characterClass, protection);
         this.mana = mana;
     }
     /**

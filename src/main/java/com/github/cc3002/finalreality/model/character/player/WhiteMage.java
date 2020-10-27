@@ -18,8 +18,8 @@ public class WhiteMage extends MagicCharacter {
      *
      */
     public WhiteMage(@NotNull BlockingQueue<ICharacter> turnsQueue,
-                     @NotNull String name, int mana) {
-        super(turnsQueue, name, "WhiteMage",mana);
+                     @NotNull String name, int mana, int protection) {
+        super(turnsQueue, name, "WhiteMage",mana, protection);
     }
 
     @Override

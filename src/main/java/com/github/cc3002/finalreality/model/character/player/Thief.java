@@ -18,8 +18,8 @@ public class Thief extends AbstractPlayerCharacter {
      *
      */
     public Thief(@NotNull BlockingQueue<ICharacter> turnsQueue,
-                 @NotNull String name) {
-        super(turnsQueue, name, "Thief");
+                 @NotNull String name,int protection) {
+        super(turnsQueue, name, "Thief", protection);
     }
 
 

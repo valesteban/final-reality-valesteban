@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.AbstractCharacter;
+import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
@@ -19,6 +20,7 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class AbstractPlayerCharacter extends AbstractCharacter implements IPlayerCharacter {
     protected IWeapon equippedWeapon ;
+
     /**
      * Creates a new player PlayetCharacter.
      *
@@ -30,8 +32,8 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
      *     the class of this character
      */
     public AbstractPlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
-                           final String characterClass) {
-        super(turnsQueue, name, characterClass);
+                           final String characterClass, int protection) {
+        super(turnsQueue, name, characterClass, protection);
         this.equippedWeapon = null;
     }
     /**
@@ -91,6 +93,26 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
 
     public void setEquippedWeapon(IWeapon equippedWeapon) {
         this.equippedWeapon = equippedWeapon;
+    }
+
+    @Override
+    public void attack(ICharacter character){
+        character.isAttackByPlayer(this);
+    }
+
+
+    @Override
+    public void isAttackByEnemy(Enemy enemy) {
+        int dano = enemy.getWeight() - this.getprotection();
+        int newHP = getHealthPoints() - dano;
+        this.setHealthPoints(newHP);
+    }
+
+    @Override
+    public void isAttackByPlayer(AbstractPlayerCharacter playerCharacter) {
+        int dano = playerCharacter.getEquippedWeapon().getDamage() - this.getprotection();
+        int newHP = this.getHealthPoints()-dano;
+        this.setHealthPoints(newHP);
     }
 }
 

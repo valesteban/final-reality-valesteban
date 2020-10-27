@@ -46,15 +46,15 @@ public class AbstractPlayerCharacterTest {
         testCharacters = new ArrayList<>();
 
 
-        engineerTest = new Engineer(turns, "name2");
+        engineerTest = new Engineer(turns, "name2",1);
         testCharacters.add(engineerTest);
-        blackTest = new BlackMage(turns, "name3", 11);
+        blackTest = new BlackMage(turns, "name3", 11,1);
         testCharacters.add(blackTest);
-        whiteTest = new WhiteMage(turns,"nameMageWhite",12);
+        whiteTest = new WhiteMage(turns,"nameMageWhite",12,1);
         testCharacters.add(whiteTest);
-        knightTest = new Knight(turns,"nameKnight");
+        knightTest = new Knight(turns,"nameKnight",1);
         testCharacters.add(knightTest);
-        thiefTest = new Thief(turns,"nameThief");
+        thiefTest = new Thief(turns,"nameThief",1);
         testCharacters.add(thiefTest);
     }
 
@@ -124,13 +124,6 @@ public class AbstractPlayerCharacterTest {
         whiteTest.equip(testWeaponBow);
         assertEquals(null,whiteTest.getEquippedWeapon());
 
-
-        //blackTest.equip(testWeapon2);
-        //assertEquals(testWeapon2, blackTest.getEquippedWeapon());
-
-        //assertNull(engTest.getEquippedWeapon());
-        //engTest.equip(testWeaponAxe);
-        //assertEquals(testWeaponAxe, engTest.getEquippedWeapon());
     }
 
     @Test

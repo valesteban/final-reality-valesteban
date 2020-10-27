@@ -1,5 +1,6 @@
 package com.github.cc3002.finalreality.model.character;
 
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.character.player.Thief;
 import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
@@ -19,27 +20,32 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class EnemyTest {
     private static final String ENEMY_NAME = "juan";
     private Enemy teste ;
+    private ICharacter testPlayer;
+    private Enemy enemyTest;
 
     protected BlockingQueue<ICharacter> turns;
     protected List<ICharacter> testCharacters;
     protected IWeapon testWeapon;
+    protected IWeapon testWeaponSword;
 
     @BeforeEach
     void setUp(){
         turns = new LinkedBlockingQueue<>();
         testWeapon = new Axe("Test", 15, 10);
         testCharacters = new ArrayList<>();
-        teste = new Enemy(turns,ENEMY_NAME,11);
-        testCharacters.add(new Enemy(turns,ENEMY_NAME,11));
+        teste = new Enemy(turns,ENEMY_NAME,11,1);
+        testCharacters.add(new Enemy(turns,ENEMY_NAME,11,1));
+        testPlayer = new Thief(turns,"nameThief",1);
+        enemyTest = new Enemy(turns,"name",13,5);
     }
 
     @Test
     void constructorTest(){
-        assertEquals(new Enemy(turns,ENEMY_NAME,11), testCharacters.get(0));
-        assertEquals(new Enemy(turns,ENEMY_NAME,11).hashCode(), testCharacters.get(0).hashCode());
-        assertNotEquals(new Enemy(turns,ENEMY_NAME,1), testCharacters.get(0));
-        assertNotEquals(testCharacters.get(0), new Thief(turns,"ron"));
-        assertNotEquals(new Enemy(turns,ENEMY_NAME,19), testCharacters.get(0));
+        assertEquals(new Enemy(turns,ENEMY_NAME,11,1), testCharacters.get(0));
+        assertEquals(new Enemy(turns,ENEMY_NAME,11,1).hashCode(), testCharacters.get(0).hashCode());
+        assertNotEquals(new Enemy(turns,ENEMY_NAME,1,1), testCharacters.get(0));
+        assertNotEquals(testCharacters.get(0), new Thief(turns,"ron",1));
+        assertNotEquals(new Enemy(turns,ENEMY_NAME,19,1), testCharacters.get(0));
 
     }
     @Test
@@ -59,6 +65,16 @@ public class EnemyTest {
             e.printStackTrace();
         }
 
+    }
+    @Test
+    void attackTest(){
+        assertEquals(100, testPlayer.getHealthPoints());
+        teste.attack(testPlayer);
+        assertEquals(90,testPlayer.getHealthPoints());
+
+        assertEquals(100,enemyTest.getHealthPoints());
+        teste.attack(enemyTest);
+        assertEquals(94,enemyTest.getHealthPoints());
     }
 
 }

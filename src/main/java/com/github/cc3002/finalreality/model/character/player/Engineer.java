@@ -18,8 +18,8 @@ public class Engineer  extends AbstractPlayerCharacter {
      *
      */
     public Engineer(@NotNull BlockingQueue<ICharacter> turnsQueue,
-                    @NotNull String name) {
-        super(turnsQueue, name, "Engineer");
+                    @NotNull String name, int protection) {
+        super(turnsQueue, name, "Engineer",protection);
     }
 
 
