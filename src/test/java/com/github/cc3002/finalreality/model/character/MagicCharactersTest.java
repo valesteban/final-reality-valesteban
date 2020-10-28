@@ -33,7 +33,7 @@ public class MagicCharactersTest {
 
         whitetest = new WhiteMage(turns,"gandalf",11,1);
         blackTest = new BlackMage(turns,"dumblurdoor",2,1);
-        enemyTest = new Enemy(turns,"naem",11,0);
+        enemyTest = new Enemy(turns,"naem",11,0,2);
         engineerTest = new Engineer(turns,"namee",1);
         testWeaponStaff = new Staff("Test", 15, 10,1);
 

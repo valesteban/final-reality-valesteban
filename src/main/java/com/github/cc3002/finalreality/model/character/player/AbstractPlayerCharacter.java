@@ -30,6 +30,8 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
      *     the queue with the characters waiting for their turn
      * @param characterClass
      *     the class of this character
+     * @param protection
+     *     the value of defence when is attacked
      */
     public AbstractPlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
                            final String characterClass, int protection) {
@@ -85,29 +87,47 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
         return equippedWeapon;
     }
 
+    /**
+     * they will equiped the character.
+     */
     public abstract void equipWithAxe(Axe axe);
     public abstract void equipWithBow(Bow bow);
     public abstract void equipWithKnife(Knife knife);
     public abstract void equipWithStaff(Staff staff);
     public abstract void equipWithSword(Sword sword);
 
+    /**
+     * change the object in the value equippedWeapon.
+     */
     public void setEquippedWeapon(IWeapon equippedWeapon) {
         this.equippedWeapon = equippedWeapon;
     }
 
+    /**
+     * method that will call another method that will say what to do with the character
+     * that is being attacked.
+     */
     @Override
     public void attack(ICharacter character){
         character.isAttackByPlayer(this);
     }
 
-
+    /**
+     * it will change the value of HealthPoints of the player
+     * whe is attacked by a enemy.
+     */
     @Override
     public void isAttackByEnemy(Enemy enemy) {
-        int dano = enemy.getWeight() - this.getprotection();
+        int dano = enemy.getDamage() - this.getprotection();
         int newHP = getHealthPoints() - dano;
         this.setHealthPoints(newHP);
     }
 
+
+    /**
+     * it will change the value of HealthPoints of the player
+     * when is attacked by another player.
+     */
     @Override
     public void isAttackByPlayer(AbstractPlayerCharacter playerCharacter) {
         int dano = playerCharacter.getEquippedWeapon().getDamage() - this.getprotection();

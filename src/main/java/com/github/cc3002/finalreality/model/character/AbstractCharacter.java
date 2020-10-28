@@ -28,6 +28,9 @@ public abstract class AbstractCharacter implements ICharacter {
    *     the queue with the characters waiting for their turn
    * @param characterClass
    *     the class of this character
+   * @param protection
+   *     value of defence when is attacked
+   *
    */
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
       @NotNull String name, String characterClass, int protection) {

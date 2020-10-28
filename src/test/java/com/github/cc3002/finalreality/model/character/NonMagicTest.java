@@ -40,7 +40,7 @@ public class NonMagicTest {
         KnightTest = new Knight(turns,"name3",1);
         testCharacters.add(KnightTest);
 
-        testCharacters.add(new Enemy(turns,ENEMY_NAME,11,1));
+        testCharacters.add(new Enemy(turns,ENEMY_NAME,11,1,2));
     }
 
 
@@ -49,17 +49,17 @@ public class NonMagicTest {
         assertEquals(new Engineer(turns,"name1",2), testCharacters.get(0));
         assertEquals(new Engineer(turns,"name1",2).hashCode(), testCharacters.get(0).hashCode());
         assertNotEquals(new Engineer(turns,"noname1",2), testCharacters.get(0));
-        assertNotEquals(testCharacters.get(0), new Enemy(turns,"ron",22,2));
+        assertNotEquals(testCharacters.get(0), new Enemy(turns,"ron",22,2,2));
 
         assertEquals( new Thief(turns,"name2",3), testCharacters.get(1));
         assertEquals( new Thief(turns,"name2",3).hashCode(), testCharacters.get(1).hashCode());
         assertNotEquals( new Thief(turns,"noname2",3), testCharacters.get(1));
-        assertNotEquals(testCharacters.get(1), new Enemy(turns,"ron",22,3));
+        assertNotEquals(testCharacters.get(1), new Enemy(turns,"ron",22,3,2));
 
         assertEquals(new Knight(turns,"name3",1), testCharacters.get(2));
         assertEquals(new Knight(turns,"name3",1).hashCode(), testCharacters.get(2).hashCode());
         assertNotEquals(new Knight(turns,"noname3",1), testCharacters.get(2));
-        assertNotEquals(testCharacters.get(2), new Enemy(turns,"ron",22,1));
+        assertNotEquals(testCharacters.get(2), new Enemy(turns,"ron",22,1,2));
     }
 }
 

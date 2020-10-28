@@ -39,7 +39,7 @@ public class SwordTest {
         assertNotEquals(new Sword(SWORD_NAME,66,WEIGHT) ,testSword);
         assertNotEquals(new Sword(SWORD_NAME,DAMAGE,88), testSword);
         assertNotEquals(new Axe(SWORD_NAME,DAMAGE,WEIGHT),testSword);
-        assertNotEquals(new Enemy(turns,"name",22,1),testSword);
+        assertNotEquals(new Enemy(turns,"name",22,1,2),testSword);
 
     }
 
