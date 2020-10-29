@@ -72,15 +72,6 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
                 && getName().equals(that.getName());
     }
     /**
-     * gives a weapon to the variable equippedWeapon
-     * of this PlayerCharacter.
-     **/
-    public  void equip(IWeapon weapon) {
-        weapon.equipFor(this);
-    }
-
-
-    /**
      * Returns the equippedWeapon of this PlayerCharacter.
      */
     public IWeapon getEquippedWeapon(){
@@ -88,7 +79,18 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     }
 
     /**
-     * they will equiped the character.
+     * gives a weapon to the variable equippedWeapon
+     * of this PlayerCharacter.
+     **/
+    public  void equip(IWeapon weapon) {
+        if (this.getHealthPoints() != 0){
+            weapon.equipFor(this);
+        }
+
+    }
+
+    /**
+     * they will equipped the character.
      */
     public abstract void equipWithAxe(Axe axe);
     public abstract void equipWithBow(Bow bow);
