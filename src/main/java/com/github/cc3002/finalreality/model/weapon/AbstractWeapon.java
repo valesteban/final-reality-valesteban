@@ -1,4 +1,6 @@
 package com.github.cc3002.finalreality.model.weapon;
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
+
 import java.util.Objects;
 /**
  * An Abstract class that holds all the information that all the weapon share.
@@ -6,7 +8,7 @@ import java.util.Objects;
  * @author Ignacio Slater Muñoz.
  * @author Valentina Esteban
  */
-public class AbstractWeapon implements IWeapon {
+public abstract class AbstractWeapon implements IWeapon {
     private final String name;
     private final int damage;
     private final int weight;
@@ -57,6 +59,7 @@ public class AbstractWeapon implements IWeapon {
     public String getType() {
         return type;
     }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
@@ -75,4 +78,8 @@ public class AbstractWeapon implements IWeapon {
     public int hashCode() {
         return Objects.hash(getName(), getDamage(), getWeight(), getType());
     }
+
+    public abstract void equipFor(IPlayerCharacter character);
+
+
 }

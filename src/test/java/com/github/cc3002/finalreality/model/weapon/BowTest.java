@@ -35,7 +35,7 @@ public class BowTest {
         assertNotEquals(new Bow(BOW_NAME,44,WEIGHT),testBow);
         assertNotEquals(new Bow(BOW_NAME,DAMAGE,33),testBow);
         assertNotEquals(new Knife(BOW_NAME,DAMAGE,WEIGHT),testBow);
-        assertNotEquals(new Enemy(turns,"name",22),testBow);
+        assertNotEquals(new Enemy(turns,"name",22,1,2),testBow);
 
     }
 

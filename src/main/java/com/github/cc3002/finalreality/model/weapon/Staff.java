@@ -1,4 +1,6 @@
 package com.github.cc3002.finalreality.model.weapon;
+import com.github.cc3002.finalreality.model.character.player.*;
+
 import java.util.Objects;
 
 /**
@@ -21,7 +23,7 @@ public class Staff extends AbstractWeapon {
                final int weight,int magicDamage) {
 
         super(name, damage, weight, "Staff");
-        this.magicDamage = magicDamage;
+       this.magicDamage = magicDamage;
 
     }
 
@@ -52,4 +54,12 @@ public class Staff extends AbstractWeapon {
     public int hashCode(){
         return Objects.hash(getName(), getDamage(), getWeight(), getType(),getMagicDamage());
     }
+
+    @Override
+    public void equipFor(IPlayerCharacter character) {
+        character.equipWithStaff(this);
+    }
+
 }
+
+

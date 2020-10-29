@@ -35,7 +35,7 @@ public class AxeTest {
         assertNotEquals(new Axe(AXE_NAME,99,WEIGHT),testAxe);
         assertNotEquals(new Axe(AXE_NAME,DAMAGE,100),testAxe);
         assertNotEquals(new Knife(AXE_NAME,DAMAGE,WEIGHT),testAxe);
-        assertNotSame(new Enemy(turns,"name",22),testAxe);
+        assertNotSame(new Enemy(turns,"name",22,1,2),testAxe);
 
 
     }

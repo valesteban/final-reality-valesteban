@@ -1,6 +1,8 @@
 package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
+import com.github.cc3002.finalreality.model.weapon.Knife;
+import com.github.cc3002.finalreality.model.weapon.Sword;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
@@ -16,7 +18,13 @@ public class WhiteMage extends MagicCharacter {
      *
      */
     public WhiteMage(@NotNull BlockingQueue<ICharacter> turnsQueue,
-                     @NotNull String name, int mana) {
-        super(turnsQueue, name, "WhiteMage",mana);
+                     @NotNull String name, int mana, int protection) {
+        super(turnsQueue, name, "WhiteMage",mana, protection);
     }
+
+    @Override
+    public void equipWithKnife(Knife knife) {
+        setEquippedWeapon(null);
+    }
+
 }

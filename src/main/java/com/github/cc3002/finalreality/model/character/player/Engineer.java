@@ -2,6 +2,7 @@ package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.AbstractCharacter;
 import com.github.cc3002.finalreality.model.character.ICharacter;
+import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
@@ -17,7 +18,33 @@ public class Engineer  extends AbstractPlayerCharacter {
      *
      */
     public Engineer(@NotNull BlockingQueue<ICharacter> turnsQueue,
-                    @NotNull String name) {
-        super(turnsQueue, name, "Engineer");
+                    @NotNull String name, int protection) {
+        super(turnsQueue, name, "Engineer",protection);
+    }
+
+
+    @Override
+    public void equipWithAxe(Axe axe) {
+        setEquippedWeapon(axe);
+    }
+
+    @Override
+    public void equipWithBow(Bow bow) {
+        setEquippedWeapon(bow);
+    }
+
+    @Override
+    public void equipWithKnife(Knife knife) {
+        setEquippedWeapon(null);
+    }
+
+    @Override
+    public void equipWithStaff(Staff staff) {
+        setEquippedWeapon(null);
+    }
+
+    @Override
+    public void equipWithSword(Sword sword) {
+        setEquippedWeapon(null);
     }
 }

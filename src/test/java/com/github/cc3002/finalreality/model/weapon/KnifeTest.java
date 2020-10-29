@@ -37,7 +37,7 @@ public class KnifeTest   {
         assertNotEquals(new Knife(KNIFE_NAME,77,WEIGHT),testKnife);
         assertNotEquals(new Knife(KNIFE_NAME,DAMAGE,99),testKnife);
         assertNotEquals(new Axe(KNIFE_NAME,DAMAGE,WEIGHT),testKnife);
-        assertNotEquals(new Enemy(turns,"name",22),testKnife);
+        assertNotEquals(new Enemy(turns,"name",22,1,2),testKnife);
 
 
     }

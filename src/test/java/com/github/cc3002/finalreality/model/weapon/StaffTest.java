@@ -37,7 +37,7 @@ public class StaffTest {
         assertNotEquals(new Staff(STAFF_NAME,1111,WEIGHT,MAGIC_DAMAGE),testStaff);
         assertNotEquals(new Staff(STAFF_NAME,DAMAGE,77,MAGIC_DAMAGE),testStaff);
         assertNotEquals(testStaff,new Knife(STAFF_NAME,DAMAGE,WEIGHT));
-        assertNotEquals(new Enemy(turns,"juan",22),testStaff);
+        assertNotEquals(testStaff,new Enemy(turns,"juan",22,1,2));
 
 
     }
