@@ -108,6 +108,7 @@ public class Enemy extends AbstractCharacter {
   public void isAttackByPlayer(AbstractPlayerCharacter playerCharacter) {
     int dano = playerCharacter.getEquippedWeapon().getDamage() - this.getprotection();
     int newHP;
+
     if (this.getHealthPoints() < dano ){
        newHP = 0;
     }

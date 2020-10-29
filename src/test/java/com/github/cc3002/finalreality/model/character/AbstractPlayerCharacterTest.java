@@ -124,10 +124,28 @@ public class AbstractPlayerCharacterTest {
         whiteTest.equip(testWeaponBow);
         assertEquals(null,whiteTest.getEquippedWeapon());
 
+
+        thiefTest.attack(whiteTest);
+        while (whiteTest.getHealthPoints() != 0 ){
+            thiefTest.attack(whiteTest);
+        }
+       assertEquals(0,whiteTest.getHealthPoints());
+        whiteTest.equip(testWeaponStaff);
+        assertEquals(null,whiteTest.getEquippedWeapon());
+        whiteTest.attack(blackTest);
+
+        assertEquals(100,blackTest.getHealthPoints());
+        knightTest.equip(testWeaponKnife);
+        while (blackTest.getHealthPoints() != 0 ){
+            knightTest.attack(blackTest);
+        }
+        assertEquals(0,blackTest.getHealthPoints());
+        knightTest.attack(blackTest);
+        assertEquals(0,blackTest.getHealthPoints());
     }
 
     @Test
-    void testWaitTyrn() {
+    void testWaitTurn() {
         Assertions.assertTrue(turns.isEmpty());
         testCharacters.get(0).equip(testWeaponAxe);
 

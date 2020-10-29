@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * @author Valentina Esteban
  */
 public abstract class AbstractPlayerCharacter extends AbstractCharacter implements IPlayerCharacter {
-    protected IWeapon equippedWeapon ;
+    private IWeapon equippedWeapon ;
 
     /**
      * Creates a new player PlayetCharacter.
@@ -85,8 +85,9 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     public  void equip(IWeapon weapon) {
         if (this.getHealthPoints() != 0){
             weapon.equipFor(this);
+        } else {
+            this.equippedWeapon = null;
         }
-
     }
 
     /**
@@ -111,7 +112,9 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
      */
     @Override
     public void attack(ICharacter character){
-        character.isAttackByPlayer(this);
+        if (this.getHealthPoints() != 0){
+            character.isAttackByPlayer(this);
+        }
     }
 
     /**

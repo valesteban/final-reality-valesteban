@@ -70,6 +70,21 @@ public class MagicCharactersTest {
         assertEquals(86,whitetest.getHealthPoints());
         whitetest.attack(blackTest);
         assertEquals(86,blackTest.getHealthPoints());
+
+        whitetest.attack(enemyTest);
+        whitetest.attack(enemyTest);
+        whitetest.attack(enemyTest);
+
+        whitetest.attack(enemyTest);
+        whitetest.attack(enemyTest);
+
+
+
+
+
+
+        assertEquals(0,enemyTest.getHealthPoints());
+
     }
 
 }

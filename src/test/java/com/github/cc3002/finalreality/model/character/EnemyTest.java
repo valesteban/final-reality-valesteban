@@ -1,5 +1,7 @@
 package com.github.cc3002.finalreality.model.character;
 
+import com.github.cc3002.finalreality.model.character.player.Engineer;
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.character.player.Thief;
 import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
@@ -20,6 +22,7 @@ public class EnemyTest {
     private static final String ENEMY_NAME = "juan";
     private Enemy teste ;
     private ICharacter testPlayer;
+    private IPlayerCharacter engineertest;
     private Enemy enemyTest;
 
     protected BlockingQueue<ICharacter> turns;
@@ -36,6 +39,8 @@ public class EnemyTest {
         testCharacters.add(new Enemy(turns,ENEMY_NAME,11,1,22));
         testPlayer = new Thief(turns,"nameThief",1);
         enemyTest = new Enemy(turns,"name",13,5,22);
+        engineertest = new Engineer(turns,"name",12);
+
     }
 
     @Test
@@ -74,6 +79,35 @@ public class EnemyTest {
         assertEquals(100,enemyTest.getHealthPoints());
         teste.attack(enemyTest);
         assertEquals(83,enemyTest.getHealthPoints());
+
+
+        assertEquals(79,testPlayer.getHealthPoints());
+        while (testPlayer.getHealthPoints() != 0 ){
+            teste.attack(testPlayer);
+        }
+        assertEquals(0,testPlayer.getHealthPoints());
+        teste.attack(testPlayer);
+        assertEquals(0,testPlayer.getHealthPoints());
+
+        assertEquals(83,enemyTest.getHealthPoints());
+        while (enemyTest.getHealthPoints() != 0 ){
+            teste.attack(enemyTest);
+        }
+        assertEquals(0,enemyTest.getHealthPoints());
+        teste.attack(enemyTest);
+        assertEquals(0,enemyTest.getHealthPoints());
+
+        engineertest.equip(testWeapon);
+        assertEquals(100,teste.getHealthPoints());
+        while (teste.getHealthPoints() != 0 ){
+            engineertest.attack(teste);
+        }
+        assertEquals(0,teste.getHealthPoints());
+        engineertest.attack(teste);
+        assertEquals(0,teste.getHealthPoints());
+
+        engineertest.attack(enemyTest);
+
     }
 
 }
