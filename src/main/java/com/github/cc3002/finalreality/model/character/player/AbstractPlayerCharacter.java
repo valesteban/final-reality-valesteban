@@ -119,7 +119,12 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     @Override
     public void isAttackByEnemy(Enemy enemy) {
         int dano = enemy.getDamage() - this.getprotection();
-        int newHP = getHealthPoints() - dano;
+        int newHP;
+        if (this.getHealthPoints() < dano){
+            newHP = 0;
+        }else {
+        newHP = getHealthPoints() - dano;
+        }
         this.setHealthPoints(newHP);
     }
 
@@ -131,7 +136,12 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     @Override
     public void isAttackByPlayer(AbstractPlayerCharacter playerCharacter) {
         int dano = playerCharacter.getEquippedWeapon().getDamage() - this.getprotection();
-        int newHP = this.getHealthPoints()-dano;
+        int newHP;
+        if (this.getHealthPoints() < dano){
+            newHP = 0;
+        } else{
+            newHP = this.getHealthPoints()-dano;
+        }
         this.setHealthPoints(newHP);
     }
 }

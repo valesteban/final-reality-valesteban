@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Enemy extends AbstractCharacter {
   private final int weight;
-  private int damage;
+  private final int damage;
   /**
    * Creates a new enemy with a name, a weight and the queue with the characters ready to
    * play.
@@ -91,7 +91,12 @@ public class Enemy extends AbstractCharacter {
   @Override
   public void isAttackByEnemy(Enemy enemy) {
     int dano = enemy.getDamage() - this.getprotection();
-    int newHP = getHealthPoints() - dano;
+    int newHP;
+    if (this.getHealthPoints() < dano){
+      newHP = 0;
+    } else {
+      newHP = getHealthPoints() - dano;
+    }
     this.setHealthPoints(newHP);
   }
 
@@ -102,7 +107,13 @@ public class Enemy extends AbstractCharacter {
   @Override
   public void isAttackByPlayer(AbstractPlayerCharacter playerCharacter) {
     int dano = playerCharacter.getEquippedWeapon().getDamage() - this.getprotection();
-    int newHP = this.getHealthPoints()-dano;
+    int newHP;
+    if (this.getHealthPoints() < dano ){
+       newHP = 0;
+    }
+    else {
+      newHP = this.getHealthPoints()-dano;
+    }
     this.setHealthPoints(newHP);
   }
 
