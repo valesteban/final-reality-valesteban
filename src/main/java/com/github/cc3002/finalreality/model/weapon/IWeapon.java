@@ -3,6 +3,7 @@ package com.github.cc3002.finalreality.model.weapon;
 import com.github.cc3002.finalreality.model.character.player.*;
 
 /**
+ * @author Valentina Estean
  * This is an interface for all the basic for a weapon
  */
 public interface IWeapon {
@@ -14,3 +15,6 @@ public interface IWeapon {
     void equipFor(IPlayerCharacter character);
 
 }
+
+
+

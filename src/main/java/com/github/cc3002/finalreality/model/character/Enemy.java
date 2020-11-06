@@ -64,7 +64,10 @@ public class Enemy extends AbstractCharacter {
       return false;
     }
     final Enemy enemy = (Enemy) o;
-    return getWeight() == enemy.getWeight();
+    return getWeight() == enemy.getWeight() &&
+            getName() == enemy.getName() &&
+            getProtection() == enemy.getProtection() &&
+            getDamage() == enemy.getDamage();
   }
   /**
    * returns a hash code to this Enemy.
@@ -90,7 +93,7 @@ public class Enemy extends AbstractCharacter {
    */
   @Override
   public void isAttackByEnemy(Enemy enemy) {
-    int dano = enemy.getDamage() - this.getprotection();
+    int dano = enemy.getDamage() - this.getProtection();
     int newHP;
     if (this.getHealthPoints() < dano){
       newHP = 0;
@@ -106,7 +109,7 @@ public class Enemy extends AbstractCharacter {
    */
   @Override
   public void isAttackByPlayer(AbstractPlayerCharacter playerCharacter) {
-    int dano = playerCharacter.getEquippedWeapon().getDamage() - this.getprotection();
+    int dano = playerCharacter.getEquippedWeapon().getDamage() - this.getProtection();
     int newHP;
 
     if (this.getHealthPoints() < dano ){

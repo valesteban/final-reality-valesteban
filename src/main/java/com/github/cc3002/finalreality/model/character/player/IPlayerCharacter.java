@@ -8,6 +8,7 @@ import com.github.cc3002.finalreality.model.weapon.*;
  */
 public interface IPlayerCharacter {
     String getName();
+    int getProtection();
     String getCharacterClass();
     IWeapon getEquippedWeapon();
     void waitTurn();

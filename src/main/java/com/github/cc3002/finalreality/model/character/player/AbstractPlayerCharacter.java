@@ -69,7 +69,8 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
         }
         final IPlayerCharacter that = (IPlayerCharacter) o;
         return getCharacterClass().equals(that.getCharacterClass())
-                && getName().equals(that.getName());
+                && getName().equals(that.getName()) &&
+                getProtection() == that.getProtection();
     }
     /**
      * Returns the equippedWeapon of this PlayerCharacter.
@@ -123,7 +124,7 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
      */
     @Override
     public void isAttackByEnemy(Enemy enemy) {
-        int dano = enemy.getDamage() - this.getprotection();
+        int dano = enemy.getDamage() - this.getProtection();
         int newHP;
         if (this.getHealthPoints() < dano){
             newHP = 0;
@@ -140,7 +141,7 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
      */
     @Override
     public void isAttackByPlayer(AbstractPlayerCharacter playerCharacter) {
-        int dano = playerCharacter.getEquippedWeapon().getDamage() - this.getprotection();
+        int dano = playerCharacter.getEquippedWeapon().getDamage() - this.getProtection();
         int newHP;
         if (this.getHealthPoints() < dano){
             newHP = 0;

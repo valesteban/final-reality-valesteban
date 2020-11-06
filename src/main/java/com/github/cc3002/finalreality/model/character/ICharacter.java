@@ -10,7 +10,7 @@ public interface ICharacter {
   String getName();
   String getCharacterClass();
   int getHealthPoints();
-  int getprotection();
+  int getProtection();
   void addToQueue();
   void attack(ICharacter character);
   void isAttackByEnemy(Enemy enemy);

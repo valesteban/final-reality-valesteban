@@ -65,7 +65,7 @@ public abstract class AbstractCharacter implements ICharacter {
   /**
    * Returns the protection of this character.
    */
-  public int getprotection(){ return protection; }
+  public int getProtection(){ return protection; }
   /**
    * set a new healthPoints of this character.
    */
