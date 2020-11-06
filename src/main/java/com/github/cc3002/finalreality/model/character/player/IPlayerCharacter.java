@@ -12,6 +12,7 @@ public interface IPlayerCharacter {
     String getCharacterClass();
     IWeapon getEquippedWeapon();
     void waitTurn();
+    int getHealthPoints();
 
     void equip(IWeapon weapon) ;
     void equipWithAxe(Axe axe);

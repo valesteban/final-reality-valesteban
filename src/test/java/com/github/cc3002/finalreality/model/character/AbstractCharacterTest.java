@@ -14,21 +14,21 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class AbstractCharacterTest {
-    protected BlockingQueue<ICharacter> turns;
-    protected Enemy enemyTest;
-    protected Thief thiefTest;
-    protected Knight knightTest;
-    protected Engineer engineerTest;
-    protected BlackMage blackMageTest;
-    protected WhiteMage whiteMageTest;
-    protected IWeapon testWeapon;
+    public BlockingQueue<ICharacter> turns;
+    public Enemy enemyTest;
+    public Thief thiefTest;
+    public Knight knightTest;
+    public Engineer engineerTest;
+    public BlackMage blackMageTest;
+    public WhiteMage whiteMageTest;
+    public IWeapon testWeapon;
 
-    void constructorTest(ICharacter expectedCharacter,
-                         ICharacter testCharacter,
-                         ICharacter sameClassDifferentName,
-                         ICharacter sameClassDifferentProtection,
-                         ICharacter differentClass,
-                         ICharacter different){
+    protected void constructorTest(ICharacter expectedCharacter,
+                                   ICharacter testCharacter,
+                                   ICharacter sameClassDifferentName,
+                                   ICharacter sameClassDifferentProtection,
+                                   ICharacter differentClass,
+                                   ICharacter different){
 
         assertEquals(expectedCharacter, testCharacter);
         assertEquals(expectedCharacter.hashCode(),testCharacter.hashCode());
