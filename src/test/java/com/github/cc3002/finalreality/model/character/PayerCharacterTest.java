@@ -58,22 +58,18 @@ public class PayerCharacterTest extends AbstractCharacterTest {
 
     }
 
-    public void attackWith(IPlayerCharacter character,ICharacter character2, IWeapon weapon){
-        character.equip(weapon);
-        if (character.getHealthPoints() == 0){
-            assertNull(character.getEquippedWeapon());
+    public void PlayerAttack(IPlayerCharacter playerCharacter,ICharacter character2, IWeapon weapon){
+        playerCharacter.equip(weapon);
+        if (playerCharacter.getHealthPoints() == 0){
+            assertNull(playerCharacter.getEquippedWeapon());
         }
         else {
             while (character2.getHealthPoints() != 0){
-                character.attack(character2);
+                playerCharacter.attack(character2);
             }
             assertEquals(0,character2.getHealthPoints());
-            character.attack(character2);
+            playerCharacter.attack(character2);
             assertEquals(0,character2.getHealthPoints());
         }
-
-
     }
-
-
 }

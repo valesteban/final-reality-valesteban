@@ -20,6 +20,6 @@ public interface IPlayerCharacter {
     void equipWithKnife(Knife knife);
     void equipWithStaff(Staff staff);
     void equipWithSword(Sword sword);
- //   int getHealthPoints();
+
     void attack(ICharacter character);
 }

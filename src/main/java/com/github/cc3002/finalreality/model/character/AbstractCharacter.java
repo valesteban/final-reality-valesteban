@@ -4,6 +4,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 
 import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacter;
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 /**
  * An abstract class that holds the common behaviour of all the characters in the game.
@@ -83,6 +84,7 @@ public abstract class AbstractCharacter implements ICharacter {
 
   @Override
   public abstract void isAttackByEnemy(Enemy enemy);
+
   @Override
-  public abstract void isAttackByPlayer(AbstractPlayerCharacter playerCharacter);
+  public abstract void isAttackByPlayer(IPlayerCharacter playerCharacter);
 }

@@ -24,6 +24,7 @@ public class EnemyTest extends AbstractCharacterTest{
                 thiefTest,
                 new Enemy(turns,"nameEnemy",10,10,11));
     }
+
     @Test
     void waitTurnTest(){
         Assertions.assertTrue(turns.isEmpty());
@@ -42,5 +43,31 @@ public class EnemyTest extends AbstractCharacterTest{
         }
 
     }
+
+    @Test
+    void enemyAttack(){
+        //enemyTest ataca enemyTest2
+        Enemy enemyTest2 = new Enemy(turns,"nameEnemy2",10,2,20);
+        assertEquals(100,enemyTest2.getHealthPoints());
+        while (enemyTest2.getHealthPoints()!=0){
+            enemyTest.attack(enemyTest2);
+        }
+        enemyTest.attack(enemyTest2);
+        assertEquals(0,enemyTest2.getHealthPoints());
+
+        //enemyTest2 no tiene vidas y por tanto no puede atacar
+        enemyTest2.attack(enemyTest);
+        assertEquals(100,enemyTest.getHealthPoints());
+
+        //ataca a un player
+        Thief thiefTest2 = new Thief(turns,"nameThief2",5);
+        assertEquals(100,thiefTest2.getHealthPoints());
+        enemyTest.attack(thiefTest2);
+        while (thiefTest2.getHealthPoints()!=0){
+            enemyTest.attack(thiefTest2);
+        }
+        assertEquals(0,thiefTest2.getHealthPoints());
+    }
+
 
 }

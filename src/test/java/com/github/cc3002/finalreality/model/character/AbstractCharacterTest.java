@@ -28,24 +28,24 @@ public class AbstractCharacterTest {
                                    ICharacter sameClassDifferentName,
                                    ICharacter sameClassDifferentProtection,
                                    ICharacter differentClass,
-                                   ICharacter different){
+                                   ICharacter different) {
 
         assertEquals(expectedCharacter, testCharacter);
-        assertEquals(expectedCharacter.hashCode(),testCharacter.hashCode());
-        assertNotEquals(testCharacter,sameClassDifferentName);
-        assertNotEquals(testCharacter ,sameClassDifferentProtection);
-        assertNotEquals(testCharacter,different);
-        assertNotEquals(testCharacter,differentClass);
+        assertEquals(expectedCharacter.hashCode(), testCharacter.hashCode());
+        assertNotEquals(testCharacter, sameClassDifferentName);
+        assertNotEquals(testCharacter, sameClassDifferentProtection);
+        assertNotEquals(testCharacter, different);
+        assertNotEquals(testCharacter, differentClass);
     }
 
 
-    public void basicSetUp(){
+    public void basicSetUp() {
         turns = new LinkedBlockingQueue<>();
-        enemyTest = new Enemy(turns,"nameEnemy",10,10,10);
-        thiefTest = new Thief(turns,"nameThief",10);
-        knightTest = new Knight(turns,"nameKnight",10);
-        engineerTest = new Engineer(turns,"nameEngineer",10);
-        blackMageTest = new BlackMage(turns,"nameBlackMage",10,10);
-        whiteMageTest = new WhiteMage(turns,"nameWhiteMage",10,10);
+        enemyTest = new Enemy(turns, "nameEnemy", 10, 10, 10);
+        thiefTest = new Thief(turns, "nameThief", 10);
+        knightTest = new Knight(turns, "nameKnight", 10);
+        engineerTest = new Engineer(turns, "nameEngineer", 10);
+        blackMageTest = new BlackMage(turns, "nameBlackMage", 10, 10);
+        whiteMageTest = new WhiteMage(turns, "nameWhiteMage", 10, 10);
     }
 }

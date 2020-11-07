@@ -12,14 +12,9 @@ public interface ICharacter {
   int getHealthPoints();
   int getProtection();
   void addToQueue();
+
   void attack(ICharacter character);
   void isAttackByEnemy(Enemy enemy);
-  void isAttackByPlayer(AbstractPlayerCharacter playerCharacter);
+  void isAttackByPlayer(IPlayerCharacter playerCharacter);
 
-
-  //void isAttackByKnight(Knight knight);
-  //void isAttackByEngineer(Engineer engineer);
-  //void isAttackByThief(Thief thief);
-  //void isAttackByBlackMage(BlackMage blackMage);
-  //void isAttackByWhiteMage(WhiteMage whiteMage);
 }

@@ -6,6 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacter;
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -84,8 +85,10 @@ public class Enemy extends AbstractCharacter {
    */
   @Override
   public void attack(ICharacter character){
+    if (this.getHealthPoints() != 0){
     character.isAttackByEnemy(this);
   }
+}
 
   /**
    * it will change the value of HealthPoints of the enemy
@@ -103,12 +106,13 @@ public class Enemy extends AbstractCharacter {
     this.setHealthPoints(newHP);
   }
 
+
   /**
    * it will change the value of HealthPoints of the enemy
    * when is attacked by a player.
    */
   @Override
-  public void isAttackByPlayer(AbstractPlayerCharacter playerCharacter) {
+  public void isAttackByPlayer(IPlayerCharacter playerCharacter) {
     int dano = playerCharacter.getEquippedWeapon().getDamage() - this.getProtection();
     int newHP;
 

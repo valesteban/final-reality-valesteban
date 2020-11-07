@@ -52,14 +52,14 @@ public class EngineerTest extends PayerCharacterTest {
     @Test
     void attackEngineerTest() {
         //ataca a un enemigo
-        attackWith(engineerTest, enemyTest, axeTest);
+        PlayerAttack(engineerTest, enemyTest, axeTest);
         engineerTest.setHealthPoints(0);
-        attackWith(engineerTest, enemyTest, axeTest);
+        PlayerAttack(engineerTest, enemyTest, axeTest);
 
         //ataca a otro player
-        attackWith(engineerTest, whiteMageTest, bowTest);
+        PlayerAttack(engineerTest, whiteMageTest, bowTest);
         engineerTest.setHealthPoints(0);
-        attackWith(engineerTest, whiteMageTest, bowTest);
+        PlayerAttack(engineerTest, whiteMageTest, bowTest);
 
 
 

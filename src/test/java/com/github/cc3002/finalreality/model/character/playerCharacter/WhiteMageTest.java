@@ -44,13 +44,13 @@ public class WhiteMageTest extends PayerCharacterTest {
     @Test
     void attackWhiteMageTest() {
         //ataca a un enemigo
-        attackWith(whiteMageTest, enemyTest, staffTest);
+        PlayerAttack(whiteMageTest, enemyTest, staffTest);
         whiteMageTest.setHealthPoints(0);
-        attackWith(whiteMageTest, enemyTest, staffTest);
+        PlayerAttack(whiteMageTest, enemyTest, staffTest);
 
         //ataca a otro player
-        attackWith(whiteMageTest, thiefTest, staffTest);
+        PlayerAttack(whiteMageTest, thiefTest, staffTest);
         whiteMageTest.setHealthPoints(0);
-        attackWith(whiteMageTest, thiefTest, staffTest);
+        PlayerAttack(whiteMageTest, thiefTest, staffTest);
     }
 }

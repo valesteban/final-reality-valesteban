@@ -50,14 +50,14 @@ public class ThiefTest  extends PayerCharacterTest  {
     @Test
     void attackThiefTest() {
         //ataca a un enemigo
-        attackWith(thiefTest, enemyTest, swordTest);
+        PlayerAttack(thiefTest, enemyTest, swordTest);
         thiefTest.setHealthPoints(0);
-        attackWith(thiefTest, enemyTest, swordTest);
+        PlayerAttack(thiefTest, enemyTest, swordTest);
 
         //ataca a otro player
-        attackWith(thiefTest, blackMageTest, staffTest);
+        PlayerAttack(thiefTest, blackMageTest, staffTest);
         thiefTest.setHealthPoints(0);
-        attackWith(thiefTest, blackMageTest, staffTest);
+        PlayerAttack(thiefTest, blackMageTest, staffTest);
     }
 
 }
