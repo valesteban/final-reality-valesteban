@@ -40,13 +40,14 @@ public abstract class MagicCharacter extends AbstractPlayerCharacter {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof BlackMage)) {
+        if (!(o instanceof MagicCharacter)) {
             return false;
         }
         final MagicCharacter that = (MagicCharacter) o;
         return getCharacterClass().equals(that.getCharacterClass())
                 && getName().equals(that.getName()) &&
-                getMana() == that.getMana();
+                getMana() == that.getMana() &&
+                getProtection() == that.getProtection();
     }
     /**
      * gives a hash code to this MagicCharacter.

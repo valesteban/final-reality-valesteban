@@ -6,6 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacter;
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -64,7 +65,10 @@ public class Enemy extends AbstractCharacter {
       return false;
     }
     final Enemy enemy = (Enemy) o;
-    return getWeight() == enemy.getWeight();
+    return getWeight() == enemy.getWeight() &&
+            getName() == enemy.getName() &&
+            getProtection() == enemy.getProtection() &&
+            getDamage() == enemy.getDamage();
   }
   /**
    * returns a hash code to this Enemy.
@@ -81,8 +85,10 @@ public class Enemy extends AbstractCharacter {
    */
   @Override
   public void attack(ICharacter character){
+    if (this.getHealthPoints() != 0){
     character.isAttackByEnemy(this);
   }
+}
 
   /**
    * it will change the value of HealthPoints of the enemy
@@ -90,7 +96,7 @@ public class Enemy extends AbstractCharacter {
    */
   @Override
   public void isAttackByEnemy(Enemy enemy) {
-    int dano = enemy.getDamage() - this.getprotection();
+    int dano = enemy.getDamage() - this.getProtection();
     int newHP;
     if (this.getHealthPoints() < dano){
       newHP = 0;
@@ -100,13 +106,14 @@ public class Enemy extends AbstractCharacter {
     this.setHealthPoints(newHP);
   }
 
+
   /**
    * it will change the value of HealthPoints of the enemy
    * when is attacked by a player.
    */
   @Override
-  public void isAttackByPlayer(AbstractPlayerCharacter playerCharacter) {
-    int dano = playerCharacter.getEquippedWeapon().getDamage() - this.getprotection();
+  public void isAttackByPlayer(IPlayerCharacter playerCharacter) {
+    int dano = playerCharacter.getEquippedWeapon().getDamage() - this.getProtection();
     int newHP;
 
     if (this.getHealthPoints() < dano ){
