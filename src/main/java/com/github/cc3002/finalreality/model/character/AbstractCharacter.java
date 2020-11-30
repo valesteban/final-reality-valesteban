@@ -20,6 +20,7 @@ public abstract class AbstractCharacter implements ICharacter {
   private int healthPoints = 100;
   private int protection;
   protected ScheduledExecutorService scheduledExecutor;
+  private boolean alive = true;
   /**
    * Creates a new player Character.
    *
@@ -57,6 +58,16 @@ public abstract class AbstractCharacter implements ICharacter {
   public String getName() {
     return name;
   }
+
+  /**
+   * Returns true if a character is alive.
+   */
+  public boolean getAlive(){return alive;}
+
+  /**
+   * set false if a character is now dead.
+   */
+  public void setDead(){this.alive = false;}
 
   /**
    * Returns the healthPoints of this character.
