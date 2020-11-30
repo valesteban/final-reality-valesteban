@@ -1,8 +1,10 @@
 package com.github.cc3002.finalreality.model.character;
 
+import java.beans.PropertyChangeSupport;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 
+import com.github.cc3002.finalreality.Controller.IEveventHandler;
 import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacter;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import org.jetbrains.annotations.NotNull;
@@ -21,6 +23,7 @@ public abstract class AbstractCharacter implements ICharacter {
   private int protection;
   protected ScheduledExecutorService scheduledExecutor;
   private boolean alive = true;
+  protected PropertyChangeSupport characterAttackedEvent = new PropertyChangeSupport(this);
   /**
    * Creates a new player Character.
    *
@@ -98,4 +101,8 @@ public abstract class AbstractCharacter implements ICharacter {
 
   @Override
   public abstract void isAttackByPlayer(IPlayerCharacter playerCharacter);
+
+  public void addListener(IEveventHandler handler){
+    characterAttackedEvent.addPropertyChangeListener(handler);
+  }
 }

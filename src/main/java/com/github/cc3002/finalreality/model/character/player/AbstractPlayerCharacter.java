@@ -132,6 +132,11 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
         newHP = getHealthPoints() - dano;
         }
         this.setHealthPoints(newHP);
+
+        if (this.getHealthPoints() == 0) //si no tiene vida lo deja muerto
+            this.setDead();
+        //llamamos a los observadores
+        characterAttackedEvent.firePropertyChange("is attacked",null, this);
     }
 
 
@@ -149,6 +154,11 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
             newHP = this.getHealthPoints()-dano;
         }
         this.setHealthPoints(newHP);
+
+        if (this.getHealthPoints() == 0)
+            this.setDead();
+
+        characterAttackedEvent.firePropertyChange("is attacked",null, this);
     }
 }
 
