@@ -88,7 +88,6 @@ public class Enemy extends AbstractCharacter {
     if (this.getHealthPoints() != 0){
     character.isAttackByEnemy(this);
   }
-  //  characterAttackedEvent.fireIndexedPropertyChange("character is attack",null,character);
 }
 
   /**
@@ -105,10 +104,12 @@ public class Enemy extends AbstractCharacter {
       newHP = getHealthPoints() - dano;
     }
     this.setHealthPoints(newHP);
-    if (this.getHealthPoints() == 0)
-      this.setDead();
+    if (this.getHealthPoints() == 0){
+      System.out.println(this.getName()+ "fue atacado y tiene:"+this.getHealthPoints());
+      this.setDead();}
 
-    characterAttackedEvent.firePropertyChange("is attacked",null, this);
+
+
   }
 
 
@@ -129,10 +130,12 @@ public class Enemy extends AbstractCharacter {
     }
     this.setHealthPoints(newHP);
 
-    if (this.getHealthPoints() == 0)
-      this.setDead();
+    if (this.getHealthPoints() == 0){
+      System.out.println(this.getName()+ "fue atacado y tiene:"+this.getHealthPoints());
+      this.setDead();}
 
-    characterAttackedEvent.firePropertyChange("is attacked",null, this);
+
+
   }
 
 }

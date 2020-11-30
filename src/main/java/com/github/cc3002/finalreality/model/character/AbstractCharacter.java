@@ -70,7 +70,10 @@ public abstract class AbstractCharacter implements ICharacter {
   /**
    * set false if a character is now dead.
    */
-  public void setDead(){this.alive = false;}
+  public void setDead(){
+    this.alive = false;
+    characterAttackedEvent.firePropertyChange("is attacked",null, this);
+  }
 
   /**
    * Returns the healthPoints of this character.

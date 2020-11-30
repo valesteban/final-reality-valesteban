@@ -13,7 +13,6 @@ public class CharacterHandler implements IEveventHandler {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         controller.isAttackedCharacter((ICharacter) evt.getNewValue());
-
     }
 }
 

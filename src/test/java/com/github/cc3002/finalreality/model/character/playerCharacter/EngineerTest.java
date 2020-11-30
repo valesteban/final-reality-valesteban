@@ -32,7 +32,7 @@ public class EngineerTest extends PayerCharacterTest {
     }
     @Test
     void equipEngineerTest(){
-        //estoy no equipan a el ingeniero : queda nunlo
+        //estoy no equipan a el ingeniero : queda nulo
         equipNullTest(engineerTest,swordTest);
         equipNullTest(engineerTest,knifeTest);
         equipNullTest(engineerTest,staffTest);
@@ -60,8 +60,7 @@ public class EngineerTest extends PayerCharacterTest {
         PlayerAttack(engineerTest, whiteMageTest, bowTest);
         engineerTest.setHealthPoints(0);
         PlayerAttack(engineerTest, whiteMageTest, bowTest);
-
-
-
     }
+
+
 }
