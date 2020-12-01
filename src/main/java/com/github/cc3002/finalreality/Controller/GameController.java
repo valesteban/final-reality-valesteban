@@ -6,20 +6,31 @@ import com.github.cc3002.finalreality.model.character.player.*;
 import com.github.cc3002.finalreality.model.weapon.*;
 
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 
 public class GameController {
     private final IEveventHandler characterDeadHandler = new CharacterHandler(this);
     private LinkedList<IPlayerCharacter> players;
-    private LinkedList<Enemy> enemies;
+    private LinkedList<ICharacter> enemies;
     private LinkedList<IWeapon> inventory;
+    private boolean winnerPlayer = false;
+    private boolean winnerEnemy = false;
+    private BlockingQueue<ICharacter> turnsQueue;
 
 
-    public GameController( ){
+    public GameController( BlockingQueue<ICharacter> turnsQueue){
         players = new LinkedList<>();
         enemies = new LinkedList<>();
         inventory = new LinkedList<>();
+        this.turnsQueue = turnsQueue;
     }
+
+
+    public BlockingQueue<ICharacter> getTurnsQueue() {
+        return turnsQueue;
+    }
+
     /**
      * Creates an enemy, add it to the enemies list and add a listener
      */
@@ -32,7 +43,7 @@ public class GameController {
     /**
      * returns the list of enemies.
      */
-    public LinkedList<Enemy> getEnemies(){return enemies;}
+    public LinkedList<ICharacter> getEnemies(){return enemies;}
     /**
      * returns the list of players.
      */
@@ -92,7 +103,7 @@ public class GameController {
      */
     public void createKnight(BlockingQueue<ICharacter> turnsQueue,String name,String characterClass,
                              int protection){
-        Knight k = new Knight(turnsQueue,name,protection);
+        IPlayerCharacter k = new Knight(turnsQueue,name,protection);
         k.addListener(characterDeadHandler);
         players.add(k);
     }
@@ -133,14 +144,57 @@ public class GameController {
         }
     }
 
-    public void attackCharacter(ICharacter attacker, ICharacter attacked){
+    public void attackPLayers(ICharacter attacker,ICharacter attacked){
         attacker.attack(attacked);
     }
 
-    public void isAttackedCharacter(ICharacter character){
-        //aqui lo eliminamos de la lista
-        System.out.println("fue matado atacado \n");
+    public void turnsC(){
+        ICharacter c1 = turnsQueue.element();                             //toma el primer elemento
+        if (players.contains(c1)){
+            //aqui pondremos la implementacion de la interaccion
+            //con el jugardor
+        }
+        else {                                                          //entonces el objeto sacado es un enemigo
+            System.out.println("toma el elementoq se llama \n"+ c1.getName());
+            this.enemyTurn(c1);
+        }
+        turnsQueue.remove(c1);
+        c1.waitTurn(); //cuando termine temorizador vuelve a meterse
+    }
+
+    private void enemyTurn(ICharacter character){
+            Random r = new Random();
+            int i = r.nextInt(players.size());     //elegimos un numero random
+            IPlayerCharacter playerThatWillBeAttacked = players.get(i);
+            System.out.println("el q sera atacado es \n"+ playerThatWillBeAttacked.getName());
+            character.attack((ICharacter) playerThatWillBeAttacked);
+            System.out.println("fue atacado \n");
+        }
 
 
+    public void isAttackedCharacter(ICharacter character) {
+        //aqui resvisamos si todos los demas entan muertos si es asi gana sino sigue
+        //como e el personaje se murio vamos a eliminarlo de la lista y despues revisar
+        // si esque la lista esta vacia y asi decimos q alguno gano
+        System.out.println("fue matado \n");
+        if (players.contains(character)) {
+            int j = players.size();
+            for (int i = 0; i <= j; i++) {
+                if (players.get(i).getAlive() == true) {  //si hay alguno vivo se sige jugando
+                    break;
+                }
+            }
+            this.winnerEnemy = true;
+        } else {   //character es enemigo
+            if (enemies.contains(character)) {
+                int j = enemies.size();
+                for (int i = 0; i <= j; i++) {
+                    if (enemies.get(i).getAlive() == true) {  //si hay alguno vivo se sige jugando
+                        break;
+                    }
+                }
+                this.winnerPlayer = true;
+            }
+        }
     }
 }

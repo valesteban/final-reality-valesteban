@@ -1,6 +1,8 @@
 package com.github.cc3002.finalreality.model.character;
 
+import java.util.LinkedList;
 import java.util.Objects;
+import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -83,7 +85,7 @@ public class Enemy extends AbstractCharacter {
    * method that will call another method that will say what to do with the character
    * that is being attacked.
    */
-  @Override
+
   public void attack(ICharacter character){
     if (this.getHealthPoints() != 0){
     character.isAttackByEnemy(this);
@@ -137,5 +139,7 @@ public class Enemy extends AbstractCharacter {
 
 
   }
+
+
 
 }

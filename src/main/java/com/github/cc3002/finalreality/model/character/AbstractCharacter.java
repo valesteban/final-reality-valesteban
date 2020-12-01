@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.model.character;
 
 import java.beans.PropertyChangeSupport;
+import java.util.LinkedList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -105,7 +106,9 @@ public abstract class AbstractCharacter implements ICharacter {
   @Override
   public abstract void isAttackByPlayer(IPlayerCharacter playerCharacter);
 
-  public void addListener(IEveventHandler handler){
+
+
+    public void addListener(IEveventHandler handler){
     characterAttackedEvent.addPropertyChangeListener(handler);
   }
 }

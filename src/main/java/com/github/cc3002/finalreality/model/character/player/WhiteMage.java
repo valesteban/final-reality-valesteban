@@ -5,6 +5,7 @@ import com.github.cc3002.finalreality.model.weapon.Knife;
 import com.github.cc3002.finalreality.model.weapon.Sword;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.LinkedList;
 import java.util.concurrent.BlockingQueue;
 /**
  * A class that creates a character of type WhiteMage
@@ -26,5 +27,6 @@ public class WhiteMage extends MagicCharacter {
     public void equipWithKnife(Knife knife) {
         setEquippedWeapon(null);
     }
+
 
 }

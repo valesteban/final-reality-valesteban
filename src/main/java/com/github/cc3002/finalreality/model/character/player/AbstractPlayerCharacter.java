@@ -6,6 +6,7 @@ import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
@@ -135,7 +136,6 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
 
         if (this.getHealthPoints() == 0) { //si no tiene vida lo deja muerto
             System.out.println(this.getName() + "fue atacado y tiene:" + this.getHealthPoints());
-
             this.setDead();
             //llamamos a los observadores
         }
@@ -159,11 +159,13 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
 
         if (this.getHealthPoints() == 0) {
             System.out.println(this.getName()+ "fue atacado y tiene:"+this.getHealthPoints());
-
-
             this.setDead();
         }
 
+    }
+
+    public void myAction(LinkedList<IPlayerCharacter> players, LinkedList<ICharacter> enemies){
+        //aca la persona ve q hace
     }
 }
 
