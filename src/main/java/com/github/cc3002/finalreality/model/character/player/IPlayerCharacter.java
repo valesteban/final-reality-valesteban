@@ -10,7 +10,7 @@ import java.util.LinkedList;
 /**
  * This is an interface for PLayerCharacter
  */
-public interface IPlayerCharacter {
+public interface IPlayerCharacter extends ICharacter{
     void addToQueue();
 
     String getName();

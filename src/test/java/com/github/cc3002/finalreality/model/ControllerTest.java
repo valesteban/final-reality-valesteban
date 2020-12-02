@@ -84,63 +84,63 @@ public class ControllerTest {
 
     @Test
     public void attackCharacter(){
-        //IPlayerCharacter p1 = controller.getPlayers().get(0); //tenemos a un thief
-        ICharacter p2 = controller.getEnemies().get(0); // tenemos a un enemy
-       // controller.attackPLayers((ICharacter) p1,(ICharacter) p2);
-        controller.attackPLayers(p2,(ICharacter) controller.getPlayers().get(0));
-        controller.attackPLayers(p2,(ICharacter)  controller.getPlayers().get(0));
-        controller.attackPLayers(p2,(ICharacter)  controller.getPlayers().get(0));
-        controller.attackPLayers(p2,(ICharacter)  controller.getPlayers().get(0));
-
-        assertEquals(0,controller.getPlayers().get(0).getHealthPoints());
+        controller.attackPLayers(controller.getEnemies().get(0), controller.getPlayers().get(0));
+        assertEquals(69,controller.getPlayers().get(0).getHealthPoints());
+        controller.attackPLayers(controller.getEnemies().get(0), controller.getPlayers().get(1));
+        assertEquals(69,controller.getPlayers().get(1).getHealthPoints());
+        controller.attackPLayers(controller.getEnemies().get(0), controller.getPlayers().get(2));
+        assertEquals(69,controller.getPlayers().get(2).getHealthPoints());
+        controller.attackPLayers(controller.getEnemyPosition(0),controller.getPlayers().get(3));
+        assertEquals(69,controller.getPlayers().get(3).getHealthPoints());
+        assertEquals(69,controller.getPlayerPosition(3).getHealthPoints());
     }
 
-    @Test
-    public void turnEnemy() {
-        Assertions.assertTrue(turns.isEmpty());
-        controller.getEnemies().get(0).waitTurn();
-        try {
-            Thread.sleep(1200);
-            Assertions.assertEquals(1, turns.size());
-            controller.turnsC();//como es el unico en la cola el estara primero y atacara a alguien al azar
+ //   @Test
+ //   public void turnEnemy() {
+ //       Assertions.assertTrue(turns.isEmpty());
+ //       controller.getEnemies().get(0).waitTurn();
+ //       try {
+ //           Thread.sleep(1200);
+ //           Assertions.assertEquals(1, turns.size());
+ //           controller.turnsC();//como es el unico en la cola el estara primero y atacara a alguien al azar
 
-            try {
-                Assertions.assertEquals(0, turns.size()); //aqui esta esperando que para volver a meterse a la cola
-                Thread.sleep(1200);
-                Assertions.assertEquals(1, turns.size());
-                controller.turnsC();//como vuelve despues a meterse debe haber 1 de nuevo
+ //           try {
+ //               Assertions.assertEquals(0, turns.size()); //aqui esta esperando que para volver a meterse a la cola
+ //               Thread.sleep(1200);
+ //               Assertions.assertEquals(1, turns.size());
+ //               controller.turnsC();//como vuelve despues a meterse debe haber 1 de nuevo
 
-            } catch (InterruptedException e) {
-            }
+   //         } catch (InterruptedException e) {
+   //         }
 
-            //Assertions.assertEquals(0, controller.turnsC());
-        } catch (InterruptedException e  ) {
-        }
-    }
-    @Test
-    public void turnPlayer() {
-        Assertions.assertTrue(turns.isEmpty());
-        IPlayerCharacter p1 = controller.getPlayers().get(0); //tenemos a un thief
-        IWeapon w1 = controller.getInventory().get(4); //tenemos una espada
-        controller.equipPlayer(p1, w1);
-        assertEquals(controller.getPlayers().get(0).getEquippedWeapon(), controller.getInventory().get(4));
+   //         //Assertions.assertEquals(0, controller.turnsC());
+   //     } catch (InterruptedException e  ) {
+   //     }
+   // }
+  //  @Test
+  //  public void turnPlayer() {
+  //      Assertions.assertTrue(turns.isEmpty());
+  //      IPlayerCharacter p1 = controller.getPlayers().get(0); //tenemos a un thief
+  //      IWeapon w1 = controller.getInventory().get(4); //tenemos una espada
+  //      controller.equipPlayer(p1, w1);
+  //      assertEquals(controller.getPlayers().get(0).getEquippedWeapon(), controller.getInventory().get(4));
 
-        controller.getPlayers().get(0).waitTurn();
-        try {
-            Thread.sleep(1200);
-            Assertions.assertEquals(1, turns.size());
-            controller.turnsC();//como es el unico en la cola el estara primero y atacara a alguien al azar
-            //assertEquals(1, controller.turnsC());
-            try {
-                Assertions.assertEquals(0, turns.size()); //aqui esta esperando que para volver a meterse a la cola
-                Thread.sleep(1200);
-                Assertions.assertEquals(1, turns.size());
-                controller.turnsC();//como vuelve despues a meterse debe haber 1 de nuevo
+//        controller.getPlayers().get(0).waitTurn();
+  //      try {
+  //          Thread.sleep(1200);
+  //          Assertions.assertEquals(1, turns.size());
+  ///          controller.turnsC();//como es el unico en la cola el estara primero y atacara a alguien al azar
+  //          //assertEquals(1, controller.turnsC());
+  //          try {
+   //             Assertions.assertEquals(0, turns.size()); //aqui esta esperando que para volver a meterse a la cola
+   //             Thread.sleep(1200);
+   //             Assertions.assertEquals(1, turns.size());
+   //             controller.turnsC();//como vuelve despues a meterse debe haber 1 de nuevo
 
-            } catch (InterruptedException e) {
-            }
-        } catch (InterruptedException e) {
-        }
-    }
+    //        } catch (InterruptedException e) {
+    //        }
+    //    } catch (InterruptedException e) {
+    //    }
+   // }
 }
 

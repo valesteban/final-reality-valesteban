@@ -12,7 +12,7 @@ import java.util.concurrent.BlockingQueue;
 public class GameController {
     private final IEveventHandler characterDeadHandler = new CharacterHandler(this);
     private LinkedList<IPlayerCharacter> players;
-    private LinkedList<ICharacter> enemies;
+    private LinkedList<Enemy> enemies;
     private LinkedList<IWeapon> inventory;
     private boolean winnerPlayer = false;
     private boolean winnerEnemy = false;
@@ -41,9 +41,18 @@ public class GameController {
         enemies.add(e);
     }
     /**
+     * returns the player in the position i of the list of players.
+     */
+    public IPlayerCharacter getPlayerPosition(int i){return players.get(i);}
+
+    /**
+     * returns the enemy in the position i of the list of enemies.
+     */
+    public Enemy getEnemyPosition(int i){return enemies.get(i);}
+    /**
      * returns the list of enemies.
      */
-    public LinkedList<ICharacter> getEnemies(){return enemies;}
+    public LinkedList<Enemy> getEnemies(){return enemies;}
     /**
      * returns the list of players.
      */
@@ -87,8 +96,6 @@ public class GameController {
         Sword s = new Sword(name, damage, weight);
         inventory.add(s);
     }
-
-
     /**
      * Controller creates a thief, add it to the player list and add a listener
      */
@@ -135,7 +142,9 @@ public class GameController {
         players.add(w);
     }
 
-
+    /**
+     *  Equip a player with a weapon.
+     */
     public void equipPlayer(IPlayerCharacter player, IWeapon weapon){
         for (IPlayerCharacter p : players){
             if (p.equals(player)){
@@ -144,10 +153,18 @@ public class GameController {
         }
     }
 
+    /**
+     *  Character attack another character.
+     */
     public void attackPLayers(ICharacter attacker,ICharacter attacked){
         attacker.attack(attacked);
     }
 
+
+    /**
+     *  Take the firs object of the BlockingQueue if it is an enemy it will take to the method enemyTurn and
+     *  if it is a player for now it won´t do anything.
+     */
     public void turnsC(){
         ICharacter c1 = turnsQueue.element();                             //toma el primer elemento
         if (players.contains(c1)){
@@ -158,17 +175,31 @@ public class GameController {
             System.out.println("toma el elementoq se llama \n"+ c1.getName());
             this.enemyTurn(c1);
         }
-        turnsQueue.remove(c1);
-        c1.waitTurn(); //cuando termine temorizador vuelve a meterse
+    }
+    /**
+     *  pulls out the first element in the BlockingQueue.
+     */
+    public void pullOutCharacter(ICharacter character){
+        turnsQueue.remove(character);
     }
 
+    /**
+     *  waits depending onits weight to be add it to the BlockingQueue .
+     */
+    public void timerCharacter(ICharacter character){
+        character.waitTurn();
+    }
+
+    /**
+     *  Enemy choose a random player of tle list players and attak it.
+     */
     private void enemyTurn(ICharacter character){
             Random r = new Random();
             int i = r.nextInt(players.size());     //elegimos un numero random
             IPlayerCharacter playerThatWillBeAttacked = players.get(i);
-            System.out.println("el q sera atacado es \n"+ playerThatWillBeAttacked.getName());
-            character.attack((ICharacter) playerThatWillBeAttacked);
-            System.out.println("fue atacado \n");
+           // System.out.println("el q sera atacado es \n"+ playerThatWillBeAttacked.getName());
+            character.attack(playerThatWillBeAttacked);
+           // System.out.println("fue atacado \n");
         }
 
 
