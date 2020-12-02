@@ -12,12 +12,15 @@ public interface ICharacter {
   void waitTurn();
   String getName();
   String getCharacterClass();
+  void setHealthPoints(int newHealthPoints);
   int getHealthPoints();
   int getProtection();
   boolean getAlive();
   void addToQueue();
+  void setDead();
 
-  void attack(ICharacter character);
+
+    void attack(ICharacter character);
   void isAttackByEnemy(Enemy enemy);
   void isAttackByPlayer(IPlayerCharacter playerCharacter);
   void addListener(IEveventHandler handler);

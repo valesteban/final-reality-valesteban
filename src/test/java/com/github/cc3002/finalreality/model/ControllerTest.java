@@ -12,11 +12,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ControllerTest {
     private BlockingQueue<ICharacter> turns ;
@@ -75,11 +75,12 @@ public class ControllerTest {
     }
 
     @Test
-    public void equipPlayers(){
-        IPlayerCharacter p1 = controller.getPlayers().get(0); //tenemos a un thief
-        IWeapon w1 = controller.getInventory().get(4); //tenemos una espada
-        controller.equipPlayer(p1, w1);
+    public void equipPlayersTest(){
+
+        controller.equipPlayer(controller.getPlayers().get(0), controller.getInventory().get(4));
         assertEquals(controller.getPlayers().get(0).getEquippedWeapon(),controller.getInventory().get(4));
+        controller.equipPlayer(controller.getPlayerPosition(1),controller.getInventory().get(1));
+        assertEquals(controller.getPlayers().get(1).getEquippedWeapon(),controller.getInventory().get(1));
     }
 
     @Test
@@ -95,52 +96,75 @@ public class ControllerTest {
         assertEquals(69,controller.getPlayerPosition(3).getHealthPoints());
     }
 
- //   @Test
- //   public void turnEnemy() {
- //       Assertions.assertTrue(turns.isEmpty());
- //       controller.getEnemies().get(0).waitTurn();
- //       try {
- //           Thread.sleep(1200);
- //           Assertions.assertEquals(1, turns.size());
- //           controller.turnsC();//como es el unico en la cola el estara primero y atacara a alguien al azar
+    @Test
+    public void enemyTurnTest(){
+        Enemy e1 = controller.getEnemyPosition(1);
+        controller.enemyTurn(e1);
+        //al player que tiene menos vida se teste eue se le quita la vida esperada
+        for (int i = 0;i <= 4; i++ ){
+            if (controller.getPlayerPosition(i).getHealthPoints() < 100){
+                assertEquals(80,controller.getPlayerPosition(i).getHealthPoints());
+            }
+        }
+    }
 
- //           try {
- //               Assertions.assertEquals(0, turns.size()); //aqui esta esperando que para volver a meterse a la cola
- //               Thread.sleep(1200);
- //               Assertions.assertEquals(1, turns.size());
- //               controller.turnsC();//como vuelve despues a meterse debe haber 1 de nuevo
+    @Test
+    public void WinerTest(){
+        for (int i = 0; i < 5 ;i++){
+            System.out.println(i);
+            controller.getPlayerPosition(i).setHealthPoints(0);
+            controller.getPlayerPosition(i).setDead();  //matamos a todos
+        }
+        //gano el enemigo porque hicimos que todos los players quedasen con vida 0
+        assertTrue(controller.returnWinnerEnemy());
 
-   //         } catch (InterruptedException e) {
-   //         }
+        for (int i = 0; i < 2 ;i++){
+            System.out.println(i);
+            controller.getEnemyPosition(i).setHealthPoints(0);
+            controller.getEnemyPosition(i).setDead();  //matamos a todos enemy
+        }
+        //gano el enemigo porque hicimos que todos los players quedasen con vida 0
+        assertTrue(controller.returnWinnerPlayer());
+    }
 
-   //         //Assertions.assertEquals(0, controller.turnsC());
-   //     } catch (InterruptedException e  ) {
-   //     }
-   // }
-  //  @Test
-  //  public void turnPlayer() {
-  //      Assertions.assertTrue(turns.isEmpty());
-  //      IPlayerCharacter p1 = controller.getPlayers().get(0); //tenemos a un thief
-  //      IWeapon w1 = controller.getInventory().get(4); //tenemos una espada
-  //      controller.equipPlayer(p1, w1);
-  //      assertEquals(controller.getPlayers().get(0).getEquippedWeapon(), controller.getInventory().get(4));
 
-//        controller.getPlayers().get(0).waitTurn();
-  //      try {
-  //          Thread.sleep(1200);
-  //          Assertions.assertEquals(1, turns.size());
-  ///          controller.turnsC();//como es el unico en la cola el estara primero y atacara a alguien al azar
-  //          //assertEquals(1, controller.turnsC());
-  //          try {
-   //             Assertions.assertEquals(0, turns.size()); //aqui esta esperando que para volver a meterse a la cola
-   //             Thread.sleep(1200);
-   //             Assertions.assertEquals(1, turns.size());
-   //             controller.turnsC();//como vuelve despues a meterse debe haber 1 de nuevo
+    @Test
+    public void TurnFirstPartEnemy(){
+        //partimos provando al enemy que este en la cabeza de la cola
+        assertTrue(controller.getTurnsQueue().isEmpty());
+        controller.getEnemyPosition(1).waitTurn(); //agregamos al enemy a la cola
+        try {
+            Thread.sleep(1300);
+            assertFalse(controller.getTurnsQueue().isEmpty());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //ahora checkeamos que al sacarlo atacke a alguien
+        controller.firstCharacterQueue();
 
-    //        } catch (InterruptedException e) {
-    //        }
-    //    } catch (InterruptedException e) {
-    //    }
-   // }
+        //ocupamos lo mismos que en enemyTurnTest() aunque ya esta probado
+        Enemy e1 = controller.getEnemyPosition(1);
+        controller.enemyTurn(e1);
+        //al player que tiene menos vida se teste eue se le quita la vida esperada
+        for (int i = 0;i <= 4; i++ ){
+            if (controller.getPlayerPosition(i).getHealthPoints() < 100){
+                assertEquals(80,controller.getPlayerPosition(i).getHealthPoints());
+            }
+        }
+    }
+    @Test
+    public void TurnFirstPartPlayer(){
+        assertTrue(controller.getTurnsQueue().isEmpty());
+        equipPlayersTest();
+        controller.getPlayerPosition(0).waitTurn(); //agregamos a un thief al la cola
+        controller.getPlayerPosition(0).waitTurn(); //agregamos a un ingeniero a la ocla
+        try {
+            Thread.sleep(1300);
+            assertFalse(controller.getTurnsQueue().isEmpty());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
 

@@ -147,7 +147,7 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
      * when is attacked by another player.
      */
     @Override
-    public void isAttackByPlayer(IPlayerCharacter playerCharacter) {
+    public void  isAttackByPlayer(IPlayerCharacter playerCharacter){
         int dano = playerCharacter.getEquippedWeapon().getDamage() - this.getProtection();
         int newHP;
         if (this.getHealthPoints() < dano){
@@ -161,11 +161,6 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
             System.out.println(this.getName()+ "fue atacado y tiene:"+this.getHealthPoints());
             this.setDead();
         }
-
-    }
-
-    public void myAction(LinkedList<IPlayerCharacter> players, LinkedList<ICharacter> enemies){
-        //aca la persona ve q hace
     }
 }
 

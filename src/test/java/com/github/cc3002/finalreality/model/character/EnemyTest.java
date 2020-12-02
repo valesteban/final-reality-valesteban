@@ -33,9 +33,9 @@ public class EnemyTest extends AbstractCharacterTest{
             // Thread.sleep is not accurate so this values may be changed to adjust the
             // acceptable error margin.
             // We're testing that the character waits approximately 1 second.
-            Thread.sleep(1000);
+            Thread.sleep(800);
             Assertions.assertEquals(0, turns.size());
-            Thread.sleep(200);
+            Thread.sleep(500);
             Assertions.assertEquals(1, turns.size());
             Assertions.assertEquals(enemyTest, turns.peek());
         } catch (InterruptedException e) {

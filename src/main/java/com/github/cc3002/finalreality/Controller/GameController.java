@@ -25,10 +25,17 @@ public class GameController {
         inventory = new LinkedList<>();
         this.turnsQueue = turnsQueue;
     }
-
-
-    public BlockingQueue<ICharacter> getTurnsQueue() {
-        return turnsQueue;
+    /**
+     * return true if the player is the winner.
+     */
+    public boolean returnWinnerPlayer(){
+            return winnerPlayer;
+    }
+    /**
+     * return true if the Enemy is the winner.
+     */
+    public boolean returnWinnerEnemy(){
+        return winnerEnemy;
     }
 
     /**
@@ -44,6 +51,10 @@ public class GameController {
      * returns the player in the position i of the list of players.
      */
     public IPlayerCharacter getPlayerPosition(int i){return players.get(i);}
+    /**
+     * returns the BlockingQueue.
+     */
+    public BlockingQueue<ICharacter>  getTurnsQueue(){return  turnsQueue;}
 
     /**
      * returns the enemy in the position i of the list of enemies.
@@ -160,12 +171,11 @@ public class GameController {
         attacker.attack(attacked);
     }
 
-
     /**
      *  Take the firs object of the BlockingQueue if it is an enemy it will take to the method enemyTurn and
      *  if it is a player for now it won´t do anything.
      */
-    public void turnsC(){
+    public void firstCharacterQueue(){
         ICharacter c1 = turnsQueue.element();                             //toma el primer elemento
         if (players.contains(c1)){
             //aqui pondremos la implementacion de la interaccion
@@ -179,12 +189,12 @@ public class GameController {
     /**
      *  pulls out the first element in the BlockingQueue.
      */
-    public void pullOutCharacter(ICharacter character){
-        turnsQueue.remove(character);
+    public void pullOutCharacter(){
+        turnsQueue.poll();
     }
 
     /**
-     *  waits depending onits weight to be add it to the BlockingQueue .
+     *  waits depending on its weight to be add it to the BlockingQueue .
      */
     public void timerCharacter(ICharacter character){
         character.waitTurn();
@@ -193,16 +203,17 @@ public class GameController {
     /**
      *  Enemy choose a random player of tle list players and attak it.
      */
-    private void enemyTurn(ICharacter character){
+    public void enemyTurn(ICharacter character){
             Random r = new Random();
             int i = r.nextInt(players.size());     //elegimos un numero random
             IPlayerCharacter playerThatWillBeAttacked = players.get(i);
-           // System.out.println("el q sera atacado es \n"+ playerThatWillBeAttacked.getName());
             character.attack(playerThatWillBeAttacked);
-           // System.out.println("fue atacado \n");
         }
 
-
+    /**
+     * When someone dies check if all in  the list of the one that died is dead
+     * also, if thats the case the othe is the winner.
+     */
     public void isAttackedCharacter(ICharacter character) {
         //aqui resvisamos si todos los demas entan muertos si es asi gana sino sigue
         //como e el personaje se murio vamos a eliminarlo de la lista y despues revisar
@@ -210,7 +221,7 @@ public class GameController {
         System.out.println("fue matado \n");
         if (players.contains(character)) {
             int j = players.size();
-            for (int i = 0; i <= j; i++) {
+            for (int i = 0; i < j; i++) {
                 if (players.get(i).getAlive() == true) {  //si hay alguno vivo se sige jugando
                     break;
                 }
@@ -219,7 +230,7 @@ public class GameController {
         } else {   //character es enemigo
             if (enemies.contains(character)) {
                 int j = enemies.size();
-                for (int i = 0; i <= j; i++) {
+                for (int i = 0; i < j; i++) {
                     if (enemies.get(i).getAlive() == true) {  //si hay alguno vivo se sige jugando
                         break;
                     }
