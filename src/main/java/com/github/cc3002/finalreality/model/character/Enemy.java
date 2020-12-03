@@ -1,6 +1,8 @@
 package com.github.cc3002.finalreality.model.character;
 
+import java.util.LinkedList;
 import java.util.Objects;
+import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -50,9 +52,6 @@ public class Enemy extends AbstractCharacter {
     var enemy = (Enemy) this;
     scheduledExecutor.schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
   }
-
-
-
   /**
    * Compare this Enemy with the given Object o.
    */
@@ -83,13 +82,11 @@ public class Enemy extends AbstractCharacter {
    * method that will call another method that will say what to do with the character
    * that is being attacked.
    */
-  @Override
+
   public void attack(ICharacter character){
     if (this.getHealthPoints() != 0){
-    character.isAttackByEnemy(this);
+    character.isAttackByEnemy(this); }
   }
-}
-
   /**
    * it will change the value of HealthPoints of the enemy
    * whe is attacked by another enemy.
@@ -104,8 +101,10 @@ public class Enemy extends AbstractCharacter {
       newHP = getHealthPoints() - dano;
     }
     this.setHealthPoints(newHP);
+    if (this.getHealthPoints() == 0){
+      System.out.println(this.getName()+ "fue atacado y tiene:"+this.getHealthPoints());
+      this.setDead();}
   }
-
 
   /**
    * it will change the value of HealthPoints of the enemy
@@ -115,14 +114,13 @@ public class Enemy extends AbstractCharacter {
   public void isAttackByPlayer(IPlayerCharacter playerCharacter) {
     int dano = playerCharacter.getEquippedWeapon().getDamage() - this.getProtection();
     int newHP;
-
     if (this.getHealthPoints() < dano ){
-       newHP = 0;
-    }
+       newHP = 0; }
     else {
-      newHP = this.getHealthPoints()-dano;
-    }
+      newHP = this.getHealthPoints()-dano; }
     this.setHealthPoints(newHP);
+    if (this.getHealthPoints() == 0){
+      System.out.println(this.getName()+ "fue atacado y tiene:"+this.getHealthPoints());
+      this.setDead();}
   }
-
 }

@@ -6,6 +6,7 @@ import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
@@ -132,6 +133,12 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
         newHP = getHealthPoints() - dano;
         }
         this.setHealthPoints(newHP);
+
+        if (this.getHealthPoints() == 0) { //si no tiene vida lo deja muerto
+            System.out.println(this.getName() + "fue atacado y tiene:" + this.getHealthPoints());
+            this.setDead();
+            //llamamos a los observadores
+        }
     }
 
 
@@ -140,7 +147,7 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
      * when is attacked by another player.
      */
     @Override
-    public void isAttackByPlayer(IPlayerCharacter playerCharacter) {
+    public void isAttackByPlayer(IPlayerCharacter playerCharacter){
         int dano = playerCharacter.getEquippedWeapon().getDamage() - this.getProtection();
         int newHP;
         if (this.getHealthPoints() < dano){
@@ -149,6 +156,11 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
             newHP = this.getHealthPoints()-dano;
         }
         this.setHealthPoints(newHP);
+
+        if (this.getHealthPoints() == 0) {
+            System.out.println(this.getName()+ "fue atacado y tiene:"+this.getHealthPoints());
+            this.setDead();
+        }
     }
 }
 

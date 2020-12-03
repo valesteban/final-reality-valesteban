@@ -55,9 +55,17 @@ public class ThiefTest  extends PayerCharacterTest  {
         PlayerAttack(thiefTest, enemyTest, swordTest);
 
         //ataca a otro player
+        blackMageTest.equip(staffTest);
+        thiefTest.isAttackByPlayer(blackMageTest);
+
         PlayerAttack(thiefTest, blackMageTest, staffTest);
         thiefTest.setHealthPoints(0);
         PlayerAttack(thiefTest, blackMageTest, staffTest);
+
+        //probamos casos borde
+        thiefTest.setHealthPoints(100);
+        blackMageTest.attack(thiefTest);
+
     }
 
 }

@@ -1,8 +1,11 @@
 package com.github.cc3002.finalreality.model.character;
 
+import java.beans.PropertyChangeSupport;
+import java.util.LinkedList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 
+import com.github.cc3002.finalreality.Controller.IEveventHandler;
 import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacter;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import org.jetbrains.annotations.NotNull;
@@ -20,6 +23,8 @@ public abstract class AbstractCharacter implements ICharacter {
   private int healthPoints = 100;
   private int protection;
   protected ScheduledExecutorService scheduledExecutor;
+  private boolean alive = true;
+  protected PropertyChangeSupport characterAttackedEvent = new PropertyChangeSupport(this);
   /**
    * Creates a new player Character.
    *
@@ -39,7 +44,6 @@ public abstract class AbstractCharacter implements ICharacter {
     this.name = name;
     this.characterClass = characterClass;
     this.protection = protection;
-
   }
   @Override
   public abstract void waitTurn() ;
@@ -48,14 +52,26 @@ public abstract class AbstractCharacter implements ICharacter {
    */
   public void addToQueue() {
     turnsQueue.add(this);
-    scheduledExecutor.shutdown();
-  }
+    scheduledExecutor.shutdown(); }
   /**
    * Returns the name of this character.
    */
   @Override
   public String getName() {
     return name;
+  }
+
+  /**
+   * Returns true if a character is alive.
+   */
+  public boolean getAlive(){return alive;}
+
+  /**
+   * set false if a character is now dead.
+   */
+  public void setDead(){
+    this.alive = false;
+    characterAttackedEvent.firePropertyChange("is attacked",null, this);
   }
 
   /**
@@ -87,4 +103,10 @@ public abstract class AbstractCharacter implements ICharacter {
 
   @Override
   public abstract void isAttackByPlayer(IPlayerCharacter playerCharacter);
+
+
+
+  public void addListener(IEveventHandler handler){
+    characterAttackedEvent.addPropertyChangeListener(handler);
+  }
 }

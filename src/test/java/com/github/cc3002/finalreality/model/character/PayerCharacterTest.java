@@ -71,5 +71,11 @@ public class PayerCharacterTest extends AbstractCharacterTest {
             playerCharacter.attack(character2);
             assertEquals(0,character2.getHealthPoints());
         }
+
+    }
+
+    @Test
+    public void ExtremeCasesAttack(){
+    //    thiefTest.equip();
     }
 }

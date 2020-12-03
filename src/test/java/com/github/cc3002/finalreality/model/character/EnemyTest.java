@@ -1,6 +1,8 @@
 package com.github.cc3002.finalreality.model.character;
 
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.character.player.Thief;
+import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
@@ -33,9 +35,9 @@ public class EnemyTest extends AbstractCharacterTest{
             // Thread.sleep is not accurate so this values may be changed to adjust the
             // acceptable error margin.
             // We're testing that the character waits approximately 1 second.
-            Thread.sleep(900);
+            Thread.sleep(800);
             Assertions.assertEquals(0, turns.size());
-            Thread.sleep(200);
+            Thread.sleep(500);
             Assertions.assertEquals(1, turns.size());
             Assertions.assertEquals(enemyTest, turns.peek());
         } catch (InterruptedException e) {
@@ -55,7 +57,8 @@ public class EnemyTest extends AbstractCharacterTest{
         enemyTest.attack(enemyTest2);
         assertEquals(0,enemyTest2.getHealthPoints());
 
-        //enemyTest2 no tiene vidas y por tanto no puede atacar
+       // enemyTest2 no tiene vidas y por tanto no puede atacar
+        enemyTest2.setHealthPoints(0);
         enemyTest2.attack(enemyTest);
         assertEquals(100,enemyTest.getHealthPoints());
 
