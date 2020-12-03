@@ -1,6 +1,8 @@
 package com.github.cc3002.finalreality.model.character;
 
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.character.player.Thief;
+import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
@@ -56,6 +58,7 @@ public class EnemyTest extends AbstractCharacterTest{
         assertEquals(0,enemyTest2.getHealthPoints());
 
        // enemyTest2 no tiene vidas y por tanto no puede atacar
+        enemyTest2.setHealthPoints(0);
         enemyTest2.attack(enemyTest);
         assertEquals(100,enemyTest.getHealthPoints());
 

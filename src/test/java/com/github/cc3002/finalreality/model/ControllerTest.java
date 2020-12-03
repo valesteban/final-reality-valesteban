@@ -128,42 +128,48 @@ public class ControllerTest {
     }
 
 
-    @Test
-    public void TurnFirstPartEnemy(){
+    //@Test
+    //public void TurnFirstPartEnemy(){
         //partimos provando al enemy que este en la cabeza de la cola
-        assertTrue(controller.getTurnsQueue().isEmpty());
-        controller.getEnemyPosition(1).waitTurn(); //agregamos al enemy a la cola
-        try {
-            Thread.sleep(1300);
-            assertFalse(controller.getTurnsQueue().isEmpty());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+      //  assertTrue(controller.getTurnsQueue().isEmpty());
+      //  controller.getEnemyPosition(1).waitTurn(); //agregamos al enemy a la cola
+      //  try {
+      //      Thread.sleep(1300);
+      //      assertFalse(controller.getTurnsQueue().isEmpty());
+      //  } catch (InterruptedException e) {
+      //      e.printStackTrace();
+      //  }
         //ahora checkeamos que al sacarlo atacke a alguien
-        controller.firstCharacterQueue();
+      //  controller.firstCharacterQueue();
 
         //ocupamos lo mismos que en enemyTurnTest() aunque ya esta probado
-        Enemy e1 = controller.getEnemyPosition(1);
-        controller.enemyTurn(e1);
+      //  Enemy e1 = controller.getEnemyPosition(1);
+      //  controller.enemyTurn(e1);
         //al player que tiene menos vida se teste eue se le quita la vida esperada
-        for (int i = 0;i <= 4; i++ ){
-            if (controller.getPlayerPosition(i).getHealthPoints() < 100){
-                assertEquals(80,controller.getPlayerPosition(i).getHealthPoints());
-            }
-        }
-    }
+      //  for (int i = 0;i <= 4; i++ ){
+      //      if (controller.getPlayerPosition(i).getHealthPoints() < 100){
+      //          assertEquals(80,controller.getPlayerPosition(i).getHealthPoints());
+      //      }
+      //  }
+   // }
     @Test
     public void TurnFirstPartPlayer(){
         assertTrue(controller.getTurnsQueue().isEmpty());
         equipPlayersTest();
-        controller.getPlayerPosition(0).waitTurn(); //agregamos a un thief al la cola
-        controller.getPlayerPosition(0).waitTurn(); //agregamos a un ingeniero a la ocla
+        controller.timerCharacter(controller.getEnemyPosition(0)); //agregamos a un thief al la cola
+        controller.timerCharacter(controller.getEnemyPosition(1)); //agregamos a un ingeniero a la ocla
+
         try {
             Thread.sleep(1300);
             assertFalse(controller.getTurnsQueue().isEmpty());
+            controller.pullOutCharacter(); //
+            controller.pullOutCharacter(); //sacamos a los elementos
+            assertTrue(controller.getTurnsQueue().isEmpty());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+
 
     }
 }

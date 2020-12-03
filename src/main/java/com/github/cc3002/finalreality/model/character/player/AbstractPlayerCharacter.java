@@ -147,7 +147,7 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
      * when is attacked by another player.
      */
     @Override
-    public void  isAttackByPlayer(IPlayerCharacter playerCharacter){
+    public void isAttackByPlayer(IPlayerCharacter playerCharacter){
         int dano = playerCharacter.getEquippedWeapon().getDamage() - this.getProtection();
         int newHP;
         if (this.getHealthPoints() < dano){

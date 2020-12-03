@@ -44,7 +44,6 @@ public abstract class AbstractCharacter implements ICharacter {
     this.name = name;
     this.characterClass = characterClass;
     this.protection = protection;
-
   }
   @Override
   public abstract void waitTurn() ;
@@ -53,8 +52,7 @@ public abstract class AbstractCharacter implements ICharacter {
    */
   public void addToQueue() {
     turnsQueue.add(this);
-    scheduledExecutor.shutdown();
-  }
+    scheduledExecutor.shutdown(); }
   /**
    * Returns the name of this character.
    */
@@ -108,7 +106,7 @@ public abstract class AbstractCharacter implements ICharacter {
 
 
 
-    public void addListener(IEveventHandler handler){
+  public void addListener(IEveventHandler handler){
     characterAttackedEvent.addPropertyChangeListener(handler);
   }
 }

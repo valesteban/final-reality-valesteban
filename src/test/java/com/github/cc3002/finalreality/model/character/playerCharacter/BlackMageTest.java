@@ -51,8 +51,8 @@ public class BlackMageTest extends PayerCharacterTest {
         PlayerAttack(blackMageTest, enemyTest, staffTest);
 
         //ataca a otro player
-        PlayerAttack(blackMageTest, knightTest, knifeTest);
-        blackMageTest.setHealthPoints(0);
+
+        blackMageTest.setHealthPoints(1);
         PlayerAttack(blackMageTest, knightTest, knifeTest);
         blackMageTest.attack(engineerTest);
 
