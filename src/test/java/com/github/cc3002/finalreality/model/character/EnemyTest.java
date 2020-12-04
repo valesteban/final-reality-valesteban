@@ -19,10 +19,10 @@ public class EnemyTest extends AbstractCharacterTest{
 
     @Test
     void constructTest(){
-        constructorTest(new Enemy(turns,"nameEnemy",10,10,10),
+        constructorTest(new Enemy(turns,"nameEnemy",10,10,12),
                 enemyTest,
-                new Enemy(turns,"name2Enemy",10,10,10),
-                new Enemy(turns,"nameEnemy",10,11,10),
+                new Enemy(turns,"name2Enemy",10,10,12),
+                new Enemy(turns,"nameEnemy",10,11,12),
                 thiefTest,
                 new Enemy(turns,"nameEnemy",10,10,11));
     }
