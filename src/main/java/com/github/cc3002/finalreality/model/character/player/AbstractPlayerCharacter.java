@@ -127,6 +127,7 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     public void isAttackByEnemy(Enemy enemy) {
         int dano = enemy.getDamage() - this.getProtection();
         int newHP;
+        System.out.println(dano);
         if (this.getHealthPoints() < dano){
             newHP = 0;
         }else {

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class EngineerTest extends PayerCharacterTest {
 
@@ -51,6 +51,7 @@ public class EngineerTest extends PayerCharacterTest {
 
     @Test
     void attackEngineerTest() {
+
         //ataca a un enemigo
         PlayerAttack(engineerTest, enemyTest, axeTest);
         engineerTest.setHealthPoints(0);
@@ -60,6 +61,15 @@ public class EngineerTest extends PayerCharacterTest {
         PlayerAttack(engineerTest, whiteMageTest, bowTest);
         engineerTest.setHealthPoints(0);
         PlayerAttack(engineerTest, whiteMageTest, bowTest);
+
+        //caso extra que faltaba testear
+        engineerTest.setHealthPoints(1);  //lo casi matamos
+        engineerTest.setEquippedWeapon(axeTest);
+        enemyTest.setHealthPoints(100); //hacemos que reviva
+        enemyTest.attack(engineerTest);
+        assertEquals(0,engineerTest.getHealthPoints());
+
+
     }
 
 

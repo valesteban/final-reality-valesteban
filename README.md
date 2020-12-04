@@ -21,35 +21,39 @@ enemies controlled by the computer.
 Comenzando con la entrega parcial 3 de armar y atacar para ambos casos se ocupó double distpach, Primero para armar a 
 los player se hizo que cada arma supiese a quien podía y a quien no podía armar, para el caso en donde un arma no podía 
 armar a un personaje, este quedaba con una equippedWeapon = nunll. Continuando para el caso de atacar se creó el método 
-attack que recibe a un ICharacter el cual sería al que se atacaria, dentro de este método se  puso el método de el 
-ICharacer que sería atacado, este dependiendo de quien fuese el atacante tendría los métodos isAttackedbyEnemy o 
+attack que recibe a un ICharacter el cual sería al que se atacaría, dentro de este método se  puso el método de el 
+characer que sería atacado, este dependiendo de quien fuese el atacante tendría los métodos isAttackedbyEnemy o 
 isAttackedByPlayer que ahí le quitaría la vida correspondiente, en caso de que ya no le quedasen vidas , esto no 
 afectaría porque se quedaría constantemente con vida 0 , pero si el atacante no tenía vida no se llevaría a cabo el 
 ataque, de la misma forma que si el atacante fuese un player y no estuviese armado, otro caso es que si se mata a un personaje 
-su arma pasa a ser null .
-Este método permite que tanto 
-enemigos y player puedan atacarse entre ellos (enemigos con enemigos o enemigos 
+su arma pasa a ser null además de que un personajes sin vida (es decir muerto) no se le podría armas una arma.
+El método attack permite que tanto enemigos y player puedan atacarse entre ellos (enemigos con enemigos o enemigos 
 con player o players con players).
 
-
-Luego para la implementación del controller, este contiene una lista de los enemigos, los players y el inventario, los 
-cuales comienzan vacíos y con métodos en el controller creamos tanto personajes como enemigos, los agregamos a las listas
-correspondientes y luego agregamos a el controller como un listener de estos objetos. Como tenemos a todos los character
+Luego para la implementación del controller, este contiene una lista de los enemigos, los players y el inventario, un handler, y dos variables que nos 
+ permitirán consultar si alguien ganó (winnerPlayer y winnerEnemy) . En cuanto a las listas de enemigos y players estas comienzan 
+ vacíos y con métodos en el controller creamos tanto personajes como enemigos, los agregamos a las listas
+correspondientes y luego agregamos a el controller como un listener de estos objetos (realmente un handler). Como tenemos a todos los character
 dentro de una lista que es una variable de la clase, el controller puede acceder todos los atributos de estos. Para el 
-caso del inventario se crearon a la lista , cabe destacar que se asumió que entre player se pueden usar la misma arma, 
-ya que no las usan al mismo tiempo. 
+caso del inventario se creó una lista que al igual que la de player y enemigos parte vacía, y a medida que creamos objetos se van
+ agregando a este inventario, cabe destacar que se asumió que el usuario no tratara de armar a  dos pllayer con una misma
+arma. 
 En cuanto a métodos para equipar a player  y atacar entre characters, esto se ocuparon casi directamente ya que ya estaban implementados 
 en las clases correspondientes.
 
 Para el caso en que hubiese un ganador se llevó a cabo un patrón de diseño observer, en este caso se notificaría al controller 
-(por medio del handle) cuando un character se hubiese muerto, esto haria que se llevase a cabo el método del controller 
+(por medio del handle) cuando un character se hubiese muerto, esto haría que se llevase a cabo el método del controller 
 void isAttackedCharacter(ICharacter character) que recibe al character que murió, en este método se verifica si el muerto corresponde 
 un player o un enemigo, dependiendo de esto se prosigue a chequear la lista correspondiente y si todos están muertos el parámetros 
 winnerEnemy o winnerPlayer se cambia a true y tenemos un ganador, en caso contrario no se hace nada.
 
-Finalmente para el caso de los turnos  creamos un método en el controller llamado turnsC(), este toma al primer elemento de
-la BlockingQueue verifica si este character está dentro de la lista de enemigos o player , en caso de ser enemy se elige un numero al azar 
-entre 0 y el porte de la lista de players y se ataca al que este en esa posición (en el caso de que fuese un player no hacemos nada aun por la entrega)
-luego se saca a este character de la BlockingQueue y ocupamos el método de Icharacter waitTurn() aqui dependiendo si es enemy o player 
-esperara un tiempo determinado para luego ser agregado a la BlockingQueue.
+Finalmente para el caso de los turnos se crearon diferentes métodos para simular los pasos descritos en la sección 2.2 de la descripcion del proyecto
+donde un primer método public void firstCharacterQueue() tomaría el primer elemento de la cola, luego verificaría si este character pertenece a la lista de 
+player o a la de enemy, en caso de ser player no se haría nada (aun no debemos implementar la interacción con el usuario), pero en caso de ser enemigo
+nos llevaría a un nuevo método   public void enemyTurn(ICharacter character) el cual elegiría un numero random entre 0 y el largo de la lista players 
+para luego atacar a uno de los players. Luego tendríamos el método public void pullOutCharacter() que sacaría al primer character de la cola de turnos y 
+luego el método public void timerCharacter(ICharacter character) que haría que este character espero el tiempo correspondiente para luego volver a ser 
+agregado a la cola de turnos. Estos métodos no se juntaron ya que se dijo que en esta entrega se debían implementar cada uno de estos pasos independiente.
 
+Otro punto importante a mencionar es que debido a la cantidad de creación de personajes muy parecido entre ellos al igual que armas, se pensaría en aplicar factory.
+además en cuanto al handler se creó una interfaz pensando que un futuro se pondrían crear más handles en caso de que muriesen.

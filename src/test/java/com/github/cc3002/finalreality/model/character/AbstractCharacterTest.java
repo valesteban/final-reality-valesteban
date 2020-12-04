@@ -41,7 +41,7 @@ public class AbstractCharacterTest {
 
     public void basicSetUp() {
         turns = new LinkedBlockingQueue<>();
-        enemyTest = new Enemy(turns, "nameEnemy", 10, 10, 10);
+        enemyTest = new Enemy(turns, "nameEnemy", 10, 10, 12);
         thiefTest = new Thief(turns, "nameThief", 10);
         knightTest = new Knight(turns, "nameKnight", 10);
         engineerTest = new Engineer(turns, "nameEngineer", 10);

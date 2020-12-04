@@ -6,9 +6,15 @@ import com.github.cc3002.finalreality.model.character.player.*;
 import com.github.cc3002.finalreality.model.weapon.*;
 
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * A class that communicate with the model  of the game.
+ *
+ * @author Valentina Esteban
+ */
 public class GameController {
     private final IEveventHandler characterDeadHandler = new CharacterHandler(this);
     private LinkedList<IPlayerCharacter> players;
@@ -18,7 +24,12 @@ public class GameController {
     private boolean winnerEnemy = false;
     private BlockingQueue<ICharacter> turnsQueue;
 
-
+    /**
+     * Creates a new GameController.
+     *
+     * @param turnsQueue
+     *     the queue with the characters waiting for their turn
+     */
     public GameController( BlockingQueue<ICharacter> turnsQueue){
         players = new LinkedList<>();
         enemies = new LinkedList<>();
@@ -28,24 +39,14 @@ public class GameController {
     /**
      * return true if the player is the winner.
      */
-    public boolean returnWinnerPlayer(){
+    public boolean getWinnerPlayer(){
             return winnerPlayer;
     }
     /**
      * return true if the Enemy is the winner.
      */
-    public boolean returnWinnerEnemy(){
+    public boolean getWinnerEnemy(){
         return winnerEnemy;
-    }
-
-    /**
-     * Creates an enemy, add it to the enemies list and add a listener
-     */
-    public void createEnemy(BlockingQueue<ICharacter> turnsQueue,String name,int weight,
-                            int protection, int damage){
-        Enemy e = new Enemy(turnsQueue,name,weight,protection,damage);
-        e.addListener(characterDeadHandler);
-        enemies.add(e);
     }
     /**
      * returns the player in the position i of the list of players.
@@ -55,7 +56,6 @@ public class GameController {
      * returns the BlockingQueue.
      */
     public BlockingQueue<ICharacter>  getTurnsQueue(){return  turnsQueue;}
-
     /**
      * returns the enemy in the position i of the list of enemies.
      */
@@ -72,6 +72,21 @@ public class GameController {
      * returns the inventory.
      */
     public LinkedList<IWeapon> getInventory(){return inventory;}
+
+
+
+    /**
+     * Creates an enemy, add it to the enemies list and add a listener
+     */
+    public void createEnemy(BlockingQueue<ICharacter> turnsQueue,String name,int weight,
+                            int protection, int damage){
+        Enemy e = new Enemy(turnsQueue,name,weight,protection,damage);
+        e.addListener(characterDeadHandler);
+        enemies.add(e);
+    }
+
+
+
     /**
      * Controller creates a axe and add it to the inventory
      */
@@ -184,8 +199,7 @@ public class GameController {
         else {                                                          //entonces el objeto sacado es un enemigo
             System.out.println("toma el elementoq se llama \n"+ c1.getName());
             this.enemyTurn(c1);
-        }
-    }
+        } }
     /**
      *  pulls out the first element in the BlockingQueue.
      */
@@ -240,3 +254,5 @@ public class GameController {
         }
     }
 }
+
+
