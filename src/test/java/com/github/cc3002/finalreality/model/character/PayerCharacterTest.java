@@ -73,9 +73,4 @@ public class PayerCharacterTest extends AbstractCharacterTest {
         }
 
     }
-
-    @Test
-    public void ExtremeCasesAttack(){
-    //    thiefTest.equip();
-    }
 }

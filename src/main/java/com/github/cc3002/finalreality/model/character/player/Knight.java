@@ -22,38 +22,14 @@ public class Knight extends AbstractPlayerCharacter {
         super(turnsQueue, name, "Knight", protection);
     }
     /**
-     * It will equipped the this player with an axe.
-     */
-    @Override
-    public void equipWithAxe(Axe axe) {
-        setEquippedWeapon(axe);
-    }
-    /**
-     * It wont equipped the this player with a bow so it will put a null.
-     */
-    @Override
-    public void equipWithBow(Bow bow) {
-        setEquippedWeapon(null);
-    }
-    /**
-     * It will equipped  this player with a knife.
-     */
-    @Override
-    public void equipWithKnife(Knife knife) {
-        setEquippedWeapon(knife);
-    }
-    /**
-     * It wont equipped the this player with a staff so it will put a null.
-     */
-    @Override
-    public void equipWithStaff(Staff staff) {
-        setEquippedWeapon(null);
-    }
-    /**
-     * It will equipped this player with a sword.
-     */
-    @Override
-    public void equipWithSword(Sword sword) {
-        setEquippedWeapon(sword);
+     * gives a weapon to the variable equippedWeapon
+     * of this PlayerCharacter ane every weapon will see if they can or not equipped the player.
+     **/
+    public  void equip(IWeapon weapon) {
+        if (this.getHealthPoints() != 0){
+            weapon.equipFor(this);
+        } else {
+            this.setEquippedWeapon(null);
+        }
     }
 }

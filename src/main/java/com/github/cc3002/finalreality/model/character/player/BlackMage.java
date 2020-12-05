@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
+import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import com.github.cc3002.finalreality.model.weapon.Knife;
 import com.github.cc3002.finalreality.model.weapon.Sword;
 import org.jetbrains.annotations.NotNull;
@@ -22,11 +23,14 @@ public class BlackMage extends MagicCharacter {
         super(turnsQueue,name,"BlackMage",mana, protection);
     }
     /**
-     * It will equipped the this player with a knife.
-     */
-    @Override
-    public void equipWithKnife(Knife knife) {
-        setEquippedWeapon(knife);
+     * gives a weapon to the variable equippedWeapon
+     * of this PlayerCharacter ane every weapon will see if they can or not equipped the player.
+     **/
+    public  void equip(IWeapon weapon) {
+        if (this.getHealthPoints() != 0){
+            weapon.equipFor(this);
+        } else {
+            this.setEquippedWeapon(null);
+        }
     }
-
 }

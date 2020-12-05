@@ -1,6 +1,8 @@
 package com.github.cc3002.finalreality.model.weapon;
 
+import com.github.cc3002.finalreality.model.character.player.Engineer;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
+import com.github.cc3002.finalreality.model.character.player.Thief;
 
 /**
  * A class that creates a specific type of weapon: Bow
@@ -20,13 +22,18 @@ public class Bow extends AbstractWeapon {
                final int weight) {
         super(name, damage, weight, "Bow");
     }
-
     /**
-     * It will give the responsibility of equipped to teh character.
+     * It will equipped a engineer with a bow.
      */
-    @Override
-    public void equipFor(IPlayerCharacter character) {
-        character.equipWithBow(this);
+    public void equipFor(Engineer character) {
+        character.setEquippedWeapon(this);
     }
+    /**
+     * It will equipped a thief with a bow.
+     */
+    public void equipFor(Thief character) {
+        character.setEquippedWeapon(this);
+    }
+
 }
 

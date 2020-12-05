@@ -1,7 +1,8 @@
 package com.github.cc3002.finalreality.model.weapon;
 
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
-
+import com.github.cc3002.finalreality.model.character.player.Knight;
+import com.github.cc3002.finalreality.model.character.player.Thief;
 
 
 /**
@@ -21,11 +22,17 @@ public class Sword extends AbstractWeapon {
         super(name, damage, weight, "Sword");
     }
     /**
-     * It will give the responsibility of equipped to teh character.
+     * It will equipped a Knight with a sword.
      */
-    @Override
-    public void equipFor(IPlayerCharacter character) {
-        character.equipWithSword(this);
+    public void equipFor(Knight character) {
+        character.setEquippedWeapon(this);
+    }
+
+    /**
+     * It will equipped a thief with a sword.
+     */
+    public void equipFor(Thief character) {
+        character.setEquippedWeapon(this);
     }
 }
 

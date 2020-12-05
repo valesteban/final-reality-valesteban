@@ -58,13 +58,23 @@ public class Staff extends AbstractWeapon {
     }
 
     /**
-     * It will give the responsibility of equipped to teh character.
+     * It will equipped thief character with the staff.
      */
-    @Override
-    public void equipFor(IPlayerCharacter character) {
-        character.equipWithStaff(this);
+    public void equipFor(Thief character) {
+        character.setEquippedWeapon(this);
     }
-
+    /**
+     * It will equipped  black mage character with the staff.
+     */
+    public void equipFor(BlackMage character) {
+        character.setEquippedWeapon(this);
+    }
+    /**
+     * It will equipped  white mage character with the staff.
+     */
+    public void equipFor(WhiteMage character) {
+        character.setEquippedWeapon(this);
+    }
 }
 
 

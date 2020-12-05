@@ -80,26 +80,6 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
         return equippedWeapon;
     }
 
-    /**
-     * gives a weapon to the variable equippedWeapon
-     * of this PlayerCharacter.
-     **/
-    public  void equip(IWeapon weapon) {
-        if (this.getHealthPoints() != 0){
-            weapon.equipFor(this);
-        } else {
-            this.equippedWeapon = null;
-        }
-    }
-
-    /**
-     * they will equipped the character.
-     */
-    public abstract void equipWithAxe(Axe axe);
-    public abstract void equipWithBow(Bow bow);
-    public abstract void equipWithKnife(Knife knife);
-    public abstract void equipWithStaff(Staff staff);
-    public abstract void equipWithSword(Sword sword);
 
     /**
      * change the object in the value equippedWeapon.
@@ -118,6 +98,7 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
             character.isAttackByPlayer(this);
         }
     }
+
 
     /**
      * it will change the value of HealthPoints of the player

@@ -1,5 +1,5 @@
 package com.github.cc3002.finalreality.model.weapon;
-import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
+import com.github.cc3002.finalreality.model.character.player.*;
 
 import java.util.Objects;
 /**
@@ -85,11 +85,34 @@ public abstract class AbstractWeapon implements IWeapon {
     public int hashCode() {
         return Objects.hash(getName(), getDamage(), getWeight(), getType());
     }
-
     /**
-     * It will equipped the player given with this weapon.
+     * It will equipped the black mage player with nothig.
      */
-    public abstract void equipFor(IPlayerCharacter character);
-
-
+    public  void equipFor(BlackMage character){
+        character.setEquippedWeapon(null);
+    }
+    /**
+     * It will equipped the white mage player with nothig.
+     */
+    public  void equipFor(WhiteMage character){
+        character.setEquippedWeapon(null);
+    }
+    /**
+     * It will equipped the engineer un equpwith nothig.
+     */
+    public  void equipFor(Engineer character){
+        character.setEquippedWeapon(null);
+    }
+    /**
+     * It will equipped the thief with nothig.
+     */
+    public  void equipFor(Thief character){
+        character.setEquippedWeapon(null);
+    }
+    /**
+     * It will equipped the knight with nothig.
+     */
+    public  void equipFor(Knight character){
+        character.setEquippedWeapon(null);
+    }
 }
