@@ -197,7 +197,6 @@ public class GameController {
             //con el jugardor
         }
         else {                                                          //entonces el objeto sacado es un enemigo
-            System.out.println("toma el elementoq se llama \n"+ c1.getName());
             this.enemyTurn(c1);
         } }
     /**
@@ -232,7 +231,6 @@ public class GameController {
         //aqui resvisamos si todos los demas entan muertos si es asi gana sino sigue
         //como e el personaje se murio vamos a eliminarlo de la lista y despues revisar
         // si esque la lista esta vacia y asi decimos q alguno gano
-        System.out.println("fue matado \n");
         if (players.contains(character)) {
             int j = players.size();
             for (int i = 0; i < j; i++) {

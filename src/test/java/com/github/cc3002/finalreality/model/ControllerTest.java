@@ -124,7 +124,6 @@ public class ControllerTest {
     @Test
     public void WinnerTest(){
         for (int i = 0; i < 5 ;i++){
-            System.out.println(i);
             controller.getPlayerPosition(i).setHealthPoints(0);
             controller.getPlayerPosition(i).setDead();  //matamos a todos
         }
@@ -132,7 +131,6 @@ public class ControllerTest {
         assertTrue(controller.getWinnerEnemy());
 
         for (int i = 0; i < 2 ;i++){
-            System.out.println(i);
             controller.getEnemyPosition(i).setHealthPoints(0);
             controller.getEnemyPosition(i).setDead();  //matamos a todos enemy
         }
@@ -155,9 +153,6 @@ public class ControllerTest {
                 assertEquals(69,controller.getPlayerPosition(i).getHealthPoints());
             }
         }
-
-
-
     }
 
 

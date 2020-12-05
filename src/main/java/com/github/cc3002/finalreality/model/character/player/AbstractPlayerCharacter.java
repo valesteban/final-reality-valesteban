@@ -127,16 +127,13 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     public void isAttackByEnemy(Enemy enemy) {
         int dano = enemy.getDamage() - this.getProtection();
         int newHP;
-        System.out.println(dano);
         if (this.getHealthPoints() < dano){
             newHP = 0;
         }else {
         newHP = getHealthPoints() - dano;
         }
         this.setHealthPoints(newHP);
-
         if (this.getHealthPoints() == 0) { //si no tiene vida lo deja muerto
-            System.out.println(this.getName() + "fue atacado y tiene:" + this.getHealthPoints());
             this.setDead();
             //llamamos a los observadores
         }
@@ -159,7 +156,6 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
         this.setHealthPoints(newHP);
 
         if (this.getHealthPoints() == 0) {
-            System.out.println(this.getName()+ "fue atacado y tiene:"+this.getHealthPoints());
             this.setDead();
         }
     }

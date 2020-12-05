@@ -102,8 +102,7 @@ public class Enemy extends AbstractCharacter {
     }
     this.setHealthPoints(newHP);
     if (this.getHealthPoints() == 0){
-      System.out.println(this.getName()+ "fue atacado y tiene:"+this.getHealthPoints());
-      this.setDead();}
+     this.setDead();}
   }
 
   /**
@@ -120,7 +119,6 @@ public class Enemy extends AbstractCharacter {
       newHP = this.getHealthPoints()-dano; }
     this.setHealthPoints(newHP);
     if (this.getHealthPoints() == 0){
-      System.out.println(this.getName()+ "fue atacado y tiene:"+this.getHealthPoints());
       this.setDead();}
   }
 }

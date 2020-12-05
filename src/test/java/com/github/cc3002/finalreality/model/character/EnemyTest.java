@@ -43,7 +43,6 @@ public class EnemyTest extends AbstractCharacterTest{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 
     @Test
@@ -57,7 +56,7 @@ public class EnemyTest extends AbstractCharacterTest{
         enemyTest.attack(enemyTest2);
         assertEquals(0,enemyTest2.getHealthPoints());
 
-       // enemyTest2 no tiene vidas y por tanto no puede atacar
+       //enemyTest2 no tiene vidas y por tanto no puede atacar
         enemyTest2.setHealthPoints(0);
         enemyTest2.attack(enemyTest);
         assertEquals(100,enemyTest.getHealthPoints());
@@ -71,6 +70,4 @@ public class EnemyTest extends AbstractCharacterTest{
         }
         assertEquals(0,thiefTest2.getHealthPoints());
     }
-
-
 }
