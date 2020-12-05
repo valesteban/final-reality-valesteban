@@ -21,27 +21,16 @@ public class Thief extends AbstractPlayerCharacter {
                  @NotNull String name,int protection) {
         super(turnsQueue, name, "Thief", protection);
     }
-
-
-    @Override
-    public void equipWithAxe(Axe axe) {
-        setEquippedWeapon(null);
-    }
-    @Override
-    public void equipWithBow(Bow bow) {
-        setEquippedWeapon(bow);
-    }
-    @Override
-    public void equipWithKnife(Knife knife) {
-        setEquippedWeapon(null);
-    }
-    @Override
-    public void equipWithStaff(Staff staff) {
-        setEquippedWeapon(staff);
-    }
-    @Override
-    public void equipWithSword(Sword sword) {
-        setEquippedWeapon(sword);
+    /**
+     * gives a weapon to the variable equippedWeapon
+     * of this PlayerCharacter ane every weapon will see if they can or not equipped the player.
+     **/
+    public  void equip(IWeapon weapon) {
+        if (this.getHealthPoints() != 0){
+            weapon.equipFor(this);
+        } else {
+            this.setEquippedWeapon(null);
+        }
     }
 
 }

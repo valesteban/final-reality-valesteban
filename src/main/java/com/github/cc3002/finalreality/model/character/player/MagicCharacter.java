@@ -59,27 +59,4 @@ public abstract class MagicCharacter extends AbstractPlayerCharacter {
     }
 
 
-    @Override
-    public void equipWithAxe(Axe axe) {
-        setEquippedWeapon(null);
-    }
-
-    @Override
-    public void equipWithBow(Bow bow) {
-        setEquippedWeapon(null);
-    }
-
-    @Override
-    public void equipWithStaff(Staff staff) {
-        setEquippedWeapon(staff);
-    }
-
-    @Override
-    public void equipWithSword(Sword sword) {
-        setEquippedWeapon(null);
-    }
-
-    @Override
-    public abstract void equipWithKnife(Knife knife);
-
 }

@@ -17,17 +17,12 @@ public interface IPlayerCharacter extends ICharacter{
     int getProtection();
     String getCharacterClass();
     IWeapon getEquippedWeapon();
+    void setEquippedWeapon(IWeapon equippedWeapon);
     void waitTurn();
     int getHealthPoints();
     boolean getAlive();
 
     void equip(IWeapon weapon) ;
-    void equipWithAxe(Axe axe);
-    void equipWithBow(Bow bow);
-    void equipWithKnife(Knife knife);
-    void equipWithStaff(Staff staff);
-    void equipWithSword(Sword sword);
-
     void attack(ICharacter character);
     void isAttackByEnemy(Enemy enemy);
     void isAttackByPlayer(IPlayerCharacter playerCharacter);

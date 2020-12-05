@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class BlackMageTest extends PayerCharacterTest {
 
 
@@ -31,9 +33,10 @@ public class BlackMageTest extends PayerCharacterTest {
         equipNullTest(blackMageTest,axeTest);
         equipNullTest(blackMageTest,bowTest);
 
-        //estos si equipan al whiteMage
+
+       // estos si equipan al whiteMage
         equipTest(blackMageTest,staffTest );
-        equipTest(blackMageTest,knifeTest);
+       equipTest(blackMageTest,knifeTest);
     }
 
     @Test

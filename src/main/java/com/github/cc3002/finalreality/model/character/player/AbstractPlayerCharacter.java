@@ -80,26 +80,6 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
         return equippedWeapon;
     }
 
-    /**
-     * gives a weapon to the variable equippedWeapon
-     * of this PlayerCharacter.
-     **/
-    public  void equip(IWeapon weapon) {
-        if (this.getHealthPoints() != 0){
-            weapon.equipFor(this);
-        } else {
-            this.equippedWeapon = null;
-        }
-    }
-
-    /**
-     * they will equipped the character.
-     */
-    public abstract void equipWithAxe(Axe axe);
-    public abstract void equipWithBow(Bow bow);
-    public abstract void equipWithKnife(Knife knife);
-    public abstract void equipWithStaff(Staff staff);
-    public abstract void equipWithSword(Sword sword);
 
     /**
      * change the object in the value equippedWeapon.
@@ -119,6 +99,7 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
         }
     }
 
+
     /**
      * it will change the value of HealthPoints of the player
      * whe is attacked by a enemy.
@@ -127,16 +108,13 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     public void isAttackByEnemy(Enemy enemy) {
         int dano = enemy.getDamage() - this.getProtection();
         int newHP;
-        System.out.println(dano);
         if (this.getHealthPoints() < dano){
             newHP = 0;
         }else {
         newHP = getHealthPoints() - dano;
         }
         this.setHealthPoints(newHP);
-
         if (this.getHealthPoints() == 0) { //si no tiene vida lo deja muerto
-            System.out.println(this.getName() + "fue atacado y tiene:" + this.getHealthPoints());
             this.setDead();
             //llamamos a los observadores
         }
@@ -159,7 +137,6 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
         this.setHealthPoints(newHP);
 
         if (this.getHealthPoints() == 0) {
-            System.out.println(this.getName()+ "fue atacado y tiene:"+this.getHealthPoints());
             this.setDead();
         }
     }

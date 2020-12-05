@@ -23,9 +23,17 @@ public class Knife extends AbstractWeapon {
         super( name, damage, weight, "Knife");
     }
 
-    @Override
-    public void equipFor(IPlayerCharacter character) {
-        character.equipWithKnife(this);
+    /**
+     * It will equipped a knight with a knife.
+     */
+    public void equipFor(Knight character) {
+        character.setEquippedWeapon(this);
+    }
+    /**
+     * It will equipped a black mage with a knife.
+     */
+    public void equipFor(BlackMage character) {
+        character.setEquippedWeapon(this);
     }
 }
 

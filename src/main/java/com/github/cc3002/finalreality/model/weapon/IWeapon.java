@@ -12,7 +12,12 @@ public interface IWeapon {
     int getWeight();
     String getType();
 
-    void equipFor(IPlayerCharacter character);
+
+    void equipFor(Engineer character);
+    void equipFor(BlackMage character);
+    void equipFor(WhiteMage character);
+    void equipFor(Thief character);
+    void equipFor(Knight character);
 
 }
 

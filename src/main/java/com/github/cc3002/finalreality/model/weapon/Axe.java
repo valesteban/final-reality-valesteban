@@ -1,7 +1,10 @@
 package com.github.cc3002.finalreality.model.weapon;
 
 
+import com.github.cc3002.finalreality.model.character.player.Engineer;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
+import com.github.cc3002.finalreality.model.character.player.Knight;
+import com.github.cc3002.finalreality.model.character.player.MagicCharacter;
 
 /**
  * A class that creates a specific type of weapon: Axe
@@ -21,9 +24,17 @@ public class Axe extends AbstractWeapon{
                           final int weight){
         super( name, damage, weight, "Axe");
     }
-
-    @Override
-    public void equipFor(IPlayerCharacter character) {
-        character.equipWithAxe(this);
+    /**
+     * It will equipped a knight with an axe.
+     */
+    public void equipFor(Knight character) {
+        character.setEquippedWeapon(this);
     }
+    /**
+     * It will equipped a engineer with an axe.
+     */
+    public void equipFor(Engineer character) {
+        character.setEquippedWeapon(this);
+    }
+
 }

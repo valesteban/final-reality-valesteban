@@ -1,5 +1,5 @@
 package com.github.cc3002.finalreality.model.weapon;
-import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
+import com.github.cc3002.finalreality.model.character.player.*;
 
 import java.util.Objects;
 /**
@@ -60,6 +60,10 @@ public abstract class AbstractWeapon implements IWeapon {
         return type;
     }
 
+
+    /**
+     * Compare if the objectect given is the same as this.
+     */
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
@@ -74,12 +78,41 @@ public abstract class AbstractWeapon implements IWeapon {
                 getName().equals(weapon.getName()) &&
                 getType().equals(weapon.getType());
     }
+    /**
+     * Returns a specific code for a weapon.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(getName(), getDamage(), getWeight(), getType());
     }
-
-    public abstract void equipFor(IPlayerCharacter character);
-
-
+    /**
+     * It will equipped the black mage player with nothig.
+     */
+    public  void equipFor(BlackMage character){
+        character.setEquippedWeapon(null);
+    }
+    /**
+     * It will equipped the white mage player with nothig.
+     */
+    public  void equipFor(WhiteMage character){
+        character.setEquippedWeapon(null);
+    }
+    /**
+     * It will equipped the engineer un equpwith nothig.
+     */
+    public  void equipFor(Engineer character){
+        character.setEquippedWeapon(null);
+    }
+    /**
+     * It will equipped the thief with nothig.
+     */
+    public  void equipFor(Thief character){
+        character.setEquippedWeapon(null);
+    }
+    /**
+     * It will equipped the knight with nothig.
+     */
+    public  void equipFor(Knight character){
+        character.setEquippedWeapon(null);
+    }
 }

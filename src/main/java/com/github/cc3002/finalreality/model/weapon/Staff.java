@@ -17,23 +17,21 @@ public class Staff extends AbstractWeapon {
      *which is Staff.
      *
      */
-
-
     public Staff(final String name, final int damage,
                final int weight,int magicDamage) {
 
         super(name, damage, weight, "Staff");
        this.magicDamage = magicDamage;
-
     }
-
     /**
      * Returns the magicDamage of the staff.
      */
     public int getMagicDamage() {
         return magicDamage;
     }
-
+    /**
+     * It will compare an object with this staff.
+     */
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
@@ -50,16 +48,33 @@ public class Staff extends AbstractWeapon {
                 getType().equals(weapon.getType());
     }
 
+
+    /**
+     * gives a specific int for each different staff.
+     */
     @Override
     public int hashCode(){
         return Objects.hash(getName(), getDamage(), getWeight(), getType(),getMagicDamage());
     }
 
-    @Override
-    public void equipFor(IPlayerCharacter character) {
-        character.equipWithStaff(this);
+    /**
+     * It will equipped thief character with the staff.
+     */
+    public void equipFor(Thief character) {
+        character.setEquippedWeapon(this);
     }
-
+    /**
+     * It will equipped  black mage character with the staff.
+     */
+    public void equipFor(BlackMage character) {
+        character.setEquippedWeapon(this);
+    }
+    /**
+     * It will equipped  white mage character with the staff.
+     */
+    public void equipFor(WhiteMage character) {
+        character.setEquippedWeapon(this);
+    }
 }
 
 

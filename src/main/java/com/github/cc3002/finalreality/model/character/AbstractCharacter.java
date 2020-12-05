@@ -97,15 +97,22 @@ public abstract class AbstractCharacter implements ICharacter {
     return characterClass;
   }
 
-
+  /**
+   * it will run when a character is attacked by an enemy.
+   */
   @Override
   public abstract void isAttackByEnemy(Enemy enemy);
 
+
+  /**
+   * it will run when a character is attacked by a player.
+   */
   @Override
   public abstract void isAttackByPlayer(IPlayerCharacter playerCharacter);
 
-
-
+  /**
+   * it will add a listener handler to a character.
+   */
   public void addListener(IEveventHandler handler){
     characterAttackedEvent.addPropertyChangeListener(handler);
   }
