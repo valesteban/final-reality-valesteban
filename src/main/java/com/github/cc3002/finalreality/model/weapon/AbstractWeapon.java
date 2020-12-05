@@ -60,6 +60,10 @@ public abstract class AbstractWeapon implements IWeapon {
         return type;
     }
 
+
+    /**
+     * Compare if the objectect given is the same as this.
+     */
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
@@ -74,11 +78,17 @@ public abstract class AbstractWeapon implements IWeapon {
                 getName().equals(weapon.getName()) &&
                 getType().equals(weapon.getType());
     }
+    /**
+     * Returns a specific code for a weapon.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(getName(), getDamage(), getWeight(), getType());
     }
 
+    /**
+     * It will equipped the player given with this weapon.
+     */
     public abstract void equipFor(IPlayerCharacter character);
 
 

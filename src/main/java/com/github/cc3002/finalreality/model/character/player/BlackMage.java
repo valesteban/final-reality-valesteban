@@ -21,8 +21,9 @@ public class BlackMage extends MagicCharacter {
                      @NotNull String name ,int mana, int protection){
         super(turnsQueue,name,"BlackMage",mana, protection);
     }
-
-
+    /**
+     * It will equipped the this player with a knife.
+     */
     @Override
     public void equipWithKnife(Knife knife) {
         setEquippedWeapon(knife);

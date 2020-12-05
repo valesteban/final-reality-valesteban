@@ -6,6 +6,7 @@ import com.github.cc3002.finalreality.model.character.player.*;
 import java.util.LinkedList;
 
 /**
+ * @author Valentina Estean
  * This is an interface for Character (Enemy and player)
  */
 public interface ICharacter {
@@ -19,8 +20,7 @@ public interface ICharacter {
   void addToQueue();
   void setDead();
 
-
-    void attack(ICharacter character);
+  void attack(ICharacter character);
   void isAttackByEnemy(Enemy enemy);
   void isAttackByPlayer(IPlayerCharacter playerCharacter);
   void addListener(IEveventHandler handler);

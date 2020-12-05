@@ -11,8 +11,6 @@ import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
  * @author Valentina Esteban
  */
 public class Sword extends AbstractWeapon {
-
-
     /**
      * Creates a weapon Sword  with a name, a base damage, weight and it's type
      *which is Sword.
@@ -22,7 +20,9 @@ public class Sword extends AbstractWeapon {
                  final int weight) {
         super(name, damage, weight, "Sword");
     }
-
+    /**
+     * It will give the responsibility of equipped to teh character.
+     */
     @Override
     public void equipFor(IPlayerCharacter character) {
         character.equipWithSword(this);

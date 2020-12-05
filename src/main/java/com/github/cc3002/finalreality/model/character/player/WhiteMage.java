@@ -22,7 +22,9 @@ public class WhiteMage extends MagicCharacter {
                      @NotNull String name, int mana, int protection) {
         super(turnsQueue, name, "WhiteMage",mana, protection);
     }
-
+    /**
+     * It wont equipped the this player with a knife so it will put a null.
+     */
     @Override
     public void equipWithKnife(Knife knife) {
         setEquippedWeapon(null);

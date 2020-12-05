@@ -57,28 +57,37 @@ public abstract class MagicCharacter extends AbstractPlayerCharacter {
     public int hashCode() {
         return Objects.hash(getCharacterClass(),getMana(),getName());
     }
-
-
+    /**
+     * It wont equipped the this player with a axe so it will put a null.
+     */
     @Override
     public void equipWithAxe(Axe axe) {
         setEquippedWeapon(null);
     }
-
+    /**
+     * It wont equipped the this player with a bow so it will put a null.
+     */
     @Override
     public void equipWithBow(Bow bow) {
         setEquippedWeapon(null);
     }
-
+    /**
+     * It will equipped this player with a staff.
+     */
     @Override
     public void equipWithStaff(Staff staff) {
         setEquippedWeapon(staff);
     }
-
+    /**
+     * It wont equipped the this player with a sword so it will put a null.
+     */
     @Override
     public void equipWithSword(Sword sword) {
         setEquippedWeapon(null);
     }
-
+    /**
+     * It will equipped this player with a knife.
+     */
     @Override
     public abstract void equipWithKnife(Knife knife);
 

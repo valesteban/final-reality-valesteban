@@ -21,24 +21,37 @@ public class Thief extends AbstractPlayerCharacter {
                  @NotNull String name,int protection) {
         super(turnsQueue, name, "Thief", protection);
     }
-
-
+    /**
+     * It wont equipped the this player with a axe so it will put a null.
+     */
     @Override
     public void equipWithAxe(Axe axe) {
         setEquippedWeapon(null);
     }
+    /**
+     * It will equipped this player with a bow.
+     */
     @Override
     public void equipWithBow(Bow bow) {
         setEquippedWeapon(bow);
     }
+    /**
+     * It wont equipped the this player with a knife so it will put a null.
+     */
     @Override
     public void equipWithKnife(Knife knife) {
         setEquippedWeapon(null);
     }
+    /**
+     * It will equipped this player with a staff.
+     */
     @Override
     public void equipWithStaff(Staff staff) {
         setEquippedWeapon(staff);
     }
+    /**
+     * It will equipped this player with a sword.
+     */
     @Override
     public void equipWithSword(Sword sword) {
         setEquippedWeapon(sword);

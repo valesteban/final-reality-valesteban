@@ -21,7 +21,9 @@ public class Axe extends AbstractWeapon{
                           final int weight){
         super( name, damage, weight, "Axe");
     }
-
+    /**
+     * It will give the responsibility of equipped to teh character.
+     */
     @Override
     public void equipFor(IPlayerCharacter character) {
         character.equipWithAxe(this);

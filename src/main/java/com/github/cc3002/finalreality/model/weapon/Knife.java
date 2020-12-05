@@ -23,6 +23,9 @@ public class Knife extends AbstractWeapon {
         super( name, damage, weight, "Knife");
     }
 
+    /**
+     * It will give the responsibility of equipped to teh character.
+     */
     @Override
     public void equipFor(IPlayerCharacter character) {
         character.equipWithKnife(this);
