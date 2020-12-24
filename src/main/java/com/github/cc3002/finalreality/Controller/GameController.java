@@ -87,6 +87,12 @@ public class GameController {
      * returns the inventory.
      */
     public LinkedList<IWeapon> getInventory(){return inventory;}
+    /**
+     * returns the name of the phase that we are in.
+     */
+    public String getPhase(){
+        return phase.toString();
+    }
 
 
 
