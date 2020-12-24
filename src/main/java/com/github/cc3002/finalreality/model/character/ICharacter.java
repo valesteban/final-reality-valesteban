@@ -1,9 +1,8 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.cc3002.finalreality.Controller.IEveventHandler;
+import com.github.cc3002.finalreality.Controller.handler.IEveventHandler;
 import com.github.cc3002.finalreality.model.character.player.*;
 
-import java.util.LinkedList;
 
 /**
  * @author Valentina Estean

@@ -1,12 +1,16 @@
 package com.github.cc3002.finalreality.Controller;
 
+import com.github.cc3002.finalreality.Controller.handler.CharacterHandler;
+import com.github.cc3002.finalreality.Controller.handler.IEveventHandler;
+import com.github.cc3002.finalreality.Controller.phases.AbstractPhase;
+import com.github.cc3002.finalreality.Controller.phases.FirstCharacterPhase;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.*;
 import com.github.cc3002.finalreality.model.weapon.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
-import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 
@@ -23,6 +27,7 @@ public class GameController {
     private boolean winnerPlayer = false;
     private boolean winnerEnemy = false;
     private BlockingQueue<ICharacter> turnsQueue;
+    private AbstractPhase phase = new FirstCharacterPhase();
 
     /**
      * Creates a new GameController.
@@ -36,6 +41,16 @@ public class GameController {
         inventory = new LinkedList<>();
         this.turnsQueue = turnsQueue;
     }
+
+    /**
+     * set the phase to the controller and add the controller tothe phase.
+     */
+    public void setPhase(final @NotNull AbstractPhase phase){
+        this.phase = phase;
+        phase.setController(this);
+    }
+
+
     /**
      * return true if the player is the winner.
      */

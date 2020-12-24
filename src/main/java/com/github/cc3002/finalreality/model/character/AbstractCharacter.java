@@ -1,12 +1,10 @@
 package com.github.cc3002.finalreality.model.character;
 
 import java.beans.PropertyChangeSupport;
-import java.util.LinkedList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 
-import com.github.cc3002.finalreality.Controller.IEveventHandler;
-import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacter;
+import com.github.cc3002.finalreality.Controller.handler.IEveventHandler;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 /**

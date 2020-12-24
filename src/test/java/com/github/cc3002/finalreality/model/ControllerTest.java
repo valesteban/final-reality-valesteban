@@ -1,8 +1,8 @@
 package com.github.cc3002.finalreality.model;
 
-import com.github.cc3002.finalreality.Controller.CharacterHandler;
+import com.github.cc3002.finalreality.Controller.handler.CharacterHandler;
 import com.github.cc3002.finalreality.Controller.GameController;
-import com.github.cc3002.finalreality.Controller.IEveventHandler;
+import com.github.cc3002.finalreality.Controller.handler.IEveventHandler;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
