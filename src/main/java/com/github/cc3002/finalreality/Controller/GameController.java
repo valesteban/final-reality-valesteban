@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * A class that communicate with the model  of the game.
@@ -26,20 +27,19 @@ public class GameController {
     private LinkedList<IWeapon> inventory;
     private boolean winnerPlayer = false;
     private boolean winnerEnemy = false;
-    private BlockingQueue<ICharacter> turnsQueue;
+    private BlockingQueue<ICharacter> turnsQueue = new LinkedBlockingQueue<>() ;
     private AbstractPhase phase = new FirstCharacterPhase();
 
     /**
      * Creates a new GameController.
      *
-     * @param turnsQueue
      *     the queue with the characters waiting for their turn
      */
-    public GameController( BlockingQueue<ICharacter> turnsQueue){
+    public GameController( ){
         players = new LinkedList<>();
         enemies = new LinkedList<>();
         inventory = new LinkedList<>();
-        this.turnsQueue = turnsQueue;
+        //this.turnsQueue = turnsQueue;
     }
 
     /**
@@ -93,9 +93,10 @@ public class GameController {
     /**
      * Creates an enemy, add it to the enemies list and add a listener
      */
-    public void createEnemy(BlockingQueue<ICharacter> turnsQueue,String name,int weight,
+    public void createEnemy(String name,int weight,
                             int protection, int damage){
         Enemy e = new Enemy(turnsQueue,name,weight,protection,damage);
+        turnsQueue.add(e);
         e.addListener(characterDeadHandler);
         enemies.add(e);
     }
@@ -140,45 +141,50 @@ public class GameController {
     /**
      * Controller creates a thief, add it to the player list and add a listener
      */
-    public void createThief(BlockingQueue<ICharacter> turnsQueue,String name,String characterClass,
+    public void createThief(String name,String characterClass,
                             int protection){
         Thief t = new Thief(turnsQueue,name,protection);
+        turnsQueue.add(t);
         t.addListener(characterDeadHandler);
         players.add(t);
     }
     /**
      * Controller creates a knight, add it to the player list and add a listener
      */
-    public void createKnight(BlockingQueue<ICharacter> turnsQueue,String name,String characterClass,
+    public void createKnight(String name,String characterClass,
                              int protection){
         IPlayerCharacter k = new Knight(turnsQueue,name,protection);
+        turnsQueue.add(k);
         k.addListener(characterDeadHandler);
         players.add(k);
     }
     /**
      * Controller creates a engineer, add it to the player list and add a listener
      */
-    public void createEngineer(BlockingQueue<ICharacter> turnsQueue,String name,String characterClass,
+    public void createEngineer(String name,String characterClass,
                                int protection){
         Engineer e = new Engineer(turnsQueue,name,protection);
+        turnsQueue.add(e);
         e.addListener(characterDeadHandler);
         players.add(e);
     }
     /**
      * Controller creates a blackMage, add it to the player list and add a listener
      */
-    public void createBlackMage(BlockingQueue<ICharacter> turnsQueue,String name,String characterClass,
+    public void createBlackMage(String name,String characterClass,
                                 int protection, int mana){
         BlackMage b = new BlackMage(turnsQueue,name,mana,protection);
+        turnsQueue.add(b);
         b.addListener(characterDeadHandler);
         players.add(b);
     }
     /**
      * Controller creates a whiteMage, add it to the player list and add a listener
      */
-    public void createWhiteMage(BlockingQueue<ICharacter> turnsQueue,String name,String characterClass,
+    public void createWhiteMage(String name,String characterClass,
                                 int protection, int mana){
         WhiteMage w = new WhiteMage(turnsQueue,name,mana,protection);
+        turnsQueue.add(w);
         w.addListener(characterDeadHandler);
         players.add(w);
     }

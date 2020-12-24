@@ -5,7 +5,7 @@ import com.github.cc3002.finalreality.Controller.GameController;
 import com.github.cc3002.finalreality.Controller.handler.IEveventHandler;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
-import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
+import com.github.cc3002.finalreality.model.character.player.*;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,26 +19,33 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ControllerTest {
     private BlockingQueue<ICharacter> turns ;
     private GameController controller;
-    private IEveventHandler handler ;
+
+    private BlockingQueue<ICharacter> turnsQueueTest;
+    private Thief thiefTest;
+    private Engineer engineerTest;
+    private Knight knightTest;
+    private BlackMage blackMageTest;
+    private WhiteMage whiteMageTest;
+    private Enemy enemy1;
+    private Enemy enemy2;
     private Axe axeTest;
-    private Sword swordTest;
+    private Bow bowTest;
     private Knife knifeTest;
     private Staff staffTest;
-    private Bow bowTest;
+    private Sword swordTest;
 
 
     @BeforeEach
     void setUp(){
-        turns = new LinkedBlockingQueue<>();
-        controller = new GameController(turns);
-        handler = new CharacterHandler(controller);
-        controller.createThief(turns, "player1Thief", "Thief", 2);
-        controller.createEngineer(turns, "player2Engineer", "Engineer", 2);
-        controller.createKnight(turns, "player3Knight", "Knight", 2);
-        controller.createBlackMage(turns, "player4BlackMageThief", "BlackMage", 2, 20);
-        controller.createWhiteMage(turns, "player5WhiteMage", "WhiteMage", 2, 22);
-        controller.createEnemy(turns,"enemy1",12,1,33);
-        controller.createEnemy(turns,"enemy2",12,2,22);
+        //turns = new LinkedBlockingQueue<>();
+        controller = new GameController();
+        controller.createThief("player1Thief", "Thief", 2);
+        controller.createEngineer("player2Engineer", "Engineer", 2);
+        controller.createKnight("player3Knight", "Knight", 2);
+        controller.createBlackMage( "player4BlackMageThief", "BlackMage", 2, 20);
+        controller.createWhiteMage( "player5WhiteMage", "WhiteMage", 2, 22);
+        controller.createEnemy("enemy1",12,1,33);
+        controller.createEnemy("enemy2",12,2,22);
 
         controller.createAxe("axeName",34,2);
         controller.createBow("bowName",44,20);
@@ -46,6 +53,19 @@ public class ControllerTest {
         controller.createStaff("staffName",45,13,2);
         controller.createSword("swordName",55,10);
 
+        axeTest = new Axe("axeName",34,2);
+        bowTest = new Bow("bowName",44,20);
+        knifeTest =  new Knife("knifeName",44,14);
+        staffTest = new Staff("staffName",45,13,2);
+        swordTest = new Sword("swordName",55,10);
+
+        thiefTest = new Thief(turnsQueueTest,"player1Thief", 2);
+        engineerTest = new Engineer(turnsQueueTest,"player2Engineer", 2);
+        knightTest = new Knight(turnsQueueTest,"player3Knight", 2);
+        blackMageTest = new BlackMage(turnsQueueTest, "player4BlackMageThief", 20, 2);
+        whiteMageTest = new WhiteMage(turnsQueueTest,"player5WhiteMage", 22, 2);
+        enemy1 = new Enemy(turnsQueueTest,"enemy1",12,1,33);
+        enemy2 = new Enemy(turnsQueueTest,"enemy2",12,2,22);
     }
 
 
@@ -53,38 +73,45 @@ public class ControllerTest {
     public void GameControllerConstructorTest() {
         Assertions.assertFalse(controller.getPlayers().isEmpty());
         Assertions.assertFalse(controller.getEnemies().isEmpty());
-        GameController g = new GameController(turns);
-        g.createThief(turns, "player1Thief", "Thief", 2);
-        g.createEngineer(turns, "player2Engineer", "Engineer", 2);
-        g.createKnight(turns, "player3Knight", "Knight", 2);
-        g.createBlackMage(turns, "player4BlackMageThief", "BlackMage", 2, 20);
-        g.createWhiteMage(turns, "player5WhiteMage", "WhiteMage", 2, 22);
 
-        g.createEnemy(turns, "enemy1", 12, 1, 33);
-        g.createEnemy(turns, "enemy2", 12, 2, 22);
+        //comprovamos a los players
+        assertEquals(controller.getPlayerPosition(0),thiefTest);
+        assertEquals(controller.getPlayerPosition(1),engineerTest);
+        assertEquals(controller.getPlayerPosition(2),knightTest);
+        assertEquals(controller.getPlayerPosition(3),blackMageTest);
+        assertEquals(controller.getPlayerPosition(4),whiteMageTest);
 
-        g.createAxe("axeName", 34, 2);
-        g.createBow("bowName", 44, 20);
-        g.createKnife("knifeName", 44, 14);
-        g.createStaff("staffName", 45, 13, 2);
-        g.createSword("swordName", 55, 10);
+        //comprobamos que esten lso enemigos
+        assertEquals(controller.getEnemyPosition(0),enemy1);
+        assertEquals(controller.getEnemyPosition(1),enemy2);
 
+        //vemos que si estan en la cola
+        assertTrue(controller.getTurnsQueue().contains(thiefTest));
+        assertTrue(controller.getTurnsQueue().contains(engineerTest));
+        assertTrue(controller.getTurnsQueue().contains(knightTest));
+        assertTrue(controller.getTurnsQueue().contains(blackMageTest));
+        assertTrue(controller.getTurnsQueue().contains(whiteMageTest));
+        assertTrue(controller.getTurnsQueue().contains(enemy1));
+        assertTrue(controller.getTurnsQueue().contains(enemy2));
 
-        assertEquals(controller.getPlayers(), g.getPlayers());
-        assertEquals(controller.getEnemies(), g.getEnemies());
-        assertEquals(controller.getInventory(), g.getInventory());
-        assertEquals(controller.getTurnsQueue(), g.getTurnsQueue());
-        assertNotEquals(controller, g);
+        //comprobamos a las armas
+        assertEquals(controller.getInventory().get(0),axeTest);
+        assertEquals(controller.getInventory().get(1),bowTest);
+        assertEquals(controller.getInventory().get(2),knifeTest);
+        assertEquals(controller.getInventory().get(3),staffTest);
+        assertEquals(controller.getInventory().get(4),swordTest);
 
     }
     @Test
     public void createWeapons(){
+        //ya lo probamos arriba pero una ves mas que mas da
         Assertions.assertFalse(controller.getInventory().isEmpty());
-        assertEquals(new Axe("axeName",34,2) ,controller.getInventory().get(0));
-        assertEquals(new Bow("bowName",44,20) ,controller.getInventory().get(1));
-        assertEquals(new Knife("knifeName",44,14) ,controller.getInventory().get(2));
-        assertEquals(new Staff("staffName",45,13,2) ,controller.getInventory().get(3));
-        assertEquals(new Sword("swordName",55,10),controller.getInventory().get(4));
+        assertTrue(controller.getInventory().contains(axeTest));
+        assertTrue(controller.getInventory().contains(bowTest));
+        assertTrue(controller.getInventory().contains(knifeTest));
+        assertTrue(controller.getInventory().contains(staffTest));
+        assertTrue(controller.getInventory().contains(swordTest));
+
     }
 
     @Test
@@ -158,7 +185,7 @@ public class ControllerTest {
 
     @Test
     public void TurnFirstPartPlayer(){
-        assertTrue(controller.getTurnsQueue().isEmpty());
+        //assertTrue(controller.getTurnsQueue().isEmpty());
         equipPlayersTest();
         controller.timerCharacter(controller.getEnemyPosition(0)); //agregamos a un thief al la cola
         controller.timerCharacter(controller.getEnemyPosition(1)); //agregamos a un ingeniero a la ocla
@@ -168,7 +195,7 @@ public class ControllerTest {
             assertFalse(controller.getTurnsQueue().isEmpty());
             controller.pullOutCharacter(); //
             controller.pullOutCharacter(); //sacamos a los elementos
-            assertTrue(controller.getTurnsQueue().isEmpty());
+            //assertTrue(controller.getTurnsQueue().isEmpty());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
