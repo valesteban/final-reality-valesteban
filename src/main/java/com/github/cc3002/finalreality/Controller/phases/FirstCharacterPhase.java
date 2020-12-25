@@ -9,8 +9,12 @@ import com.github.cc3002.finalreality.model.character.ICharacter;
  */
 public class FirstCharacterPhase extends AbstractPhase {
 
+    public FirstCharacterPhase(){
+        super();
+    }
+
     @Override
-    public void Turn() {
+    public void turn() {
         ICharacter c1 =  controller.getFirstCharacterQueue();
         changeTo(c1);
     }
@@ -20,19 +24,17 @@ public class FirstCharacterPhase extends AbstractPhase {
      * that the queue has.
      */
     public void changeTo(ICharacter character){
+
         if (controller.getPlayers().contains(character)){
-            //changePhase();
+            System.out.println("me voy a la fase del player");
+            //
         }
         else {
-           // changePhase();
+            System.out.println("me voy a la fase del enemigi");
+            changePhase(new EnemyAttackPhase(character));//changePhase();
         }
-
     }
 
-
-
-    public void endTurn(){
-    }
 
     /**
      * returns a string with the name of the phase.

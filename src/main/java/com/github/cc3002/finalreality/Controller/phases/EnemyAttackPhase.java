@@ -10,21 +10,18 @@ import com.github.cc3002.finalreality.model.character.ICharacter;
  * @author Valentina Esteban
  */
 public class EnemyAttackPhase extends AbstractPhase {
-    private Enemy attacker ;
+    private ICharacter attacker ;
 
-    public EnemyAttackPhase(Enemy enemy){
+    public EnemyAttackPhase(ICharacter enemy){
         this.attacker = enemy;
     }
-
-
-
 
     /**
      * the enemy will atack a random player.
      */
     @Override
-    public void Turn() {
-        //
+    public void turn() {
+        controller.enemyTurn(attacker);
     }
 
     /**

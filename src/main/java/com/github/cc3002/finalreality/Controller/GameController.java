@@ -275,6 +275,12 @@ public class GameController {
             }
         }
     }
+
+    public void startPlaying(){
+        phase.setController(this);
+        phase.turn();
+
+    }
 }
 
 

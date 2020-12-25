@@ -22,7 +22,7 @@ public abstract class AbstractPhase implements IPhase{
         controller.setPhase(phase);
     }
 
-    public void Turn(){
+    public void turn(){
         System.out.println("algo fue malo llegamos al turno de la clase abstracta de las fases");
     }
 
