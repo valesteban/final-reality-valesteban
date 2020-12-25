@@ -6,7 +6,7 @@ import com.github.cc3002.finalreality.Controller.GameController;
  *
  * @author Valentina Esteban
  */
-public abstract class AbstractPhase {
+public abstract class AbstractPhase implements IPhase{
     protected GameController controller;
 
     /**
@@ -18,14 +18,14 @@ public abstract class AbstractPhase {
     /**
      * Change the actual phase to another one.
      */
-    public void changePhase(AbstractPhase phase){
+    public void changePhase(IPhase phase){
         controller.setPhase(phase);
     }
 
-
     public void Turn(){
-
+        System.out.println("algo fue malo llegamos al turno de la clase abstracta de las fases");
     }
+
 
 
 }

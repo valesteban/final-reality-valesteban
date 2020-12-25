@@ -15,4 +15,5 @@ public class PhasesTest extends AbstractPhase {
     public void initialPhaseTest(){
         assertEquals(controller.getPhase(),"FirstCharacterPhase");
     }
+
 }

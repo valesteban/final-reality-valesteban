@@ -4,6 +4,7 @@ import com.github.cc3002.finalreality.Controller.handler.CharacterHandler;
 import com.github.cc3002.finalreality.Controller.handler.IEveventHandler;
 import com.github.cc3002.finalreality.Controller.phases.AbstractPhase;
 import com.github.cc3002.finalreality.Controller.phases.FirstCharacterPhase;
+import com.github.cc3002.finalreality.Controller.phases.IPhase;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.*;
@@ -28,7 +29,7 @@ public class GameController {
     private boolean winnerPlayer = false;
     private boolean winnerEnemy = false;
     private BlockingQueue<ICharacter> turnsQueue = new LinkedBlockingQueue<>() ;
-    private AbstractPhase phase = new FirstCharacterPhase();
+    private IPhase phase = new FirstCharacterPhase();
 
     /**
      * Creates a new GameController.
@@ -45,7 +46,7 @@ public class GameController {
     /**
      * set the phase to the controller and add the controller tothe phase.
      */
-    public void setPhase(final @NotNull AbstractPhase phase){
+    public void setPhase(final @NotNull IPhase phase){
         this.phase = phase;
         phase.setController(this);
     }
@@ -209,23 +210,19 @@ public class GameController {
     /**
      *  Character attack another character.
      */
-    public void attackPLayers(ICharacter attacker,ICharacter attacked){
+    public void attackPlayers(ICharacter attacker, ICharacter attacked){
         attacker.attack(attacked);
     }
 
+
     /**
-     *  Take the firs object of the BlockingQueue if it is an enemy it will take to the method enemyTurn and
-     *  if it is a player for now it won´t do anything.
+     *  returns the firs character of the BlockingQueue.
      */
-    public void firstCharacterQueue(){
-        ICharacter c1 = turnsQueue.element();                             //toma el primer elemento
-        if (players.contains(c1)){
-            //aqui pondremos la implementacion de la interaccion
-            //con el jugardor
-        }
-        else {                                                          //entonces el objeto sacado es un enemigo
-            this.enemyTurn(c1);
-        } }
+    public ICharacter getFirstCharacterQueue(){
+        ICharacter c1 = turnsQueue.element();
+        return c1;
+    }
+
     /**
      *  pulls out the first element in the BlockingQueue.
      */

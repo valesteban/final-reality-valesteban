@@ -1,8 +1,6 @@
 package com.github.cc3002.finalreality.model;
 
-import com.github.cc3002.finalreality.Controller.handler.CharacterHandler;
 import com.github.cc3002.finalreality.Controller.GameController;
-import com.github.cc3002.finalreality.Controller.handler.IEveventHandler;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.*;
@@ -12,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -116,22 +113,36 @@ public class ControllerTest {
 
     @Test
     public void equipPlayersTest(){
-
+        //equipamos a un thief con una espada
         controller.equipPlayer(controller.getPlayers().get(0), controller.getInventory().get(4));
         assertEquals(controller.getPlayers().get(0).getEquippedWeapon(),controller.getInventory().get(4));
+
+        //equipamos a un ingeniero con arco
         controller.equipPlayer(controller.getPlayerPosition(1),controller.getInventory().get(1));
         assertEquals(controller.getPlayers().get(1).getEquippedWeapon(),controller.getInventory().get(1));
+
+        //equipamos a un caballero con una hacha
+        controller.equipPlayer(controller.getPlayers().get(2), controller.getInventory().get(0));
+        assertEquals(controller.getPlayers().get(2).getEquippedWeapon(),controller.getInventory().get(0));
+
+        //equipamos a un mago negro con un cuchillo
+        controller.equipPlayer(controller.getPlayers().get(3), controller.getInventory().get(2));
+        assertEquals(controller.getPlayers().get(3).getEquippedWeapon(),controller.getInventory().get(2));
+
+        //equipamos a un mago blanco con baston
+        controller.equipPlayer(controller.getPlayers().get(4), controller.getInventory().get(3));
+        assertEquals(controller.getPlayerPosition(4).getEquippedWeapon(),controller.getInventory().get(3));
     }
 
     @Test
     public void attackCharacter(){
-        controller.attackPLayers(controller.getEnemies().get(0), controller.getPlayers().get(0));
+        controller.attackPlayers(controller.getEnemies().get(0), controller.getPlayers().get(0));
         assertEquals(69,controller.getPlayers().get(0).getHealthPoints());
-        controller.attackPLayers(controller.getEnemies().get(0), controller.getPlayers().get(1));
+        controller.attackPlayers(controller.getEnemies().get(0), controller.getPlayers().get(1));
         assertEquals(69,controller.getPlayers().get(1).getHealthPoints());
-        controller.attackPLayers(controller.getEnemies().get(0), controller.getPlayers().get(2));
+        controller.attackPlayers(controller.getEnemies().get(0), controller.getPlayers().get(2));
         assertEquals(69,controller.getPlayers().get(2).getHealthPoints());
-        controller.attackPLayers(controller.getEnemyPosition(0),controller.getPlayers().get(3));
+        controller.attackPlayers(controller.getEnemyPosition(0),controller.getPlayers().get(3));
         assertEquals(69,controller.getPlayers().get(3).getHealthPoints());
         assertEquals(69,controller.getPlayerPosition(3).getHealthPoints());
     }
@@ -150,9 +161,10 @@ public class ControllerTest {
 
     @Test
     public void WinnerTest(){
+        //matamos a todos los players
         for (int i = 0; i < 5 ;i++){
-            controller.getPlayerPosition(i).setHealthPoints(0);
-            controller.getPlayerPosition(i).setDead();  //matamos a todos
+            controller.getPlayerPosition(i).setHealthPoints(0); //quitandoles la vida
+            controller.getPlayerPosition(i).setDead();          //seteando que estan muertos
         }
         //gano el enemigo porque hicimos que todos los players quedasen con vida 0
         assertTrue(controller.getWinnerEnemy());
@@ -166,40 +178,29 @@ public class ControllerTest {
     }
 
     @Test
-    public void firstCharacterQueueTest(){
-        BlockingQueue t = controller.getTurnsQueue();
-        IPlayerCharacter p1 = controller.getPlayerPosition(0);
-        ICharacter e1 = controller.getEnemyPosition(0);
-        //controller.equipPlayer(p1,controller.getInventory().get(4));
-        //controller.timerCharacter(p1);
-        controller.getTurnsQueue().add(e1); //agregamos a la mala al  player (para ahorrarse  poner un try/catch)
-        controller.firstCharacterQueue();
+    public void firstCharacterQueueAndPullOutCharacterTest(){
+        assertFalse(controller.getTurnsQueue().isEmpty());
+        ICharacter c1 = controller.getFirstCharacterQueue();
+        assertEquals(c1,thiefTest);
+        controller.pullOutCharacter();  //lo sacamos
 
-        for (int i = 0;i <= 4; i++ ){
-            if (controller.getPlayerPosition(i).getHealthPoints() < 100){
-                assertEquals(69,controller.getPlayerPosition(i).getHealthPoints());
-            }
-        }
+        c1 = controller.getFirstCharacterQueue();
+        assertEquals(c1,engineerTest);
+        controller.pullOutCharacter();
+
+        c1 = controller.getFirstCharacterQueue();
+        assertEquals(c1,knightTest);
+        controller.pullOutCharacter();
+
+        c1 = controller.getFirstCharacterQueue();
+        assertEquals(c1,blackMageTest);
+        controller.pullOutCharacter();
+
+        c1 = controller.getFirstCharacterQueue();
+        assertEquals(c1,whiteMageTest);
+        controller.pullOutCharacter();
     }
 
 
-    @Test
-    public void TurnFirstPartPlayer(){
-        //assertTrue(controller.getTurnsQueue().isEmpty());
-        equipPlayersTest();
-        controller.timerCharacter(controller.getEnemyPosition(0)); //agregamos a un thief al la cola
-        controller.timerCharacter(controller.getEnemyPosition(1)); //agregamos a un ingeniero a la ocla
-
-        try {
-            Thread.sleep(1300);
-            assertFalse(controller.getTurnsQueue().isEmpty());
-            controller.pullOutCharacter(); //
-            controller.pullOutCharacter(); //sacamos a los elementos
-            //assertTrue(controller.getTurnsQueue().isEmpty());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-    }
 }
 

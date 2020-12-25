@@ -69,7 +69,7 @@ public abstract class AbstractCharacter implements ICharacter {
    */
   public void setDead(){
     this.alive = false;
-    characterAttackedEvent.firePropertyChange("is attacked",null, this);
+    characterAttackedEvent.firePropertyChange("is attacked",null, this); //manda mensaje a handler
   }
 
   /**
