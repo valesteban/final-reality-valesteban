@@ -1,6 +1,8 @@
 package com.github.cc3002.finalreality.Controller.phases;
 
-public class SelectAttackTargetPhase extends AbstractPhase{
+import com.github.cc3002.finalreality.model.character.ICharacter;
+
+public class PlayerAttackPhase extends AbstractPhase{
 
 
     /**
@@ -8,7 +10,16 @@ public class SelectAttackTargetPhase extends AbstractPhase{
      */
     @Override
     public void turn() {
-
+        attackEnemy();
+    }
+    /**
+     * por ahora siempre va a atacar al enemigo que venga primero en la lista de enemigos del controllwe
+     *  arrrrrrrrreeeeggglarr.
+     */
+    private void attackEnemy() {
+        ICharacter player = controller.getPlayerPosition(0);
+        ICharacter enemy = controller.getEnemyPosition(0);
+        controller.attackPlayers(player,enemy);
     }
 
     /**

@@ -63,18 +63,47 @@ public class PhasesTest extends AbstractPhaseTest {
     }
 
     @Test
-    public void ChoseWeaponPhaseTest(){
+    public void ChoseWeaponAndAttackPhaseTest(){
         oneFullTurn();  //we are in the phase FirstCharacterPhase with an engineer
         assertEquals("ChoseWeaponPhase",controller.getNamePhase());
         // esto es como q se elige armas al ingeniiero con una hacha
         controller.ThisWeaponButton(controller.getInventory().get(3)); //este sera un boton para una arma
         assertEquals(controller.getInventory().get(3),controller.getPlayerPosition(0).getEquippedWeapon());
 
+        //antes de que sea atacado tiene toda la vida
+        assertEquals(100,controller.getEnemyPosition(0).getHealthPoints());
         //apretamos el boton para pasar a la siguiente fase que es elegir al target
         controller.buttonNext();
         assertEquals("SelectAttackTargetPhase",controller.getNamePhase());
+        //como fue atacado tiene menos vida
+        assertEquals(99,controller.getEnemyPosition(0).getHealthPoints());
+    }
+    @Test
+    public void pollOutAndBackAgain(){
+        ChoseWeaponAndAttackPhaseTest();
+        assertEquals("SelectAttackTargetPhase",controller.getNamePhase());
+        controller.buttonNext();
+        assertEquals(7,controller.getTurnsQueue().size());
+        assertEquals("pullOutCharacterPhase",controller.getNamePhase());
+        try {
+            // we wait for a while until the chracater is put back on the turns queue
+            Thread.sleep(1100);
+            assertEquals(8,controller.getTurnsQueue().size());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        controller.buttonNext();
+        assertEquals("CheckTurnQueuePhase",controller.getNamePhase());
+        controller.buttonNext();
+        assertEquals("EnemyAttackPhase",controller.getNamePhase());
+
+
+
 
     }
+
+
 
 
 }

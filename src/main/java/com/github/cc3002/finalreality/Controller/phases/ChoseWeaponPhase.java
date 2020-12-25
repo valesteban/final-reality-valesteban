@@ -23,7 +23,7 @@ public class ChoseWeaponPhase extends AbstractPhase{
      */
     @Override
     public void nextPhaseButton() {
-        changePhase(new SelectAttackTargetPhase());
+        changePhase(new PlayerAttackPhase());
     }
 
     @Override
