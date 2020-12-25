@@ -1,7 +1,6 @@
 package com.github.cc3002.finalreality.Controller.phases;
 
 
-import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 
 /**
@@ -25,11 +24,11 @@ public class EnemyAttackPhase extends AbstractPhase {
     }
 
     /**
-     * it will change tha phase of the controller.
+     * it will change tha phase of the controller to pullOutCharacter.  ---------creo q esto se activara cuando se aprete un boton
      */
     @Override
-    public void changePhase(IPhase phase) {
-        //
+    public void nextPhaseButton() {
+        changePhase(new PollAndWaitCharacterPhase());
     }
 
     /**
@@ -39,4 +38,5 @@ public class EnemyAttackPhase extends AbstractPhase {
     public String toString() {
         return "EnemyAttackPhase";
     }
+
 }

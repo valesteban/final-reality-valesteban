@@ -1,6 +1,8 @@
 package com.github.cc3002.finalreality.Controller.phases;
 
 import com.github.cc3002.finalreality.Controller.GameController;
+import com.github.cc3002.finalreality.model.character.ICharacter;
+
 /**
  * A class that creates states of the turns.
  *
@@ -22,10 +24,19 @@ public abstract class AbstractPhase implements IPhase{
         controller.setPhase(phase);
     }
 
+
     public void turn(){
         System.out.println("algo fue malo llegamos al turno de la clase abstracta de las fases");
     }
 
+
+    /**
+     * botones activaran esta funcion para cambiar de fase en el caso de las
+     * primeras fases no hara nada
+     */
+    public void nextPhaseButton(){
+        //botones
+    }
 
 
 }

@@ -6,7 +6,7 @@ import com.github.cc3002.finalreality.model.character.ICharacter;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public abstract class AbstractPhase {
+public abstract class AbstractPhaseTest {
     protected GameController controller;
 
 

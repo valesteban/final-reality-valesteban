@@ -1,12 +1,11 @@
 package com.github.cc3002.finalreality.model.states;
 
-import com.github.cc3002.finalreality.model.character.Enemy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-public class PhasesTest extends AbstractPhase {
+public class PhasesTest extends AbstractPhaseTest {
 
     @BeforeEach
     void setUp(){
@@ -16,7 +15,7 @@ public class PhasesTest extends AbstractPhase {
     @Test
     public void initialPhaseTest(){
         System.out.println(controller.getTurnsQueue());
-        assertEquals(controller.getPhase(),"FirstCharacterPhase");
+        assertEquals(controller.getNamePhase(),"FirstCharacterPhase");
     }
 
     @Test
@@ -24,7 +23,7 @@ public class PhasesTest extends AbstractPhase {
         assertFalse(controller.getTurnsQueue().isEmpty());
 
         controller.startPlaying();
-        assertEquals("EnemyAttackPhase",controller.getPhase());
+        assertEquals("EnemyAttackPhase",controller.getNamePhase());
 
         //ahora revisamos que el enemigo si halla atacado a alguien
         //entonces un  player tiene que tener vida 80
@@ -33,6 +32,12 @@ public class PhasesTest extends AbstractPhase {
                 assertEquals(80,controller.getPlayerPosition(i).getHealthPoints());
             }
         }
+    }
+    @Test
+    public void pollCharacterPhaseTest(){
+        enemyAttackPhaseTest();
+        controller.getPhase().nextPhaseButton();
+        assertEquals("pullOutCharacterPhase",controller.getNamePhase());
     }
 
 }

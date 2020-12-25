@@ -9,9 +9,6 @@ import com.github.cc3002.finalreality.model.character.ICharacter;
  */
 public class FirstCharacterPhase extends AbstractPhase {
 
-    public FirstCharacterPhase(){
-        super();
-    }
 
     @Override
     public void turn() {
@@ -43,5 +40,7 @@ public class FirstCharacterPhase extends AbstractPhase {
     public String toString(){
         return "FirstCharacterPhase";
     }
+
+
 
 }

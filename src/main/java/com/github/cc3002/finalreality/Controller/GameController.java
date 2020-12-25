@@ -91,9 +91,13 @@ public class GameController {
     /**
      * returns the name of the phase that we are in.
      */
-    public String getPhase(){
+    public String getNamePhase(){
         return phase.toString();
     }
+    /**
+     * returns  the phase that we are in.
+     */
+    public IPhase getPhase(){return phase;}
 
 
 
