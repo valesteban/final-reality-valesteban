@@ -23,11 +23,8 @@ public class FirstCharacterPhase extends AbstractPhase {
     public void changeTo(ICharacter character){
 
         if (controller.getPlayers().contains(character)){
-            System.out.println("me voy a la fase del player");
-            //
-        }
-        else {
-            System.out.println("me voy a la fase del enemigi");
+            changePhase(new ChoseWeaponPhase());
+        } else {
             changePhase(new EnemyAttackPhase(character));//changePhase();
         }
     }

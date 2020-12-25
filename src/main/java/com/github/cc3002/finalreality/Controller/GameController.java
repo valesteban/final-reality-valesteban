@@ -283,7 +283,15 @@ public class GameController {
     public void startPlaying(){
         phase.setController(this);
         phase.turn();
+    }
+    public void buttonNext(){
+        phase.nextPhaseButton(); //comabia a la siguiente fase
+        phase.turn();   //Activa lo q sea q tiene  q hacer en ese  turno
+    }
 
+    //despues arreglar esto se supone q el jugador va  aelegir un aarma de las que hay en el inventario
+    public void ThisWeaponButton(IWeapon weapon){
+        phase.ThisWeapon(weapon);
     }
 }
 

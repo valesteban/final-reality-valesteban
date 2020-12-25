@@ -2,6 +2,7 @@ package com.github.cc3002.finalreality.Controller.phases;
 
 import com.github.cc3002.finalreality.Controller.GameController;
 import com.github.cc3002.finalreality.model.character.ICharacter;
+import com.github.cc3002.finalreality.model.weapon.IWeapon;
 
 /**
  * A class that creates states of the turns.
@@ -36,6 +37,10 @@ public abstract class AbstractPhase implements IPhase{
      */
     public void nextPhaseButton(){
         //botones
+    }
+
+    public void ThisWeapon(IWeapon weapon){
+        System.out.println("en esta fase no puedes elegir una arma estay puro dando jugo hay q poenrle un error ");
     }
 
 
