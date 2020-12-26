@@ -2,7 +2,7 @@ package com.github.cc3002.finalreality.Controller.phases;
 
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 
-public class ChoseWeaponPhase extends AbstractPhase{
+public class ChoseWeaponPhase extends Phase {
 
 
     /**

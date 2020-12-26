@@ -28,6 +28,7 @@ public abstract class AbstractPhaseTest {
         controller.createEnemy("nameEnemy3",8,11,15);
         controller.createWhiteMage( "nameWhiteMage", "WhiteMage",5, 14);
         controller.createBlackMage( "nameBlackMage", "BlackMage",8, 12);
+
     }
 
 

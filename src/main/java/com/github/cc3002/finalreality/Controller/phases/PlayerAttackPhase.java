@@ -1,8 +1,11 @@
 package com.github.cc3002.finalreality.Controller.phases;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 
-public class PlayerAttackPhase extends AbstractPhase{
+import java.util.Random;
+
+public class PlayerAttackPhase extends Phase {
 
 
     /**
@@ -10,16 +13,16 @@ public class PlayerAttackPhase extends AbstractPhase{
      */
     @Override
     public void turn() {
-        attackEnemy();
-    }
-    /**
-     * por ahora siempre va a atacar al enemigo que venga primero en la lista de enemigos del controllwe
-     *  arrrrrrrrreeeeggglarr.
-     */
-    private void attackEnemy() {
         ICharacter player = controller.getPlayerPosition(0);
-        ICharacter enemy = controller.getEnemyPosition(0);
-        controller.attackPlayers(player,enemy);
+        playerAttack(player);
+    }
+
+
+    private void playerAttack(ICharacter player){
+        Random r = new Random();
+        int i = r.nextInt(controller.getEnemies().size());     //elegimos un numero random
+        ICharacter playerThatWillBeAttacked = controller.getEnemyPosition(i);
+        player.attack(playerThatWillBeAttacked);
     }
 
     /**
@@ -35,7 +38,7 @@ public class PlayerAttackPhase extends AbstractPhase{
      */
     @Override
     public String toString() {
-        return "SelectAttackTargetPhase";
+        return "PlayerAttackPhase";
     }
 
 }

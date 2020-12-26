@@ -2,7 +2,7 @@ package com.github.cc3002.finalreality.Controller.phases;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
 
-public class PollAndWaitCharacterPhase extends AbstractPhase{
+public class PollAndWaitCharacterPhase extends Phase {
 
 
     /**

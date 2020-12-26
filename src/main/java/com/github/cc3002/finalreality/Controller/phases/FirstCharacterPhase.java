@@ -1,13 +1,16 @@
 package com.github.cc3002.finalreality.Controller.phases;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
+
+import java.util.Random;
 
 /**
  * A class that creates the state of taking the first character of the queue.
  *
  * @author Valentina Esteban
  */
-public class FirstCharacterPhase extends AbstractPhase {
+public class FirstCharacterPhase extends Phase {
 
 
     @Override
@@ -28,6 +31,7 @@ public class FirstCharacterPhase extends AbstractPhase {
             changePhase(new EnemyAttackPhase(character));//changePhase();
         }
     }
+
 
 
     /**

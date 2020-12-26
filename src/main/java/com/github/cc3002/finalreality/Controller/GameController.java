@@ -2,9 +2,9 @@ package com.github.cc3002.finalreality.Controller;
 
 import com.github.cc3002.finalreality.Controller.handler.CharacterHandler;
 import com.github.cc3002.finalreality.Controller.handler.IEveventHandler;
-import com.github.cc3002.finalreality.Controller.phases.AbstractPhase;
 import com.github.cc3002.finalreality.Controller.phases.FirstCharacterPhase;
-import com.github.cc3002.finalreality.Controller.phases.IPhase;
+import com.github.cc3002.finalreality.Controller.phases.InvalidActionException;
+import com.github.cc3002.finalreality.Controller.phases.Phase;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.*;
@@ -12,6 +12,7 @@ import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -29,7 +30,7 @@ public class GameController {
     private boolean winnerPlayer = false;
     private boolean winnerEnemy = false;
     private BlockingQueue<ICharacter> turnsQueue = new LinkedBlockingQueue<>() ;
-    private IPhase phase = new FirstCharacterPhase();
+    private Phase phase = new FirstCharacterPhase();
 
     /**
      * Creates a new GameController.
@@ -46,7 +47,7 @@ public class GameController {
     /**
      * set the phase to the controller and add the controller tothe phase.
      */
-    public void setPhase(final @NotNull IPhase phase){
+    public void setPhase(final @NotNull Phase phase){
         this.phase = phase;
         phase.setController(this);
     }
@@ -97,7 +98,7 @@ public class GameController {
     /**
      * returns  the phase that we are in.
      */
-    public IPhase getPhase(){return phase;}
+    public Phase getPhase(){return phase;}
 
 
 
@@ -285,15 +286,66 @@ public class GameController {
         phase.turn();
     }
     public void buttonNext(){
+        phase.turn();
         phase.nextPhaseButton(); //comabia a la siguiente fase
-        phase.turn();   //Activa lo q sea q tiene  q hacer en ese  turno
+           //Activa lo q sea q tiene  q hacer en ese  turno
     }
 
     //despues arreglar esto se supone q el jugador va  aelegir un aarma de las que hay en el inventario
-    public void ThisWeaponButton(IWeapon weapon){
+    public void ThisWeaponButton(IWeapon weapon) throws InvalidActionException {
         phase.ThisWeapon(weapon);
     }
 
+    public List showEnemies() {
+        LinkedList l = new LinkedList<>();
+        for (Enemy e : enemies){
+            l.add(e.getName());
+        }
+        return l;
+    }
+
+    public List showPlayers() {
+        LinkedList l = new LinkedList<>();
+        for (IPlayerCharacter e : players){
+            l.add(e.getName());
+        }
+        return l;
+    }
+
+    public String getCurrentPhase() {
+        return phase.toString();
+    }
+
+    public List showHpEnemies() {
+        LinkedList l = new LinkedList<>();
+        for (Enemy e : enemies){
+            l.add(e.getHealthPoints());
+        }
+        return l;
+    }
+    public List showHpPlayer() {
+        LinkedList l = new LinkedList<>();
+        for (IPlayerCharacter e : players ){
+            l.add(e.getHealthPoints());
+        }
+        return l;
+    }
+
+    public List showWeapons() {
+        LinkedList l = new LinkedList<>();
+        for (IWeapon e : inventory ){
+            l.add(e.getName());
+        }
+        return l;
+    }
+
+    public List showTurns() {
+        LinkedList l = new LinkedList<>();
+        for (ICharacter e : turnsQueue ){
+            l.add(e.getName());
+        }
+        return l;
+    }
 }
 
 

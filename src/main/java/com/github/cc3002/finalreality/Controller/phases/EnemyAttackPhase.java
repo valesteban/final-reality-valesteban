@@ -8,7 +8,7 @@ import com.github.cc3002.finalreality.model.character.ICharacter;
  *
  * @author Valentina Esteban
  */
-public class EnemyAttackPhase extends AbstractPhase {
+public class EnemyAttackPhase extends Phase {
     private ICharacter attacker ;
 
     public EnemyAttackPhase(ICharacter enemy){

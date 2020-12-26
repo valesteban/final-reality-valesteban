@@ -1,7 +1,6 @@
 package com.github.cc3002.finalreality.Controller.phases;
 
 import com.github.cc3002.finalreality.Controller.GameController;
-import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 
 /**
@@ -9,7 +8,7 @@ import com.github.cc3002.finalreality.model.weapon.IWeapon;
  *
  * @author Valentina Esteban
  */
-public abstract class AbstractPhase implements IPhase{
+public  class Phase {
     protected GameController controller;
 
     /**
@@ -21,7 +20,7 @@ public abstract class AbstractPhase implements IPhase{
     /**
      * Change the actual phase to another one.
      */
-    public void changePhase(IPhase phase){
+    public void changePhase(Phase phase){
         controller.setPhase(phase);
     }
 
@@ -39,8 +38,8 @@ public abstract class AbstractPhase implements IPhase{
         //botones
     }
 
-    public void ThisWeapon(IWeapon weapon){
-        System.out.println("en esta fase no puedes elegir una arma estay puro dando jugo hay q poenrle un error ");
+    public void ThisWeapon(IWeapon weapon) throws InvalidActionException {
+        throw new InvalidActionException("can´t use this in "+ this.toString());
     }
 
 
