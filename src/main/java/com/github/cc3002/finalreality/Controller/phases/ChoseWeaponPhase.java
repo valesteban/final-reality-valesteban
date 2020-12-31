@@ -1,8 +1,10 @@
 package com.github.cc3002.finalreality.Controller.phases;
 
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 
 public class ChoseWeaponPhase extends Phase {
+    private IWeapon weapon  = null;
 
 
     /**
@@ -10,25 +12,28 @@ public class ChoseWeaponPhase extends Phase {
      */
     @Override
     public void turn() {
-        //equippingTheCharacter();
-
-    }
-
-    public void equippingTheCharacter(IWeapon weapon) {
-        controller.equipPlayer(controller.getPlayerPosition(0),weapon);
+        //don do anything in here
     }
 
     /**
-     * it will change tha phase of the controller to pullOutCharacter.  ---------creo q esto se activara cuando se aprete un boton
+     * it will change tha phase of the controller to SelectTargetPhase.
      */
     @Override
     public void nextPhaseButton() {
-        changePhase(new PlayerAttackPhase());
+        System.out.println(controller.getFirstCharacterQueue().getName());
+        IPlayerCharacter i =(IPlayerCharacter)controller.getFirstCharacterQueue();
+        System.out.println(i.getEquippedWeapon());
+        changePhase(new SelectTargetPhase());
     }
 
+
+
     @Override
-    public void ThisWeapon(IWeapon weapon) {
-        controller.equipPlayer(controller.getPlayerPosition(0),weapon);
+    public void thisWeapon(IWeapon weapon) {
+        //we check that the weapon is in the inventory arrrrreeeee
+        ///
+        if (controller.getInventory().contains(weapon))
+            controller.equipPlayer((IPlayerCharacter) controller.getFirstCharacterQueue(),weapon);
     }
 
     /**

@@ -20,14 +20,16 @@ public abstract class AbstractPhaseTest {
         controller.createBow("BowName",12,4);
 
         //creamos players y enemies y los agregamos a sus respectivas listas y a la cola de turnos
-        controller.createEnemy("nameEnemy1", 10, 10, 12);
-        controller.createEngineer( "nameEngineer", "Engineer",6);
-        controller.createEnemy( "nameEnemy1", 10, 7,14);
-        controller.createKnight( "nameKnight", "Knight",4);
+        controller.createEnemy("nameEnemy1", 15, 4, 12);
+        controller.createEngineer( "nameEngineer", "Engineer",3);
+        controller.createEnemy( "nameEnemy1", 16, 3,14);
+        controller.createKnight( "nameKnight", "Knight",2);
+        controller.createEnemy("nameEnemy3", 15, 2, 10);
         controller.createThief( "nameThief", "Thief",5);
-        controller.createEnemy("nameEnemy3",8,11,15);
-        controller.createWhiteMage( "nameWhiteMage", "WhiteMage",5, 14);
-        controller.createBlackMage( "nameBlackMage", "BlackMage",8, 12);
+        controller.createEnemy("nameEnemy4",12,4,15);
+        controller.createWhiteMage( "nameWhiteMage", "WhiteMage",1, 14);
+        controller.createEnemy("nameEnemy5", 13, 1, 7);
+        controller.createBlackMage( "nameBlackMage", "BlackMage",2, 12);
 
     }
 

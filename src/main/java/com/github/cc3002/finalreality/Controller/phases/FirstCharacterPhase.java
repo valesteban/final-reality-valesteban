@@ -13,10 +13,14 @@ import java.util.Random;
 public class FirstCharacterPhase extends Phase {
 
 
+    /**
+     * it will take the first character unn the queue and add it as a variable and the
+     * change the phase of the controller.
+     */
     @Override
     public void turn() {
-        ICharacter c1 =  controller.getFirstCharacterQueue();
-        changeTo(c1);
+        ICharacter c1 =  controller.getFirstCharacterQueue();  //sacamos el peronaje inicial en la cola
+        changeTo(c1);                                          //cambiara  ala siguiente phase
     }
 
     /**
@@ -28,12 +32,9 @@ public class FirstCharacterPhase extends Phase {
         if (controller.getPlayers().contains(character)){
             changePhase(new ChoseWeaponPhase());
         } else {
-            changePhase(new EnemyAttackPhase(character));//changePhase();
+            changePhase(new CharacterAttackPhase(null));//changePhase();
         }
     }
-
-
-
     /**
      * returns a string with the name of the phase.
      */

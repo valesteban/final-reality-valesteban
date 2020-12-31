@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.Controller.phases;
 
 import com.github.cc3002.finalreality.Controller.GameController;
+import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 
 /**
@@ -10,6 +11,8 @@ import com.github.cc3002.finalreality.model.weapon.IWeapon;
  */
 public  class Phase {
     protected GameController controller;
+    protected ICharacter character = null;
+
 
     /**
      * Sets the controller.
@@ -24,6 +27,9 @@ public  class Phase {
         controller.setPhase(phase);
     }
 
+    public ICharacter getCharacter() {
+        return character;
+    }
 
     public void turn(){
         System.out.println("algo fue malo llegamos al turno de la clase abstracta de las fases");
@@ -38,9 +44,16 @@ public  class Phase {
         //botones
     }
 
-    public void ThisWeapon(IWeapon weapon) throws InvalidActionException {
-        throw new InvalidActionException("can´t use this in "+ this.toString());
+    public void thisWeapon(IWeapon weapon) {//throws InvalidActionException {
+        //throw new InvalidActionException("can´t choose a weapon to use in  "+ this.toString());
     }
 
+
+    public void selectTarget(int i) {//throws  InvalidActionException{
+        //throw new InvalidActionException("can´t choose an Enemy to attack in");
+
+    }
+
+    public void setCharacter(ICharacter character){this.character = character;}
 
 }

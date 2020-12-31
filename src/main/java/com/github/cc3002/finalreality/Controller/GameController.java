@@ -30,7 +30,7 @@ public class GameController {
     private boolean winnerPlayer = false;
     private boolean winnerEnemy = false;
     private BlockingQueue<ICharacter> turnsQueue = new LinkedBlockingQueue<>() ;
-    private Phase phase = new FirstCharacterPhase();
+    private Phase phase ;
 
     /**
      * Creates a new GameController.
@@ -41,7 +41,7 @@ public class GameController {
         players = new LinkedList<>();
         enemies = new LinkedList<>();
         inventory = new LinkedList<>();
-        //this.turnsQueue = turnsQueue;
+        setPhase( new FirstCharacterPhase());
     }
 
     /**
@@ -208,6 +208,7 @@ public class GameController {
         for (IPlayerCharacter p : players){
             if (p.equals(player)){
                 p.equip(weapon);
+                System.out.println(p.getEquippedWeapon().getName());
             }
         }
     }
@@ -281,20 +282,13 @@ public class GameController {
         }
     }
 
-    public void startPlaying(){
-        phase.setController(this);
-        phase.turn();
-    }
-    public void buttonNext(){
-        phase.turn();
-        phase.nextPhaseButton(); //comabia a la siguiente fase
-           //Activa lo q sea q tiene  q hacer en ese  turno
-    }
 
     //despues arreglar esto se supone q el jugador va  aelegir un aarma de las que hay en el inventario
-    public void ThisWeaponButton(IWeapon weapon) throws InvalidActionException {
-        phase.ThisWeapon(weapon);
+    public void thisWeaponButton(IWeapon weapon){// throws InvalidActionException {
+        phase.thisWeapon(weapon);
     }
+    //despues arreglar esto se supone q el jugador va  aelegir un aarma de las que hay en el inventario
+
 
     public List showEnemies() {
         LinkedList l = new LinkedList<>();
@@ -346,6 +340,22 @@ public class GameController {
         }
         return l;
     }
+
+    public void selectingEnemy(int i){// throws InvalidActionException {
+        phase.selectTarget(i);
+    }
+
+
+    public void startPlaying(){
+        phase.setController(this);
+        phase.turn();
+    }
+    public void buttonNext(){
+        phase.turn();
+        phase.nextPhaseButton(); //comabia a la siguiente fase
+        //Activa lo q sea q tiene  q hacer en ese  turno
+    }
+
 }
 
 

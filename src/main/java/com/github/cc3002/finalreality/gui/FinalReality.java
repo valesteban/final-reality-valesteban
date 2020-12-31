@@ -41,6 +41,7 @@ public class FinalReality extends Application {
   private Label listPlayers;  //lista ded players
   private Label listHPPlayers;  //lista ded players
   private Label listWeapons;  //lista de weapons
+
   private Button buttonNextPhase; //boton para pasar a la siguiente fase
   private Button starGame; //boton para pasar a la siguiente fase
 
@@ -50,6 +51,15 @@ public class FinalReality extends Application {
   private Button staffButton;
   private Button swordButton;
 
+  private Button enemy1Button;
+  private Button enemy2Button;
+  private Button enemy3Button;
+  private Button enemy4Button;
+  private Button enemy5Button;
+
+  private Button start;
+  Scene scene;
+
 
 
   public static void main(String[] args) {
@@ -58,54 +68,71 @@ public class FinalReality extends Application {
 
   @Override
   public void start(Stage primaryStage) throws FileNotFoundException {
-    //setiando el controller
-    //crearmos y agregamos las armas al inventario
-    controller.createSword("SwordName",15,10);
-    controller.createStaff("StaffName",13,9,3);
-    controller.createKnife("KnifeName",8,2);
-    controller.createAxe("AxeName",11,6);
-    controller.createBow("BowName",12,4);
-
-    //creamos players y enemies y los agregamos a sus respectivas listas y a la cola de turnos
-    controller.createEnemy("nameEnemy1", 10, 10, 12);
-    controller.createEngineer( "nameEngineer", "Engineer",6);
-    controller.createEnemy( "nameEnemy1", 10, 7,14);
-    controller.createKnight( "nameKnight", "Knight",4);
-    controller.createThief( "nameThief", "Thief",5);
-    controller.createEnemy("nameEnemy3",8,11,15);
-    controller.createWhiteMage( "nameWhiteMage", "WhiteMage",5, 14);
-    controller.createBlackMage( "nameBlackMage", "BlackMage",8, 12);
-
+    createWeaponAndCharacters();
     primaryStage.setTitle("Final reality");
     primaryStage.setResizable(false);
-
+    scene = new Scene(root, 1000,625);
     var background =
-            new ImageView(new Image(new FileInputStream(RESOURCE_PATH + "fondo4.jpg")));
+            new ImageView(new Image(new FileInputStream(RESOURCE_PATH + "k2.jpg")));
     root.getChildren().add(background);
 
-    Scene scene = createScene();
+    start = createButton("start",500,500);
+    start.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        try {
+          scene = createScene1();
+        } catch (FileNotFoundException e) {
+          e.printStackTrace();
+        }
+      }
+    });
+
+
     primaryStage.setScene(scene);
 
     primaryStage.show();
   }
 
-  private @NotNull Scene createScene(){
-    Scene scene = new Scene(root,690,490);
-    buttonNextPhase = createButton("next Phase",150,440);
-    starGame = createButton("Start Turn",50,440);
-    listTurns = createLabel(0,200);
-    listEnemies = createLabel(0,50);
-    listHPEnemies = createLabel(0, 75);
-    listPlayers = createLabel(0,100);
-    listHPPlayers = createLabel(0,125);
-    phaseLabel = createLabel(0,150);
-    listWeapons = createLabel(0,175);
 
-    axeButton = createButton("Axe",400,440);
-    bowButton = createButton("Bow",450,440);;
-    knifeButton = createButton("Knife",500,440);;
-    staffButton = createButton("Staff",552,440);;
-    swordButton = createButton("Sword",600,440);;
+
+  private @NotNull Scene createScene1() throws FileNotFoundException {
+    var background =
+            new ImageView(new Image(new FileInputStream(RESOURCE_PATH + "fondo.jpg")));
+    root.getChildren().add(background);
+    buttonNextPhase = createButton("next Phase",150,540);
+    starGame = createButton("Start Turn",50,540);
+    listTurns = createLabel(0,0);
+    listWeapons = createLabel(0,25);
+
+
+
+
+    listEnemies = createLabel(0,75);
+    listHPEnemies = createLabel(0, 100);
+    listPlayers = createLabel(500,75);
+    listHPPlayers = createLabel(500,100);
+    phaseLabel = createLabel(0,150);
+    starGame.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        controller.startPlaying();
+      }
+    });
+
+
+
+    axeButton = createButton("Axe",600,560);
+    bowButton = createButton("Bow",650,560);;
+    knifeButton = createButton("Knife",700,560);;
+    staffButton = createButton("Staff",752,560);;
+    swordButton = createButton("Sword",800,560);;
+
+    enemy1Button = createButton("Enemy 1",575,520);;
+    enemy2Button = createButton("Enemy 2",650,520);;
+    enemy3Button = createButton("Enemy 3",725,520);;
+    enemy4Button = createButton("Enemy 4",800,520);;
+    enemy5Button = createButton("Enemy 5",875,520);;
 
     listWeapons.setText("Weapons : "+ controller.showWeapons());
     buttonNextPhase.setOnAction(new EventHandler<ActionEvent>() {
@@ -114,66 +141,69 @@ public class FinalReality extends Application {
         controller.buttonNext();
       }
     });
-    starGame.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent event) {
-        controller.startPlaying();
-      }
-    });
-    axeButton.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent event) {
-        try {
-          controller.ThisWeaponButton(controller.getInventory().get(3));
-        } catch (InvalidActionException e) {
-          e.printStackTrace();
-        }
-      }
-    });
+    //acciones de los botones para armar
     swordButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        try {
-          controller.ThisWeaponButton(controller.getInventory().get(0));
-        } catch (InvalidActionException e) {
-          e.printStackTrace();
-        }
+        controller.thisWeaponButton(controller.getInventory().get(0));
       }
     });
     staffButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        try {
-          controller.ThisWeaponButton(controller.getInventory().get(1));
-        } catch (InvalidActionException e) {
-          e.printStackTrace();
-        }
+        controller.thisWeaponButton(controller.getInventory().get(1));
       }
     });
     knifeButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        try {
-          controller.ThisWeaponButton(controller.getInventory().get(2));
-        } catch (InvalidActionException e) {
-          e.printStackTrace();
-        }
+        controller.thisWeaponButton(controller.getInventory().get(2));
+      }
+    });
+    axeButton.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        controller.thisWeaponButton(controller.getInventory().get(3));
       }
     });
     bowButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        try {
-          controller.ThisWeaponButton(controller.getInventory().get(4));
-        } catch (InvalidActionException e) {
-          e.printStackTrace();
-        }
+        controller.thisWeaponButton(controller.getInventory().get(4));
       }
     });
 
-
-
-
+    //acciones para elegir a  quien voy a atacar
+    enemy1Button.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        controller.selectingEnemy(0);
+      }
+    });
+    enemy2Button.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        controller.selectingEnemy(1);
+      }
+    });
+    enemy3Button.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        controller.selectingEnemy(2);
+      }
+    });
+    enemy4Button.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        controller.selectingEnemy(3);
+      }
+    });
+    enemy5Button.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        controller.selectingEnemy(4);
+      }
+    });
 
     startAnimator();
     return scene;
@@ -211,5 +241,30 @@ public class FinalReality extends Application {
     button.setLayoutX(xPos);
     root.getChildren().add(button);
     return button;
+  }
+
+  private void createWeaponAndCharacters(){
+
+    //setiando el controller
+    //crearmos y agregamos las armas al inventario
+    controller.createSword("SwordName",15,30);
+    controller.createStaff("StaffName",13,29,3);
+    controller.createKnife("KnifeName",8,32);
+    controller.createAxe("AxeName",11,26);
+    controller.createBow("BowName",12,34);
+
+    //creamos players y enemies y los agregamos a sus respectivas listas y a la cola de turnos
+    controller.createKnight( "nameKnight", "Knight",2);
+    controller.createEnemy("nameEnemy1", 30, 4, 12);
+
+    controller.createEngineer( "nameEngineer", "Engineer",3);
+    controller.createEnemy( "nameEnemy2", 40, 3,14);
+    controller.createEnemy("nameEnemy3", 39, 2, 10);
+    controller.createThief( "nameThief", "Thief",5);
+    controller.createEnemy("nameEnemy4",28,4,15);
+    controller.createWhiteMage( "nameWhiteMage", "WhiteMage",1, 14);
+    controller.createEnemy("nameEnemy5", 38, 1, 7);
+    controller.createBlackMage( "nameBlackMage", "BlackMage",2, 12);
+
   }
 }
