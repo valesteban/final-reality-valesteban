@@ -25,11 +25,15 @@ public class ChoseWeaponPhase extends Phase {
         System.out.println(i.getEquippedWeapon());
         changePhase(new SelectTargetPhase());
     }
+    @Override
+    public String instruction(){
+        return "Choose a weapon for "+controller.getFirstCharacterQueue().getName();
+    }
 
 
 
     @Override
-    public void thisWeapon(IWeapon weapon) {
+    public void selectWeapon(IWeapon weapon) {
         //we check that the weapon is in the inventory arrrrreeeee
         ///
         if (controller.getInventory().contains(weapon))

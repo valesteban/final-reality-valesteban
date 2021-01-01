@@ -34,7 +34,13 @@ public class FirstCharacterPhase extends Phase {
             changePhase(new ChoseWeaponPhase());
         } else {
             changePhase(new CharacterAttackPhase(null));//changePhase();
+            controller.buttonNext();
         }
+    }
+
+    @Override
+    public String instruction(){
+        return " To start the turn press the button start Turn";
     }
     /**
      * returns a string with the name of the phase.
@@ -43,6 +49,7 @@ public class FirstCharacterPhase extends Phase {
     public String toString(){
         return "FirstCharacterPhase";
     }
+
 
 
 

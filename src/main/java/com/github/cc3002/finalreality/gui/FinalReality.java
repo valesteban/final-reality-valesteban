@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.gui;
 
 import com.github.cc3002.finalreality.Controller.GameController;
+import com.github.cc3002.finalreality.Controller.phases.InvalidActionException;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -40,6 +41,7 @@ public class FinalReality extends Application {
   private Label listWeapons;  //lista de weapons
 
   private Label HPlost;
+  private Label whatToDo; //le dira al usuario que hacer
 
   private Button buttonNextPhase; //boton para pasar a la siguiente fase
   private Button starGame; //boton para pasar a la siguiente fase
@@ -111,6 +113,8 @@ public class FinalReality extends Application {
 
     HPlost = createLabel(500,300);
 
+    whatToDo  = createLabel(300,230);
+
 
 
 
@@ -152,31 +156,51 @@ public class FinalReality extends Application {
     swordButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        controller.thisWeaponButton(controller.getInventory().get(0));
+        try {
+          controller.thisWeaponButton(controller.getInventory().get(0));
+        } catch (InvalidActionException e) {
+          e.printStackTrace();
+        }
       }
     });
     staffButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        controller.thisWeaponButton(controller.getInventory().get(1));
+        try {
+          controller.thisWeaponButton(controller.getInventory().get(1));
+        } catch (InvalidActionException e) {
+          e.printStackTrace();
+        }
       }
     });
     knifeButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        controller.thisWeaponButton(controller.getInventory().get(2));
+        try {
+          controller.thisWeaponButton(controller.getInventory().get(2));
+        } catch (InvalidActionException e) {
+          e.printStackTrace();
+        }
       }
     });
     axeButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        controller.thisWeaponButton(controller.getInventory().get(3));
+        try {
+          controller.thisWeaponButton(controller.getInventory().get(3));
+        } catch (InvalidActionException e) {
+          e.printStackTrace();
+        }
       }
     });
     bowButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        controller.thisWeaponButton(controller.getInventory().get(4));
+        try {
+          controller.thisWeaponButton(controller.getInventory().get(4));
+        } catch (InvalidActionException e) {
+          e.printStackTrace();
+        }
       }
     });
 
@@ -184,31 +208,51 @@ public class FinalReality extends Application {
     enemy1Button.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        controller.selectingEnemy(0);
+        try {
+          controller.selectingEnemy(0);
+        } catch (InvalidActionException e) {
+          e.printStackTrace();
+        }
       }
     });
     enemy2Button.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        controller.selectingEnemy(1);
+        try {
+          controller.selectingEnemy(1);
+        } catch (InvalidActionException e) {
+          e.printStackTrace();
+        }
       }
     });
     enemy3Button.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        controller.selectingEnemy(2);
+        try {
+          controller.selectingEnemy(2);
+        } catch (InvalidActionException e) {
+          e.printStackTrace();
+        }
       }
     });
     enemy4Button.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        controller.selectingEnemy(3);
+        try {
+          controller.selectingEnemy(3);
+        } catch (InvalidActionException e) {
+          e.printStackTrace();
+        }
       }
     });
     enemy5Button.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        controller.selectingEnemy(4);
+        try {
+          controller.selectingEnemy(4);
+        } catch (InvalidActionException e) {
+          e.printStackTrace();
+        }
       }
     });
 
@@ -227,7 +271,13 @@ public class FinalReality extends Application {
         listHPPlayers.setText("Players HP : "+ controller.showHpPlayer());
         listTurns.setText("turns : " + controller.showTurns() );
 
-      //  HPlost.setText("HP lost : " + controller.HPlost());
+        try {
+          whatToDo.setText("Instructions: "+controller.showInstrucction());
+        } catch (InvalidActionException e) {
+          e.printStackTrace();
+        }
+
+        //  HPlost.setText("HP lost : " + controller.HPlost());
 
 
         phaseLabel.setText("Phase : " + controller.getCurrentPhase() );

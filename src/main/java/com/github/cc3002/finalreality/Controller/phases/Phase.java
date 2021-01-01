@@ -44,21 +44,22 @@ public  class Phase {
         //botones
     }
 
-    public void thisWeapon(IWeapon weapon) {//throws InvalidActionException {
-        //throw new InvalidActionException("can´t choose a weapon to use in  "+ this.toString());
+    public void selectWeapon(IWeapon weapon) throws InvalidActionException {
+        throw new InvalidActionException("can´t choose a weapon to use in  "+ this.toString());
     }
 
 
-    public void selectTarget(int i) {//throws  InvalidActionException{
-        //throw new InvalidActionException("can´t choose an Enemy to attack in");
+    public void selectTarget(int i) throws  InvalidActionException{
+        throw new InvalidActionException("can´t choose an Enemy to attack in" + this.toString());
 
     }
 
     public void setCharacter(ICharacter character){this.character = character;}
+    public String instruction()throws  InvalidActionException{
+        throw new InvalidActionException("can´t choose an Enemy to attack in" + this.toString());}
 
 
-    public void hp(){
-//despues poner exception solo va aservir par aattack phase
-    }
+
+
 }
 

@@ -290,12 +290,12 @@ public class GameController {
 
 
     //despues arreglar esto se supone q el jugador va  aelegir un aarma de las que hay en el inventario
-    public void thisWeaponButton(IWeapon weapon){// throws InvalidActionException {
-        phase.thisWeapon(weapon);
+    public void thisWeaponButton(IWeapon weapon) throws InvalidActionException {// throws InvalidActionException {
+        phase.selectWeapon(weapon);
         buttonNext();
     }
 
-    public void selectingEnemy(int i){// throws InvalidActionException {
+    public void selectingEnemy(int i) throws InvalidActionException {// throws InvalidActionException {
         phase.selectTarget(i);
         buttonNext();
     }
@@ -378,9 +378,9 @@ public class GameController {
     }
 
 
-
-
-
+    public String showInstrucction() throws InvalidActionException {
+       return phase.instruction();
+    }
 }
 
 

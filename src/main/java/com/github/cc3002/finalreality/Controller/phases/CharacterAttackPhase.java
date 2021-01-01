@@ -12,6 +12,7 @@ import com.github.cc3002.finalreality.model.weapon.IWeapon;
 public class CharacterAttackPhase extends Phase {
 
 
+
     public CharacterAttackPhase(ICharacter attacked){
 
         this.character = attacked;
@@ -33,12 +34,7 @@ public class CharacterAttackPhase extends Phase {
 
         controller.pullOutCharacter();
         controller.timerCharacter(c1);
-      //  controller.buttonNext();
     }
-  //  public void hp(int oldHP){
-  //      int attack = oldHP - character.getHealthPoints();
-  //          return attack;
-  //      }
 
 
 

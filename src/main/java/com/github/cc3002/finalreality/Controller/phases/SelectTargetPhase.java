@@ -24,6 +24,11 @@ public class SelectTargetPhase extends Phase {
         this.character = c1;
     }
 
+    @Override
+    public String instruction(){
+        return "Choose a Enemy to attack ";
+    }
+
 
     /**
      * returns a string with the name of the phase.
