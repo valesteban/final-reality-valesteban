@@ -56,4 +56,9 @@ public  class Phase {
 
     public void setCharacter(ICharacter character){this.character = character;}
 
+
+    public void hp(){
+//despues poner exception solo va aservir par aattack phase
+    }
 }
+

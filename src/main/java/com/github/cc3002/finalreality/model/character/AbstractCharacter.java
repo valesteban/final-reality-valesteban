@@ -18,7 +18,7 @@ public abstract class AbstractCharacter implements ICharacter {
   private final BlockingQueue<ICharacter> turnsQueue;
   private final String name;
   private final String characterClass;
-  private int healthPoints = 10;
+  private int healthPoints = 100;
   private int protection;
   protected ScheduledExecutorService scheduledExecutor;
   private boolean alive = true;

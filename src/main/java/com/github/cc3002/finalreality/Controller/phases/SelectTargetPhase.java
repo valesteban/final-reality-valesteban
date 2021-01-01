@@ -17,6 +17,7 @@ public class SelectTargetPhase extends Phase {
     @Override
     public void nextPhaseButton() {
         changePhase(new CharacterAttackPhase(this.character));
+        controller.buttonNext();
     }
     public void selectTarget(int i){
         ICharacter c1 = controller.getEnemyPosition(i);

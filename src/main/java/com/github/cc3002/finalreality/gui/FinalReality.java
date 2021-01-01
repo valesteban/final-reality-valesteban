@@ -1,12 +1,10 @@
 package com.github.cc3002.finalreality.gui;
 
 import com.github.cc3002.finalreality.Controller.GameController;
-import com.github.cc3002.finalreality.Controller.phases.InvalidActionException;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,7 +16,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.List;
 
 /**
  * Main entry point for the application.
@@ -41,6 +38,8 @@ public class FinalReality extends Application {
   private Label listPlayers;  //lista ded players
   private Label listHPPlayers;  //lista ded players
   private Label listWeapons;  //lista de weapons
+
+  private Label HPlost;
 
   private Button buttonNextPhase; //boton para pasar a la siguiente fase
   private Button starGame; //boton para pasar a la siguiente fase
@@ -89,7 +88,12 @@ public class FinalReality extends Application {
     });
 
 
+
     primaryStage.setScene(scene);
+
+    if (controller.getWinnerPlayer()||controller.getWinnerEnemy()){
+      scene = createWinnerLoserScene();
+    }
 
     primaryStage.show();
   }
@@ -100,10 +104,13 @@ public class FinalReality extends Application {
     var background =
             new ImageView(new Image(new FileInputStream(RESOURCE_PATH + "fondo.jpg")));
     root.getChildren().add(background);
-    buttonNextPhase = createButton("next Phase",150,540);
+    buttonNextPhase = createButton("attack",150,540);
     starGame = createButton("Start Turn",50,540);
     listTurns = createLabel(0,0);
     listWeapons = createLabel(0,25);
+
+    HPlost = createLabel(500,300);
+
 
 
 
@@ -220,10 +227,19 @@ public class FinalReality extends Application {
         listHPPlayers.setText("Players HP : "+ controller.showHpPlayer());
         listTurns.setText("turns : " + controller.showTurns() );
 
+      //  HPlost.setText("HP lost : " + controller.HPlost());
+
+
         phaseLabel.setText("Phase : " + controller.getCurrentPhase() );
-      }
+        }
+
     };
     timer.start();
+  }
+  private @NotNull Scene createWinnerLoserScene() throws FileNotFoundException {
+    var background =
+            new ImageView(new Image(new FileInputStream(RESOURCE_PATH + "kirby.jpg")));
+    return scene;
   }
 
   private @NotNull Label createLabel(int xPos,int yPos){
@@ -247,11 +263,11 @@ public class FinalReality extends Application {
 
     //setiando el controller
     //crearmos y agregamos las armas al inventario
-    controller.createSword("SwordName",15,30);
-    controller.createStaff("StaffName",13,29,3);
-    controller.createKnife("KnifeName",8,32);
-    controller.createAxe("AxeName",11,26);
-    controller.createBow("BowName",12,34);
+    controller.createSword("SwordName",25,30);
+    controller.createStaff("StaffName",23,29,3);
+    controller.createKnife("KnifeName",18,32);
+    controller.createAxe("AxeName",21,26);
+    controller.createBow("BowName",22,34);
 
     //creamos players y enemies y los agregamos a sus respectivas listas y a la cola de turnos
     controller.createKnight( "nameKnight", "Knight",2);
@@ -261,7 +277,7 @@ public class FinalReality extends Application {
     controller.createEnemy( "nameEnemy2", 40, 3,14);
     controller.createEnemy("nameEnemy3", 39, 2, 10);
     controller.createThief( "nameThief", "Thief",5);
-    controller.createEnemy("nameEnemy4",28,4,15);
+    controller.createEnemy("nameEnemy4",48,4,15);
     controller.createWhiteMage( "nameWhiteMage", "WhiteMage",1, 14);
     controller.createEnemy("nameEnemy5", 38, 1, 7);
     controller.createBlackMage( "nameBlackMage", "BlackMage",2, 12);

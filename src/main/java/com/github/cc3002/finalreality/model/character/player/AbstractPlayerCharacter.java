@@ -94,9 +94,10 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
      */
     @Override
     public void attack(ICharacter character){
-        if (this.getHealthPoints() != 0){
-            character.isAttackByPlayer(this);
+            if (this.getHealthPoints() != 0){
+                character.isAttackByPlayer(this);
         }
+
     }
 
 

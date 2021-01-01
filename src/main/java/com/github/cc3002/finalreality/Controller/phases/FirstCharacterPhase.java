@@ -20,14 +20,15 @@ public class FirstCharacterPhase extends Phase {
     @Override
     public void turn() {
         ICharacter c1 =  controller.getFirstCharacterQueue();  //sacamos el peronaje inicial en la cola
-        changeTo(c1);                                          //cambiara  ala siguiente phase
+        nextTo(c1);                       //cambiara  ala siguiente phase
     }
 
     /**
      * it will decided the next phase for the controller depending on the character
      * that the queue has.
      */
-    public void changeTo(ICharacter character){
+    public void nextTo(ICharacter character){
+        ICharacter i = controller.getFirstCharacterQueue();
 
         if (controller.getPlayers().contains(character)){
             changePhase(new ChoseWeaponPhase());

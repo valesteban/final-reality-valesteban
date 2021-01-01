@@ -27,13 +27,21 @@ public class CharacterAttackPhase extends Phase {
         else {                                      //if it is an enemy
             controller.enemyTurn(c1);
         }
+      //  controller.hpLost(hp);
 
         //then we will take out the character of the turn queue and start the timer
 
         controller.pullOutCharacter();
         controller.timerCharacter(c1);
-
+      //  controller.buttonNext();
     }
+  //  public void hp(int oldHP){
+  //      int attack = oldHP - character.getHealthPoints();
+  //          return attack;
+  //      }
+
+
+
 
     /**
      * it will change tha phase of the controller to FirstCharacterPhase.

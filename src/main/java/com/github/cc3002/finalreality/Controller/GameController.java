@@ -208,7 +208,7 @@ public class GameController {
         for (IPlayerCharacter p : players){
             if (p.equals(player)){
                 p.equip(weapon);
-                System.out.println(p.getEquippedWeapon().getName());
+//                System.out.println(p.getEquippedWeapon().getName());
             }
         }
     }
@@ -257,38 +257,74 @@ public class GameController {
      * When someone dies check if all in  the list of the one that died is dead
      * also, if thats the case the othe is the winner.
      */
-    public void isAttackedCharacter(ICharacter character) {
+    public int isAttackedCharacter(ICharacter character) {
         //aqui resvisamos si todos los demas entan muertos si es asi gana sino sigue
         //como e el personaje se murio vamos a eliminarlo de la lista y despues revisar
         // si esque la lista esta vacia y asi decimos q alguno gano
+        System.out.println("alguien murio sique revisamos si todo murieron");
+        System.out.println("este personaje murio : "+character.getName());
         if (players.contains(character)) {
+            System.out.println("era un player");
             int j = players.size();
             for (int i = 0; i < j; i++) {
                 if (players.get(i).getAlive() == true) {  //si hay alguno vivo se sige jugando
-                    break;
+                    return 0;
                 }
             }
             this.winnerEnemy = true;
         } else {   //character es enemigo
             if (enemies.contains(character)) {
+                System.out.println("era un enemigo");
                 int j = enemies.size();
                 for (int i = 0; i < j; i++) {
                     if (enemies.get(i).getAlive() == true) {  //si hay alguno vivo se sige jugando
-                        break;
+                        return 0;
                     }
                 }
                 this.winnerPlayer = true;
+
             }
         }
+        return 1;
     }
 
 
     //despues arreglar esto se supone q el jugador va  aelegir un aarma de las que hay en el inventario
     public void thisWeaponButton(IWeapon weapon){// throws InvalidActionException {
         phase.thisWeapon(weapon);
+        buttonNext();
+    }
+
+    public void selectingEnemy(int i){// throws InvalidActionException {
+        phase.selectTarget(i);
+        buttonNext();
     }
     //despues arreglar esto se supone q el jugador va  aelegir un aarma de las que hay en el inventario
+    public void startPlaying(){
+        phase.setController(this);
+        phase.turn();
+      //  phase.nextPhaseButton();
+    }
+    public void buttonNext(){
+        if(getWinnerEnemy()||getWinnerPlayer()){
+            //paramos
+            System.out.println("hay un winner si que paramos");
 
+        }
+        else {
+            System.out.println("no hay un winner si que continuamos al siguiente turno \n");
+            phase.turn();
+            phase.nextPhaseButton(); //comabia a la siguiente fase
+            //Activa lo q sea q tiene  q hacer en ese  turno
+
+        }
+    }
+    public void loop(){
+        while (true){
+            phase.turn();
+            phase.nextPhaseButton();
+        }
+    }
 
     public List showEnemies() {
         LinkedList l = new LinkedList<>();
@@ -341,20 +377,9 @@ public class GameController {
         return l;
     }
 
-    public void selectingEnemy(int i){// throws InvalidActionException {
-        phase.selectTarget(i);
-    }
 
 
-    public void startPlaying(){
-        phase.setController(this);
-        phase.turn();
-    }
-    public void buttonNext(){
-        phase.turn();
-        phase.nextPhaseButton(); //comabia a la siguiente fase
-        //Activa lo q sea q tiene  q hacer en ese  turno
-    }
+
 
 }
 
