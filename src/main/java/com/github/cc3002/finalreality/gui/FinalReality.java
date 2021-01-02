@@ -1,7 +1,9 @@
 package com.github.cc3002.finalreality.gui;
 
 import com.github.cc3002.finalreality.Controller.GameController;
+import com.github.cc3002.finalreality.Controller.phases.FirstCharacterPhase;
 import com.github.cc3002.finalreality.Controller.phases.InvalidActionException;
+import com.github.cc3002.finalreality.gui.nodes.MovableNodeBuilder;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -22,11 +24,9 @@ import java.util.Random;
 
 /**
  * Main entry point for the application.
- * <p>
- * <Complete here with the details of the implemented application>
  *
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Valentina Esteban
  */
 public class FinalReality extends Application {
   private static final String RESOURCE_PATH = "src/main/resources/";
@@ -83,11 +83,14 @@ public class FinalReality extends Application {
     }
     primaryStage.show();
   }
-
+  /**
+   * creates the scene of the game.
+   */
   private @NotNull Scene createScene1() throws FileNotFoundException {
     var background =
             new ImageView(new Image(new FileInputStream(RESOURCE_PATH + "fondo.jpg")));
     root.getChildren().add(background);
+    createPLayersAndEnemies();
 
     //this are the labels that will be changing
     listTurns = createLabel(0,0);
@@ -270,10 +273,74 @@ public class FinalReality extends Application {
     startAnimator();
     return scene;
   }
+  /**
+   * creates the image of the enemies and the players.
+   */
+  private void createPLayersAndEnemies() throws FileNotFoundException {
+
+    var knight = new MovableNodeBuilder(scene).setImagePath(RESOURCE_PATH + "knight.png")
+            .setPosition(850, 200)
+            .setSize(50, 50)
+            .build();
+    root.getChildren().add(knight.getNode());
+    var engineer = new MovableNodeBuilder(scene).setImagePath(RESOURCE_PATH + "kirby1.png")
+            .setPosition(850, 250)
+            .setSize(50, 50)
+            .build();
+    root.getChildren().add(engineer.getNode());
+    var thief = new MovableNodeBuilder(scene).setImagePath(RESOURCE_PATH + "thief.png")
+            .setPosition(850, 300)
+            .setSize(50, 50)
+            .build();
+    root.getChildren().add(thief.getNode());
+    var white_mage = new MovableNodeBuilder(scene).setImagePath(RESOURCE_PATH + "aang.png")
+            .setPosition(850, 350)
+            .setSize(50, 50)
+            .build();
+    root.getChildren().add(white_mage.getNode());
+    var black_mage = new MovableNodeBuilder(scene).setImagePath(RESOURCE_PATH + "appa.png")
+            .setPosition(850, 400)
+            .setSize(50, 50)
+            .build();
+    root.getChildren().add(black_mage.getNode());
+
+    var enemy1 = new MovableNodeBuilder(scene).setImagePath(RESOURCE_PATH + "minion.png")
+            .setPosition(50, 200)
+            .setSize(50, 50)
+            .build();
+    root.getChildren().add(enemy1.getNode());
+    var enemy2 = new MovableNodeBuilder(scene).setImagePath(RESOURCE_PATH + "minion.png")
+            .setPosition(50, 250)
+            .setSize(50, 50)
+            .build();
+    root.getChildren().add(enemy2.getNode());
+    var enemy3 = new MovableNodeBuilder(scene).setImagePath(RESOURCE_PATH + "minion.png")
+            .setPosition(50, 300)
+            .setSize(50, 50)
+            .build();
+    root.getChildren().add(enemy3.getNode());
+    var enemy4 = new MovableNodeBuilder(scene).setImagePath(RESOURCE_PATH + "minion.png")
+            .setPosition(50, 350)
+            .setSize(50, 50)
+            .build();
+    root.getChildren().add(enemy4.getNode());
+    var enemy5 = new MovableNodeBuilder(scene).setImagePath(RESOURCE_PATH + "minion.png")
+            .setPosition(50, 400)
+            .setSize(50, 50)
+            .build();
+    root.getChildren().add(enemy5.getNode());
+
+  }
+  /**
+   * it will reset the game.
+   */
   private void resetGame() {
     controller.reStart();
     createWeaponAndCharacters();
   }
+  /**
+   * it will refresh the parameters.
+   */
   private void startAnimator(){
     AnimationTimer timer = new AnimationTimer() {
       @Override
@@ -292,6 +359,10 @@ public class FinalReality extends Application {
           e.printStackTrace();
         }
 
+        if (controller.getPhase().toString() == "FirstCharacterPhase"){
+
+        }
+
         //  HPlost.setText("HP lost : " + controller.HPlost());
 
 
@@ -301,11 +372,17 @@ public class FinalReality extends Application {
     };
     timer.start();
   }
+  /**
+   * it will change the scene when we press the button end game.
+   */
   private @NotNull Scene createWinnerLoserScene() throws FileNotFoundException {
     var background =
             new ImageView(new Image(new FileInputStream(RESOURCE_PATH + "kirby.jpg")));
     return scene;
   }
+  /**
+   * creates and return a new Label.
+   */
   private @NotNull Label createLabel(int xPos,int yPos){
     Label label = new Label();
     label.setLayoutX(xPos);
@@ -314,6 +391,9 @@ public class FinalReality extends Application {
     return label;
 
   }
+  /**
+   * creates and return a new button.
+   */
   private @NotNull Button createButton(String name,int xPos,int yPos){
     Button button = new Button(name);
     button.setLayoutY(yPos);
@@ -321,6 +401,9 @@ public class FinalReality extends Application {
     root.getChildren().add(button);
     return button;
   }
+  /**
+   * creates the weapons,players and enemies.
+   */
   private void createWeaponAndCharacters(){
     Random r = new Random();
 

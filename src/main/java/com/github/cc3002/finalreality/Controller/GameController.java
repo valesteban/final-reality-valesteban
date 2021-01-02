@@ -5,6 +5,7 @@ import com.github.cc3002.finalreality.Controller.handler.IEveventHandler;
 import com.github.cc3002.finalreality.Controller.phases.FirstCharacterPhase;
 import com.github.cc3002.finalreality.Controller.phases.InvalidActionException;
 import com.github.cc3002.finalreality.Controller.phases.Phase;
+import com.github.cc3002.finalreality.gui.nodes.MovableNode;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.*;

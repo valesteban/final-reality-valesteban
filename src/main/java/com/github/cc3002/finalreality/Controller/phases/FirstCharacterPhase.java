@@ -45,8 +45,4 @@ public class FirstCharacterPhase extends Phase {
     public String toString(){
         return "FirstCharacterPhase";
     }
-
-
-
-
 }
