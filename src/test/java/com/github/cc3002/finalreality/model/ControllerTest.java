@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.model;
 
 import com.github.cc3002.finalreality.Controller.GameController;
+import com.github.cc3002.finalreality.Controller.phases.InvalidActionException;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.*;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -199,6 +202,44 @@ public class ControllerTest {
         c1 = controller.getFirstCharacterQueue();
         assertEquals(c1,whiteMageTest);
         controller.pullOutCharacter();
+    }
+    @Test
+    public void showInGuiTest() throws InvalidActionException {
+        LinkedList enemiesList = new LinkedList<>();
+        for (Enemy e : controller.getEnemies()){
+            enemiesList.add(e.getName());
+        }
+        assertEquals(enemiesList,controller.showEnemies());
+
+        LinkedList playersList = new LinkedList<>();
+            for (IPlayerCharacter e : controller.getPlayers()){
+                playersList.add(e.getName());
+            }
+        assertEquals(playersList,controller.showPlayers());
+        assertEquals("FirstCharacterPhase",controller.getCurrentPhase());
+
+        LinkedList enemiesHPList = new LinkedList<>();
+        for (Enemy e : controller.getEnemies()){
+            enemiesHPList.add(e.getHealthPoints());
+        }
+        assertEquals(enemiesHPList,controller.showHpEnemies());
+        LinkedList playersHPList = new LinkedList<>();
+        for (IPlayerCharacter e : controller.getPlayers()){
+            playersHPList.add(e.getHealthPoints());
+        }
+        assertEquals(playersHPList,controller.showHpPlayer());
+        LinkedList weaponList = new LinkedList<>();
+        for (IWeapon e : controller.getInventory()){
+            weaponList.add(e.getName());
+        }
+        assertEquals(weaponList,controller.showWeapons() );
+
+        LinkedList turnsQueueList = new LinkedList<>();
+        for (ICharacter e : controller.getTurnsQueue()){
+            turnsQueueList.add(e.getName());
+        }
+        assertEquals(turnsQueueList,controller.showTurns() );
+        assertEquals("To start the turn press the button start Turn",controller.showInstrucction() );
     }
 
 

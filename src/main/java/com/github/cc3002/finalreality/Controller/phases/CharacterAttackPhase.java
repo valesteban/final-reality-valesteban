@@ -28,10 +28,6 @@ public class CharacterAttackPhase extends Phase {
         else {                                      //if it is an enemy
             controller.enemyTurn(c1);
         }
-      //  controller.hpLost(hp);
-
-        //then we will take out the character of the turn queue and start the timer
-
         controller.pullOutCharacter();
         controller.timerCharacter(c1);
     }
@@ -50,8 +46,8 @@ public class CharacterAttackPhase extends Phase {
     /**
      * returns a string with the name of the phase.
      */
-    @Override
-    public String toString() {
-        return "CharacterAttackPhase";
-    }
+  //  @Override
+  //  public String toString() {
+  //      return "CharacterAttackPhase";
+  //  }
 }

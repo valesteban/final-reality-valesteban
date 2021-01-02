@@ -59,7 +59,7 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
                     .schedule(this::addToQueue, equippedWeapon.getWeight() / 10, TimeUnit.SECONDS);
         }else {
             scheduledExecutor
-                    .schedule(this::addToQueue, 10, TimeUnit.SECONDS);
+                    .schedule(this::addToQueue, 1, TimeUnit.SECONDS);
         }
     }
     /**

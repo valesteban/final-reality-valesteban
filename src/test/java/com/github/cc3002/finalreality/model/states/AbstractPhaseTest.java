@@ -1,14 +1,68 @@
 package com.github.cc3002.finalreality.model.states;
 
 import com.github.cc3002.finalreality.Controller.GameController;
+import com.github.cc3002.finalreality.Controller.phases.InvalidActionException;
 import com.github.cc3002.finalreality.model.character.ICharacter;
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
+import com.github.cc3002.finalreality.model.weapon.IWeapon;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public abstract class AbstractPhaseTest {
     protected GameController controller;
 
+    public void equipWeaponTest(int inventoryWeapon , GameController controller,int playerPosition) throws InvalidActionException {
+        assertEquals("ChoseWeaponPhase",controller.getNamePhase());
+        assertEquals("Choose a weapon",controller.getPhase().instruction());
+        controller.thisWeaponButton(controller.getInventory().get(inventoryWeapon)); //esto es como si se apreta el boton
+        assertEquals(controller.getInventory().get(inventoryWeapon),controller.getPlayerPosition(playerPosition).getEquippedWeapon());
+
+    }
+    public void equipWeaponNullTest(int inventoryWeapon , GameController controller,int playerPosition) throws InvalidActionException {
+        assertEquals("ChoseWeaponPhase",controller.getNamePhase());
+        assertEquals("Choose a weapon",controller.getPhase().instruction());
+        controller.thisWeaponButton(controller.getInventory().get(inventoryWeapon)); //esto es como si se apreta el boton
+        assertEquals(null,controller.getPlayerPosition(playerPosition).getEquippedWeapon());
+        assertEquals("SelectTargetPhase",controller.getNamePhase());
+        assertEquals("Choose a Enemy to attack",controller.getPhase().instruction());
+
+
+    }
+
+    public void attackEnemyTest(int positionEnemy) throws InvalidActionException {
+        assertEquals(10,controller.getTurnsQueue().size()); //antes de atacar hay 10 en la cola de turnos
+        assertEquals("SelectTargetPhase",controller.getNamePhase());
+        assertEquals("Choose a Enemy to attack",controller.getPhase().instruction());
+        controller.selectingEnemy(positionEnemy);
+        assertEquals(9,controller.getTurnsQueue().size()); //se saca de la cola de turnos
+        try {   //luego de esperar un poco se vuelve a meter a la cola al player
+            Thread.sleep(1100);
+            assertEquals(10,controller.getTurnsQueue().size());  //is back in the turns queue
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals("FirstCharacterPhase",controller.getNamePhase());
+
+    }
+    public void attackEnemyButNotTest(int positionEnemy) throws InvalidActionException {
+        assertEquals(10,controller.getTurnsQueue().size()); //antes de atacar hay 10 en la cola de turnos
+        assertEquals("SelectTargetPhase",controller.getNamePhase());
+        assertEquals("Choose a Enemy to attack",controller.getPhase().instruction());
+        controller.selectingEnemy(positionEnemy);
+        assertEquals(9,controller.getTurnsQueue().size()); //se saca de la cola de turnos
+        assertEquals("FirstCharacterPhase",controller.getNamePhase());
+        try {   //luego de esperar un poco se vuelve a meter a la cola al player
+            Thread.sleep(1100);
+            assertEquals(10,controller.getTurnsQueue().size());  //is back in the turns queue
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public void basicSetUp(){
         controller = new GameController();

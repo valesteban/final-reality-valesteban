@@ -18,7 +18,7 @@ public class FirstCharacterPhase extends Phase {
      * change the phase of the controller.
      */
     @Override
-    public void turn() {
+    public void turn() throws InvalidActionException {
         ICharacter c1 =  controller.getFirstCharacterQueue();  //sacamos el peronaje inicial en la cola
         nextTo(c1);                       //cambiara  ala siguiente phase
     }
@@ -27,7 +27,7 @@ public class FirstCharacterPhase extends Phase {
      * it will decided the next phase for the controller depending on the character
      * that the queue has.
      */
-    public void nextTo(ICharacter character){
+    public void nextTo(ICharacter character) throws InvalidActionException {
         ICharacter i = controller.getFirstCharacterQueue();
 
         if (controller.getPlayers().contains(character)){
@@ -40,7 +40,7 @@ public class FirstCharacterPhase extends Phase {
 
     @Override
     public String instruction(){
-        return " To start the turn press the button start Turn";
+        return "To start the turn press the button start Turn";
     }
     /**
      * returns a string with the name of the phase.

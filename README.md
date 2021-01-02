@@ -35,8 +35,8 @@ En este juego siempre tendremos 5 enemigos, 5 weapons y 5 players, de los cuales
 Para saber que hacer en pantalla tenemos instrucciones de que se debe hacer; com opor ejemplpo elegir un arma , elegir un enemigo a atacar,
 atacar, etc.
 
-Tenemos el caso en que si un pllayer se intenta arma con un arma que no puede ocupar y intenta atacar, no dañara a su enemigo y se demorara 10 
-seg en volver a meterse en la cola.
+Tenemos el caso en que si un player se intenta arma con un arma que no puede ocupar y intenta atacar, no dañara a su enemigo y se metera de inmediato 
+tendra unn tiempo de espera de !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11 
 Los enemogos siempre atacaran a alguien al azar en la lista de players, por lo tanto va a estar el caso en que intenten atacar a alguien que ya este 
 muerto, en ese caso sera un "un turno perdido" para ellos.
 

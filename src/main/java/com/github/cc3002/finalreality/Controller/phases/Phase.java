@@ -27,21 +27,12 @@ public  class Phase {
         controller.setPhase(phase);
     }
 
-    public ICharacter getCharacter() {
-        return character;
-    }
-
-    public void turn(){
+    public void turn() throws InvalidActionException {
         System.out.println("algo fue malo llegamos al turno de la clase abstracta de las fases");
     }
 
-
-    /**
-     * botones activaran esta funcion para cambiar de fase en el caso de las
-     * primeras fases no hara nada
-     */
-    public void nextPhaseButton(){
-        //botones
+    public void nextPhaseButton()throws InvalidActionException {
+        throw new InvalidActionException("can´t use this in"+ this.toString());
     }
 
     public void selectWeapon(IWeapon weapon) throws InvalidActionException {
@@ -51,15 +42,9 @@ public  class Phase {
 
     public void selectTarget(int i) throws  InvalidActionException{
         throw new InvalidActionException("can´t choose an Enemy to attack in" + this.toString());
-
     }
 
-    public void setCharacter(ICharacter character){this.character = character;}
     public String instruction()throws  InvalidActionException{
         throw new InvalidActionException("can´t choose an Enemy to attack in" + this.toString());}
-
-
-
-
 }
 

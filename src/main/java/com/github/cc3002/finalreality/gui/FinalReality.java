@@ -127,7 +127,11 @@ public class FinalReality extends Application {
     starGame.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        controller.startPlaying();
+        try {
+          controller.startPlaying();
+        } catch (InvalidActionException e) {
+          e.printStackTrace();
+        }
       }
     });
 
@@ -149,7 +153,11 @@ public class FinalReality extends Application {
     buttonNextPhase.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        controller.buttonNext();
+        try {
+          controller.buttonNext();
+        } catch (InvalidActionException e) {
+          e.printStackTrace();
+        }
       }
     });
     //acciones de los botones para armar
@@ -269,7 +277,7 @@ public class FinalReality extends Application {
         listHPEnemies.setText("Enemies HP : "+ controller.showHpEnemies());
         listPlayers.setText("Players : "+ controller.showPlayers());
         listHPPlayers.setText("Players HP : "+ controller.showHpPlayer());
-        listTurns.setText("turns : " + controller.showTurns() );
+        //listTurns.setText("turns : " + controller.showTurns() );
 
         try {
           whatToDo.setText("Instructions: "+controller.showInstrucction());

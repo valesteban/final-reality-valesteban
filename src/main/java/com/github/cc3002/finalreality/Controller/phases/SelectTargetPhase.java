@@ -6,16 +6,16 @@ import com.github.cc3002.finalreality.model.weapon.IWeapon;
 public class SelectTargetPhase extends Phase {
 
 
-    @Override
-    public void turn() {
-
-    }
+ //   @Override
+//    public void turn() {
+//
+  //  }
 
     /**
      * it will change tha phase of the controller to CharacterAttackPhase.
      */
     @Override
-    public void nextPhaseButton() {
+    public void nextPhaseButton() throws InvalidActionException {
         changePhase(new CharacterAttackPhase(this.character));
         controller.buttonNext();
     }
@@ -26,10 +26,8 @@ public class SelectTargetPhase extends Phase {
 
     @Override
     public String instruction(){
-        return "Choose a Enemy to attack ";
+        return "Choose a Enemy to attack";
     }
-
-
     /**
      * returns a string with the name of the phase.
      */

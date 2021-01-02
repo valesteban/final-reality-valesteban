@@ -3,6 +3,7 @@ package com.github.cc3002.finalreality.model.states;
 import com.github.cc3002.finalreality.Controller.phases.InvalidActionException;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.weapon.AxeTest;
+import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,83 +18,92 @@ public class PhasesTest extends AbstractPhaseTest {
     }
 
     @Test
-    public void initialPhaseTest(){
+    public void initialPhaseTest() throws InvalidActionException {
         assertEquals("FirstCharacterPhase" ,controller.getNamePhase());
+        assertEquals("To start the turn press the button start Turn",controller.getPhase().instruction());
+
+
         //whe the button start Game is push it will change to the next phase
+        assertEquals(10,controller.getTurnsQueue().size()); //tenemos 10 characters
         controller.startPlaying();
-        //the first character in the queue is an enemy then we move to the CharacterAttackPhase
-        assertEquals("CharacterAttackPhase",controller.getNamePhase());
-    }
+        //com oel primer character en la fila de turnos es un nemy attaca y vuelve al inicio
 
-    @Test
-    public void EnemyAttackAndPullANdTimerTest(){
-        assertEquals(5,controller.getEnemies().size());
-        initialPhaseTest();
-        assertEquals(controller.getNamePhase(),"CharacterAttackPhase");
-        //whe the button start Game is push it will change to the next phase
-        assertEquals(10,controller.getTurnsQueue().size()); //turns queue before is pull out
-        controller.buttonNext();
-        assertEquals(9,controller.getTurnsQueue().size()); //turns queue is taken out
-        //we check that the enemy was pull of the queue and the put back
-
-        try {
+        assertEquals(9,controller.getTurnsQueue().size()); // ataco el enemigo s esaco de la cola de turnos
+        assertEquals("FirstCharacterPhase",controller.getNamePhase());
+        try {   //luego de esperar un poco se vuelve a meter a la cola al enemigo
             Thread.sleep(1100);
             assertEquals(10,controller.getTurnsQueue().size());  //is back in the turns queue
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
-        //we check that some player was attacked
+        // y un player quedo con menos vida
         for (int i = 0;i <= 4; i++ ){
             if (controller.getPlayerPosition(i).getHealthPoints() < 100){
                 assertTrue(controller.getPlayerPosition(i).getHealthPoints()<100);
-
-        assertEquals(controller.getNamePhase(),"FirstCharacterPhase");
+                assertEquals(controller.getNamePhase(),"FirstCharacterPhase");
             }
         }
+
+
     }
 
     @Test
-    public void firstCharacterPhaseIsEnemy() throws InvalidActionException {
-        EnemyAttackAndPullANdTimerTest();
-        assertEquals(controller.getNamePhase(),"FirstCharacterPhase");
+    public void characterChooseWeapon0AndEnemy0() throws InvalidActionException {
+        initialPhaseTest();
+        controller.startPlaying(); //tenemoa a un ingeniero primero en la cola de turnos
+        equipWeaponNullTest( 0,controller,0); //tratamos de equipar al ingenieron con una espada  pero no se puede
+        attackEnemyButNotTest(4);
+
+    }
+    @Test
+    public void characterChooseWeapon1AndEnemy1() throws InvalidActionException {
+        initialPhaseTest();
+        controller.startPlaying();  //tenemoa a un ingeniero primero en la cola de turnos
+        equipWeaponNullTest(1,controller,0); //tratamos de equipar al ingenieron con un bastón pero no se puede
+        attackEnemyButNotTest(1);
+
+    }
+    @Test
+    public void characterChooseWeapon2AndEnemy2() throws InvalidActionException {
+        initialPhaseTest();
+        controller.startPlaying();  //tenemoa a un ingeniero primero en la cola de turnos
+        equipWeaponNullTest( 2,controller,0); //tratamos de equipar al ingenieron con un cuchillo pero no se puede
+        attackEnemyButNotTest(2);
+    }
+    @Test
+    public void characterChooseWeapon3AndEnemy3() throws InvalidActionException {
+        initialPhaseTest();
+        controller.startPlaying(); //tenemoa a un ingeniero primero en la cola de turnos
+        equipWeaponTest( 3,controller,0); //equipamos al ingenieron con una hacha
+        attackEnemyTest(3);
+    }
+
+    @Test
+    public void characterChooseWeapon4AndEnemy4() throws InvalidActionException {
+        initialPhaseTest();
+        controller.startPlaying();  //tenemos a un ingeniero primero en la cola de turnos
+        equipWeaponTest( 4,controller,0); //equipamos al ingenieron con un arco
+        attackEnemyTest(4);
+    }
+    @Test
+    public void errorTest() throws InvalidActionException {
+        assertEquals("FirstCharacterPhase" ,controller.getNamePhase());
+        //si tratamos de selccionar a un enemigo en otra fase
+        assertThrows(InvalidActionException.class,()->controller.selectingEnemy(0));
+        //si tratamos de selccionar una arma en otra fase
+        assertThrows(InvalidActionException.class,()->controller.thisWeaponButton(controller.getInventory().get(0)));
+
+        //lo mismo con el metodo nextPhaseButton si lo llamamos cuando estamos en la fase FirstCharacterPhase
+        assertThrows(InvalidActionException.class,()->controller.getPhase().nextPhaseButton());
 
         controller.startPlaying();
-        //we have an engineer first in the turn queue
-        assertEquals("ChoseWeaponPhase",controller.getNamePhase());
-        controller.thisWeaponButton(controller.getInventory().get(3)); //we equipped the player with an axe
-        assertEquals(controller.getInventory().get(3),controller.getPlayerPosition(0).getEquippedWeapon());
-        controller.buttonNext();
-        assertEquals("SelectTargetPhase",controller.getNamePhase());
+        assertEquals("FirstCharacterPhase" ,controller.getNamePhase());
+        controller.startPlaying();
+        assertEquals("ChoseWeaponPhase" ,controller.getNamePhase());
+      //  assertThrows(InvalidActionException.class,()->controller.getPhase().instruction());
     }
-    @Test
-    public void selectTargetTest() throws InvalidActionException {
-        firstCharacterPhaseIsEnemy();
-        assertEquals("SelectTargetPhase",controller.getNamePhase());
-       // seleccionamos al tercer e nemy
-        //controller.getPhase().selectTarget(2);
-        controller.selectingEnemy(2);
-        assertEquals("nameEnemy3",controller.getPhase().getCharacter().getName());
-        controller.buttonNext();
-        assertEquals("CharacterAttackPhase",controller.getNamePhase());
-        System.out.println(controller.showHpEnemies());
-        System.out.println(controller.showHpPlayer());
-        controller.buttonNext();
-        //assertEquals(93,controller.getEnemyPosition(0).getHealthPoints());
-        //controller.getPhase().setCharacter(controller.getEnemyPosition(0));
-        //controller.buttonNext();
-        //en este caso eligio atacar al primer enemigo
-        //assertEquals(93,controller.getEnemyPosition(0).getHealthPoints());
-        //System.out.println(controller.showHpEnemies());
 
-        controller.equipPlayer(controller.getPlayerPosition(1),controller.getInventory().get(0));
-        System.out.println(controller.getPlayerPosition(1));
-        System.out.println(controller.getPlayerPosition(1).getEquippedWeapon());
-
-
-
-    }
 }
+
 
 

@@ -300,16 +300,14 @@ public class GameController {
         buttonNext();
     }
     //despues arreglar esto se supone q el jugador va  aelegir un aarma de las que hay en el inventario
-    public void startPlaying(){
+    public void startPlaying() throws InvalidActionException {
         phase.setController(this);
         phase.turn();
       //  phase.nextPhaseButton();
     }
-    public void buttonNext(){
+    public void buttonNext() throws InvalidActionException {
         if(getWinnerEnemy()||getWinnerPlayer()){
-            //paramos
-            System.out.println("hay un winner si que paramos");
-
+          //  System.out.println("hay un winner si que paramos");
         }
         else {
             System.out.println("no hay un winner si que continuamos al siguiente turno \n");
@@ -319,21 +317,12 @@ public class GameController {
 
         }
     }
-    public void loop(){
-        while (true){
-            phase.turn();
-            phase.nextPhaseButton();
-        }
-    }
-
     public List showEnemies() {
         LinkedList l = new LinkedList<>();
         for (Enemy e : enemies){
             l.add(e.getName());
         }
-        return l;
-    }
-
+        return l;    }
     public List showPlayers() {
         LinkedList l = new LinkedList<>();
         for (IPlayerCharacter e : players){
@@ -341,11 +330,9 @@ public class GameController {
         }
         return l;
     }
-
     public String getCurrentPhase() {
         return phase.toString();
     }
-
     public List showHpEnemies() {
         LinkedList l = new LinkedList<>();
         for (Enemy e : enemies){
@@ -358,9 +345,7 @@ public class GameController {
         for (IPlayerCharacter e : players ){
             l.add(e.getHealthPoints());
         }
-        return l;
-    }
-
+        return l;}
     public List showWeapons() {
         LinkedList l = new LinkedList<>();
         for (IWeapon e : inventory ){
@@ -368,7 +353,6 @@ public class GameController {
         }
         return l;
     }
-
     public List showTurns() {
         LinkedList l = new LinkedList<>();
         for (ICharacter e : turnsQueue ){
@@ -376,11 +360,8 @@ public class GameController {
         }
         return l;
     }
-
-
     public String showInstrucction() throws InvalidActionException {
-       return phase.instruction();
-    }
+       return phase.instruction(); }
 }
 
 

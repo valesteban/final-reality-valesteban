@@ -27,7 +27,7 @@ public class ChoseWeaponPhase extends Phase {
     }
     @Override
     public String instruction(){
-        return "Choose a weapon for "+controller.getFirstCharacterQueue().getName();
+        return "Choose a weapon";
     }
 
 
