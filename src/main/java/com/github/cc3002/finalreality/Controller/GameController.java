@@ -18,7 +18,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * A class that communicate with the model  of the game.
+ * A class that communicate with the model and gui of the game.
  *
  * @author Valentina Esteban
  */
@@ -33,9 +33,8 @@ public class GameController {
     private Phase phase ;
 
     /**
-     * Creates a new GameController.
-     *
-     *     the queue with the characters waiting for their turn
+     * Creates a new GameController, that will be initiated with the
+     * phase FirstCharacterPhase
      */
     public GameController( ){
         players = new LinkedList<>();
@@ -43,7 +42,6 @@ public class GameController {
         inventory = new LinkedList<>();
         setPhase( new FirstCharacterPhase());
     }
-
     /**
      * set the phase to the controller and add the controller tothe phase.
      */
@@ -51,7 +49,6 @@ public class GameController {
         this.phase = phase;
         phase.setController(this);
     }
-
 
     /**
      * return true if the player is the winner.
@@ -100,8 +97,6 @@ public class GameController {
      */
     public Phase getPhase(){return phase;}
 
-
-
     /**
      * Creates an enemy, add it to the enemies list and add a listener
      */
@@ -112,8 +107,6 @@ public class GameController {
         e.addListener(characterDeadHandler);
         enemies.add(e);
     }
-
-
 
     /**
      * Controller creates a axe and add it to the inventory
@@ -200,11 +193,10 @@ public class GameController {
         w.addListener(characterDeadHandler);
         players.add(w);
     }
-
     /**
      *  Equip a player with a weapon.
      */
-    public void equipPlayer(IPlayerCharacter player, IWeapon weapon){
+    public void equipPlayer(ICharacter player, IWeapon weapon){
         for (IPlayerCharacter p : players){
             if (p.equals(player)){
                 p.equip(weapon);
@@ -212,15 +204,12 @@ public class GameController {
             }
         }
     }
-
     /**
      *  Character attack another character.
      */
     public void attackPlayers(ICharacter attacker, ICharacter attacked){
         attacker.attack(attacked);
     }
-
-
     /**
      *  returns the firs character of the BlockingQueue.
      */
@@ -228,21 +217,18 @@ public class GameController {
         ICharacter c1 = turnsQueue.element();
         return c1;
     }
-
     /**
      *  pulls out the first element in the BlockingQueue.
      */
     public void pullOutCharacter(){
         turnsQueue.poll();
     }
-
     /**
      *  waits depending on its weight to be add it to the BlockingQueue .
      */
     public void timerCharacter(ICharacter character){
         character.waitTurn();
     }
-
     /**
      *  Enemy choose a random player of tle list players and attak it.
      */
@@ -252,10 +238,9 @@ public class GameController {
             IPlayerCharacter playerThatWillBeAttacked = players.get(i);
             character.attack(playerThatWillBeAttacked);
         }
-
     /**
      * When someone dies check if all in  the list of the one that died is dead
-     * also, if thats the case the othe is the winner.
+     * also, if that´s the case the othe is the winner.
      */
     public int isAttackedCharacter(ICharacter character) {
         //aqui resvisamos si todos los demas entan muertos si es asi gana sino sigue
@@ -288,23 +273,31 @@ public class GameController {
         return 1;
     }
 
-
-    //despues arreglar esto se supone q el jugador va  aelegir un aarma de las que hay en el inventario
+    /**
+     * it will tell the phase to equip the player with this weapon, only if it the correct
+     * phase.
+     */
     public void thisWeaponButton(IWeapon weapon) throws InvalidActionException {// throws InvalidActionException {
         phase.selectWeapon(weapon);
         buttonNext();
     }
-
+    /**
+     * it will tell the phase to attack this enemy only if it is the correct phase.
+     */
     public void selectingEnemy(int i) throws InvalidActionException {// throws InvalidActionException {
         phase.selectTarget(i);
         buttonNext();
     }
-    //despues arreglar esto se supone q el jugador va  aelegir un aarma de las que hay en el inventario
+    /**
+     *  to start each turns and change to the next one, it will work as a button for the gui.
+     */
     public void startPlaying() throws InvalidActionException {
         phase.setController(this);
         phase.turn();
-      //  phase.nextPhaseButton();
     }
+    /**
+     * it will work as a button for the gui. it changes between the phases.
+     */
     public void buttonNext() throws InvalidActionException {
         if(getWinnerEnemy()||getWinnerPlayer()){
           //  System.out.println("hay un winner si que paramos");
@@ -317,12 +310,18 @@ public class GameController {
 
         }
     }
+    /**
+     *  it will show all the enemy´s names in a list.
+     */
     public List showEnemies() {
         LinkedList l = new LinkedList<>();
         for (Enemy e : enemies){
             l.add(e.getName());
         }
         return l;    }
+    /**
+     *  it will show all the player´s names in a list.
+     */
     public List showPlayers() {
         LinkedList l = new LinkedList<>();
         for (IPlayerCharacter e : players){
@@ -330,9 +329,15 @@ public class GameController {
         }
         return l;
     }
+    /**
+     *  it will show the actual phase.
+     */
     public String getCurrentPhase() {
         return phase.toString();
     }
+    /**
+     *  it will show all the enemy´s HP.
+     */
     public List showHpEnemies() {
         LinkedList l = new LinkedList<>();
         for (Enemy e : enemies){
@@ -340,12 +345,18 @@ public class GameController {
         }
         return l;
     }
+    /**
+     *  it will show all the players´s HP in a list.
+     */
     public List showHpPlayer() {
         LinkedList l = new LinkedList<>();
         for (IPlayerCharacter e : players ){
             l.add(e.getHealthPoints());
         }
         return l;}
+    /**
+     *  it will show all the weapons in the inventory in a list.
+     */
     public List showWeapons() {
         LinkedList l = new LinkedList<>();
         for (IWeapon e : inventory ){
@@ -353,6 +364,9 @@ public class GameController {
         }
         return l;
     }
+    /**
+     *  it will show all the characters in the queue og turns in a list.
+     */
     public List showTurns() {
         LinkedList l = new LinkedList<>();
         for (ICharacter e : turnsQueue ){
@@ -360,8 +374,23 @@ public class GameController {
         }
         return l;
     }
+    /**
+     *  it will show the instruction for the phase in a string.
+     */
     public String showInstrucction() throws InvalidActionException {
        return phase.instruction(); }
+    /**
+     * it will restart the players, enemies, inventory and the winner.
+     */
+    public void reStart() {
+        players = new LinkedList<>();
+        enemies = new LinkedList<>();
+        inventory = new LinkedList<>();
+        setPhase( new FirstCharacterPhase());
+        winnerPlayer = false;
+        winnerEnemy = false;
+        turnsQueue = new LinkedBlockingQueue<>() ;
+    }
 }
 
 

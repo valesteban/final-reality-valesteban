@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -242,6 +243,20 @@ public class ControllerTest {
         assertEquals("To start the turn press the button start Turn",controller.showInstrucction() );
     }
 
+    @Test
+    public void reStartTest(){
+        assertEquals(5,controller.getPlayers().size());
+        assertEquals(2,controller.getEnemies().size());
+        assertEquals(5,controller.getInventory().size());
+        assertEquals(7,controller.getTurnsQueue().size());
+        controller.reStart();
 
+        assertEquals(0,controller.getPlayers().size());
+        assertEquals(0,controller.getEnemies().size());
+        assertEquals(0,controller.getInventory().size());
+        assertFalse(controller.getWinnerPlayer());
+        assertFalse(controller.getWinnerEnemy());
+        assertEquals(0,controller.getTurnsQueue().size());
+    }
 }
 

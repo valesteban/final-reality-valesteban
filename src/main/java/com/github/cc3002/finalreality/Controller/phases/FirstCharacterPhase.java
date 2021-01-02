@@ -1,9 +1,6 @@
 package com.github.cc3002.finalreality.Controller.phases;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
-import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
-
-import java.util.Random;
 
 /**
  * A class that creates the state of taking the first character of the queue.
@@ -11,18 +8,15 @@ import java.util.Random;
  * @author Valentina Esteban
  */
 public class FirstCharacterPhase extends Phase {
-
-
     /**
-     * it will take the first character unn the queue and add it as a variable and the
+     * it will take the first character of the queue and add it as a variable and the
      * change the phase of the controller.
      */
     @Override
     public void turn() throws InvalidActionException {
-        ICharacter c1 =  controller.getFirstCharacterQueue();  //sacamos el peronaje inicial en la cola
-        nextTo(c1);                       //cambiara  ala siguiente phase
+        ICharacter c1 =  controller.getFirstCharacterQueue();
+        nextTo(c1);
     }
-
     /**
      * it will decided the next phase for the controller depending on the character
      * that the queue has.
@@ -37,7 +31,9 @@ public class FirstCharacterPhase extends Phase {
             controller.buttonNext();
         }
     }
-
+    /**
+     * returns a string with the instruction of the phase.
+     */
     @Override
     public String instruction(){
         return "To start the turn press the button start Turn";

@@ -2,44 +2,36 @@ package com.github.cc3002.finalreality.Controller.phases;
 
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
-
+/**
+ * A class that creates the state where the characters will be equip with weapon.
+ *
+ * @author Valentina Esteban
+ */
 public class ChoseWeaponPhase extends Phase {
     private IWeapon weapon  = null;
-
-
-    /**
-     * the enemy will atack a random player.
-     */
-    @Override
-    public void turn() {
-        //don do anything in here
-    }
 
     /**
      * it will change tha phase of the controller to SelectTargetPhase.
      */
     @Override
     public void nextPhaseButton() {
-        System.out.println(controller.getFirstCharacterQueue().getName());
-        IPlayerCharacter i =(IPlayerCharacter)controller.getFirstCharacterQueue();
-        System.out.println(i.getEquippedWeapon());
         changePhase(new SelectTargetPhase());
     }
+    /**
+     * it will return a string with the instruction of the phase.
+     */
     @Override
     public String instruction(){
         return "Choose a weapon";
     }
-
-
-
+    /**
+     * the controller will give a weapon will it tell to equipped the player.
+     */
     @Override
     public void selectWeapon(IWeapon weapon) {
-        //we check that the weapon is in the inventory arrrrreeeee
-        ///
         if (controller.getInventory().contains(weapon))
-            controller.equipPlayer((IPlayerCharacter) controller.getFirstCharacterQueue(),weapon);
+            controller.equipPlayer( controller.getFirstCharacterQueue(),weapon);
     }
-
     /**
      * returns a string with the name of the phase.
      */

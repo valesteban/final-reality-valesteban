@@ -4,20 +4,25 @@ import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 
 /**
- * A class that creates the state where the characters will attack and then they will be taken out
- * of the turn queue and start the timer to come back.
+ * A class that creates the state where the characters will attack and then they will
+ * be taken out of the turn queue and start the timer to come back.
  *
  * @author Valentina Esteban
  */
 public class CharacterAttackPhase extends Phase {
-
-
-
+    /**
+     * Creates a new player CharacterAttackPhase.
+     *
+     * @param attacked
+     *     the enemy that will be attacked.
+     */
     public CharacterAttackPhase(ICharacter attacked){
-
         this.character = attacked;
     }
-
+    /**
+     * it make that the first player in the turnQueue attack the enemy choosen,then it will take aout
+     * the player of the queue of turn and make it wait.
+     */
     @Override
     public void turn() {
 
@@ -31,10 +36,6 @@ public class CharacterAttackPhase extends Phase {
         controller.pullOutCharacter();
         controller.timerCharacter(c1);
     }
-
-
-
-
     /**
      * it will change tha phase of the controller to FirstCharacterPhase.
      */
@@ -42,12 +43,4 @@ public class CharacterAttackPhase extends Phase {
     public void nextPhaseButton() {
         changePhase(new FirstCharacterPhase());
     }
-
-    /**
-     * returns a string with the name of the phase.
-     */
-  //  @Override
-  //  public String toString() {
-  //      return "CharacterAttackPhase";
-  //  }
 }
