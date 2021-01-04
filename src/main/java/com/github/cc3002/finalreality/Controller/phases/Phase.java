@@ -30,7 +30,7 @@ public  class Phase {
     /**
      * it will do nothing.
      */
-    public void turn(){
+    public void turn() throws InvalidActionException {
     }
     /**
      * it will throw an exceptionCreates with a message of why.
