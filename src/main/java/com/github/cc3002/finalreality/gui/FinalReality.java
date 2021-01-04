@@ -112,7 +112,6 @@ public class FinalReality extends Application {
      Button enemy5Button = createButton("Enemy 5",875,520);
 
      Button starGame = createButton("Start Turn",50,540);
-     Button buttonAttack = createButton("attack",150,540);
 
     listEnemies = createLabel(0,75);
     listHPEnemies = createLabel(0, 100);
@@ -132,16 +131,6 @@ public class FinalReality extends Application {
     reStartGame = createButton("reStart Game",325,540);
 
     listWeapons.setText("Weapons : "+ controller.showWeapons());
-    buttonAttack.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent event) {
-        try {
-          controller.buttonNext();
-        } catch (InvalidActionException e) {
-          e.printStackTrace();
-        }
-      }
-    });
     //acciones de los botones para armar
     swordButton.setOnAction(new EventHandler<ActionEvent>() {
       @Override
