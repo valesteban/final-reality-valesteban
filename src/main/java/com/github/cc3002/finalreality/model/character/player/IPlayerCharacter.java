@@ -1,11 +1,9 @@
 package com.github.cc3002.finalreality.model.character.player;
 
-import com.github.cc3002.finalreality.Controller.IEveventHandler;
+import com.github.cc3002.finalreality.Controller.handler.IEveventHandler;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.weapon.*;
-
-import java.util.LinkedList;
 
 /**
  * This is an interface for PLayerCharacter

@@ -1,5 +1,6 @@
-package com.github.cc3002.finalreality.Controller;
+package com.github.cc3002.finalreality.Controller.handler;
 
+import com.github.cc3002.finalreality.Controller.GameController;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 
 import java.beans.PropertyChangeEvent;

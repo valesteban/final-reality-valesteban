@@ -18,42 +18,27 @@ enemies controlled by the computer.
 
 **The rest of the documentation is left for the users of this template to complete**
 
-Comenzando con la entrega parcial 3 de armar y atacar para ambos casos se ocupó double distpach, Primero para armar a 
-los player se hizo que cada arma supiese a quien podía y a quien no podía armar, para el caso en donde un arma no podía 
-armar a un personaje, este quedaba con una equippedWeapon = nunll. Continuando para el caso de atacar se creó el método 
-attack que recibe a un ICharacter el cual sería al que se atacaría, dentro de este método se  puso el método de el 
-characer que sería atacado, este dependiendo de quien fuese el atacante tendría los métodos isAttackedbyEnemy o 
-isAttackedByPlayer que ahí le quitaría la vida correspondiente, en caso de que ya no le quedasen vidas , esto no 
-afectaría porque se quedaría constantemente con vida 0 , pero si el atacante no tenía vida no se llevaría a cabo el 
-ataque, de la misma forma que si el atacante fuese un player y no estuviese armado, otro caso es que si se mata a un personaje 
-su arma pasa a ser null además de que un personajes sin vida (es decir muerto) no se le podría armas una arma.
-El método attack permite que tanto enemigos y player puedan atacarse entre ellos (enemigos con enemigos o enemigos 
-con player o players con players).
+Este juego se trata de 5 enemigos vs 5 players quienes se atacan mtuamente hasta que todos los player o enemigos esten muertos, 
+aquel que al final tenaga algunos personajes con vida gana. 
+En este juego nosotros seremos los player y los enemigos contra quienes deberemos pelear.
 
-Luego para la implementación del controller, este contiene una lista de los enemigos, los players y el inventario, un handler, y dos variables que nos 
- permitirán consultar si alguien ganó (winnerPlayer y winnerEnemy) . En cuanto a las listas de enemigos y players estas comienzan 
- vacíos y con métodos en el controller creamos tanto personajes como enemigos, los agregamos a las listas
-correspondientes y luego agregamos a el controller como un listener de estos objetos (realmente un handler). Como tenemos a todos los character
-dentro de una lista que es una variable de la clase, el controller puede acceder todos los atributos de estos. Para el 
-caso del inventario se creó una lista que al igual que la de player y enemigos parte vacía, y a medida que creamos objetos se van
- agregando a este inventario, cabe destacar que se asumió que el usuario no tratara de armar a  dos pllayer con una misma
-arma. 
-En cuanto a métodos para equipar a player  y atacar entre characters, esto se ocuparon casi directamente ya que ya estaban implementados 
-en las clases correspondientes.
+Como jugar:
+Al correr el juego aparece un aventana con un boton de start, el cual al presionarlo combiamos de excena a un adond el juego comienza,
+luego en la parte de arriba de la ventana tendremos un avista de la lista de turnos y las armas que tendremos en nuestro inventario.
+Luegos al lado izquierdo tendremos la lista de los nombres de los enemigos y abajo el HP de cada unos, de la misma forma tendremos
+al lado derecho la lista de nombre de los personajes y abajo su HP. En cuanto a los botones tendremos un boton "start turn"
+el cual se debe apretar para comenzar cada turnos, luego el boton attack , el cual hara que se ataque al personaje y ahi se le quitara vida y 
+finalmente tenemoso los botones para elegir la arma con la que queremos armar a nuestro personaje y al enemigo al que queremos atacar.
+Luego de que alguien gane ............................
 
-Para el caso en que hubiese un ganador se llevó a cabo un patrón de diseño observer, en este caso se notificaría al controller 
-(por medio del handle) cuando un character se hubiese muerto, esto haría que se llevase a cabo el método del controller 
-void isAttackedCharacter(ICharacter character) que recibe al character que murió, en este método se verifica si el muerto corresponde 
-un player o un enemigo, dependiendo de esto se prosigue a chequear la lista correspondiente y si todos están muertos el parámetros 
-winnerEnemy o winnerPlayer se cambia a true y tenemos un ganador, en caso contrario no se hace nada.
+En este juego siempre tendremos 5 enemigos, 5 weapons y 5 players, de los cuales los valores de inicio  seran al azar.
+Para saber que hacer en pantalla tenemos instrucciones de que se debe hacer; com opor ejemplpo elegir un arma , elegir un enemigo a atacar,
+atacar, etc.
 
-Finalmente para el caso de los turnos se crearon diferentes métodos para simular los pasos descritos en la sección 2.2 de la descripcion del proyecto
-donde un primer método public void firstCharacterQueue() tomaría el primer elemento de la cola, luego verificaría si este character pertenece a la lista de 
-player o a la de enemy, en caso de ser player no se haría nada (aun no debemos implementar la interacción con el usuario), pero en caso de ser enemigo
-nos llevaría a un nuevo método   public void enemyTurn(ICharacter character) el cual elegiría un numero random entre 0 y el largo de la lista players 
-para luego atacar a uno de los players. Luego tendríamos el método public void pullOutCharacter() que sacaría al primer character de la cola de turnos y 
-luego el método public void timerCharacter(ICharacter character) que haría que este character espero el tiempo correspondiente para luego volver a ser 
-agregado a la cola de turnos. Estos métodos no se juntaron ya que se dijo que en esta entrega se debían implementar cada uno de estos pasos independiente.
+Tenemos el caso en que si un player se intenta arma con un arma que no puede ocupar y intenta atacar, no dañara a su enemigo y se metera de inmediato 
+tendra unn tiempo de espera de !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11 
+Los enemogos siempre atacaran a alguien al azar en la lista de players, por lo tanto va a estar el caso en que intenten atacar a alguien que ya este 
+muerto, en ese caso sera un "un turno perdido" para ellos.
 
-Otro punto importante a mencionar es que debido a la cantidad de creación de personajes muy parecido entre ellos al igual que armas, se pensaría en aplicar factory.
-además en cuanto al handler se creó una interfaz pensando que un futuro se pondrían crear más handles en caso de que muriesen.
+En este juego asumiremos que quien juega conoce el juego y no intentara armar y atacar con  
+ 

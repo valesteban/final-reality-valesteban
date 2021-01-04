@@ -54,8 +54,13 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     @Override
     public void waitTurn() {
         scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
-        scheduledExecutor
-                .schedule(this::addToQueue, equippedWeapon.getWeight() / 10, TimeUnit.SECONDS);
+        if (this.getEquippedWeapon()!=null){
+            scheduledExecutor
+                    .schedule(this::addToQueue, equippedWeapon.getWeight() / 10, TimeUnit.SECONDS);
+        }else {
+            scheduledExecutor
+                    .schedule(this::addToQueue, 1, TimeUnit.SECONDS);
+        }
     }
     /**
      * Compare this PlayerCharacter with the given Object o.
@@ -94,8 +99,10 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
      */
     @Override
     public void attack(ICharacter character){
-        if (this.getHealthPoints() != 0){
-            character.isAttackByPlayer(this);
+        if (this.getEquippedWeapon()!= null){
+            if (this.getHealthPoints() != 0){
+                character.isAttackByPlayer(this);
+            }
         }
     }
 
