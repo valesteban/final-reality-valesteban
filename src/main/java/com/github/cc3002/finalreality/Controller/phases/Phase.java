@@ -28,10 +28,9 @@ public  class Phase {
     }
 
     /**
-     * it will throw an exceptionCreates with a message of why.
+     * it will do nothing.
      */
-    public void turn() throws InvalidActionException {
-        System.out.println("can´t use this here"+ this.toString());
+    public void turn(){
     }
     /**
      * it will throw an exceptionCreates with a message of why.
